@@ -7,14 +7,15 @@ import java.util.Date;
 
 public class News {
 	private int newsID;
-	private String socialName;
-	private String title;
-	private String preview;
-	private Date date;
-	private String image;
-	private String link;
-	private String provider;
-	private String count;
+	private String socialCorpEnglishName;
+	private String socialCorpKoreanName;
+	private String newsTitle;
+	private String newsPreview;
+	private Date newsDate;
+	private String newsImage;
+	private String newsLink;
+	private String newsProvider;
+	private String newsCount;
 	
 	public int getNewsID() {
 		return newsID;
@@ -22,52 +23,60 @@ public class News {
 	public void setNewsID(int newsID) {
 		this.newsID = newsID;
 	}
-	public String getSocialName() {
-		return socialName;
+	public String getSocialCorpEnglishName() {
+		return socialCorpEnglishName;
 	}
-	public void setSocialName(String socialName) {
-		this.socialName = socialName;
+	public void setSocialCorpEnglishName(String socialCorpEnglishName) {
+		this.socialCorpEnglishName = socialCorpEnglishName;
 	}
-	public String getTitle() {
-		return title;
+	public String getSocialCorpKoreanName() {
+		return socialCorpKoreanName;
 	}
-	public void setTitle(String title) {
-		this.title = title;
+	public void setSocialCorpKoreanName(String socialCorpKoreanName) {
+		this.socialCorpKoreanName = socialCorpKoreanName;
 	}
-	public String getPreview() {
-		return preview;
+	public String getNewsTitle() {
+		return newsTitle;
 	}
-	public void setPreview(String preview) {
-		this.preview = preview;
+	public void setNewsTitle(String newsTitle) {
+		this.newsTitle = newsTitle;
 	}
-	public Date getDate() {
-		return date;
+	public String getNewsPreview() {
+		return newsPreview;
 	}
-	public void setDate(Date date) {
-		this.date = date;
+	public void setNewsPreview(String newsPreview) {
+		this.newsPreview = newsPreview;
 	}
-	public String getImage() {
-		return image;
+	public Date getNewsDate() {
+		return newsDate;
 	}
-	public void setImage(String image) {
-		this.image = image;
+	public void setNewsDate(Date newsDate) {
+		this.newsDate = newsDate;
 	}
-	public String getLink() {
-		return link;
+	public String getNewsImage() {
+		return newsImage;
 	}
-	public void setLink(String link) {
-		this.link = link;
+	public void setNewsImage(String newsImage) {
+		this.newsImage = newsImage;
 	}
-	public String getProvider() {
-		return provider;
+	public String getNewsLink() {
+		return newsLink;
 	}
-	public void setProvider(String provider) {
-		this.provider = provider;
+	public void setNewsLink(String newsLink) {
+		this.newsLink = newsLink;
 	}
-	public String getCount() {
-		return count;
+	public String getNewsProvider() {
+		return newsProvider;
 	}
-	public void setCount(String count) {
-		this.count = count;
+	public void setNewsProvider(String newsProvider) {
+		this.newsProvider = newsProvider;
 	}
+	public String getNewsCount() {
+		return newsCount;
+	}
+	public void setNewsCount(String newsCount) {
+		this.newsCount = newsCount;
+	}
+	
+	
 }
