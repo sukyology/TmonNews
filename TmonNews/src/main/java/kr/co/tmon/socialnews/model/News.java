@@ -15,7 +15,7 @@ public class News {
 	private String newsImage;
 	private String newsLink;
 	private String newsProvider;
-	private String newsCount;
+	private int newsCount;
 	
 	public int getNewsID() {
 		return newsID;
@@ -71,10 +71,10 @@ public class News {
 	public void setNewsProvider(String newsProvider) {
 		this.newsProvider = newsProvider;
 	}
-	public String getNewsCount() {
+	public int getNewsCount() {
 		return newsCount;
 	}
-	public void setNewsCount(String newsCount) {
+	public void setNewsCount(int newsCount) {
 		this.newsCount = newsCount;
 	}
 	
