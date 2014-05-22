@@ -10,6 +10,10 @@ public class HelloSpringBO {
 	@Autowired
 	private HelloSpringDAO helloSpringDAO;
 	
+	/**
+	 * 내일 워크샵이다
+	 * @return
+	 */
 	public String getHelloComment() {
 		return helloSpringDAO.selectHelloComment();
 	}
