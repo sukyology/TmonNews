@@ -4,16 +4,19 @@ import java.util.List;
 
 import kr.co.tmon.socialnews.model.News;
 
-public class SocialCategoryBO {
+/**
+ * 
+ * @author 김종환
+ * 
+ */
 
-	public List<News> getNewsList() {
-		return null;
-	}
+/*
+ * 카데고리와 Date에 맞게 데이터를 Select하기위한 로직이 들어있는 클래스
+ */
 
-	public void selectedOtherPage(int page, String selectedSocialCorporation, String selectedDate) {
-	}
-
-	public void selectedAllCorporation(int page, String selectedDate) {
-
+public class SocialCategoryBO extends GetNews {
+	public List<News> getNewsByCategory(String changedCategoty) {
+		super.setSocialCorpCode(changedCategoty);
+		return getNewsList();
 	}
 }

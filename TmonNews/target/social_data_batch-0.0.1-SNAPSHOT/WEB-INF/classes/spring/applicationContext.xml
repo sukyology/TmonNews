@@ -11,34 +11,17 @@
 	<!-- DataSource -->
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
 		destroy-method="close" p:driverClassName="com.mysql.jdbc.Driver"
-		p:url="jdbc:mysql://localhost:3306/front_db" p:removeAbandoned="true"
+		p:url="jdbc:mysql://localhost:3306/social" p:removeAbandoned="true"
 		p:removeAbandonedTimeout="30" p:logAbandoned="true" p:testOnBorrow="false"
 		p:username="root" p:password="admin" p:initialSize="10" p:maxActive="40"
 		p:maxIdle="40" p:minIdle="6" p:maxWait="1000" p:testWhileIdle="true"
 		p:timeBetweenEvictionRunsMillis="30000" p:numTestsPerEvictionRun="10"
 		p:validationQuery="SELECT 1" />
-
+		
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
-		<property name="mapperLocations" value="classpath:sql/mappers/NewsMapper.xml"></property>
-		<property name="typeAliases" value="kr.co.tmon.cocialnews.model.News"></property>
-		<property name="typeAliasesPackage" value="kr.co.tmon.socialnews.model"></property>
 	</bean>
-
-	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
-		<constructor-arg index="0" ref="sqlSessionFactory" />
-		<constructor-arg index="1" value="BATCH" />
-	</bean>
-
-	<bean id="newsMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
-		<property name="mapperInterface" value="kr.co.tmon.socialnews.dao.NewsMapper" />
-		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
-	</bean>
-
-
-	<bean id="transactionManager"
-		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-		<property name="dataSource" ref="dataSource" />
-	</bean>
+	
+	
 
 </beans>

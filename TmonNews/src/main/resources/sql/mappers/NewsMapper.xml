@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kr.co.tmon.socialnews.dao.NewsMapper">
+	<resultMap type="News" id="NewsResult">
+		<id property="newsID" column="ID" />
+		<result property="newsTitle" column="TITLE" />
+		<result property="newsPreview" column="PREVIEW" />
+		<result property="newsDate" column="DATE" />
+		<result property="newsImage" column="IMAGE" />
+		<result property="newsLink" column="LINK" />
+		<result property="newsProvider" column="PROVIDER" />
+	</resultMap>
+
+	<select id="getNewsList" resultMap="NewsResult">
+		SELECT news.*,
+		social_corporations.KORNAME, social_corporations.ENGNAME
+		FROM news
+		INNER JOIN mapping_social ON news.ID = mapping_social.NEWS_ID
+		INNER
+		JOIN social_corporations ON mapping_social.SOCIAL_CORPCODE =
+		social_corporations.CODE
+		WHERE social_corporations.CODE=#{param1} AND
+		DATE=#{param2}
+	</select>
+
+	<select id="getNewsListByAllCorp" parameterType="String"
+		resultMap="NewsResult">
+		SELECT news.*,
+		social_corporations.KORNAME,
+		social_corporations.ENGNAME
+		FROM news INNER JOIN mapping_social ON
+		news.ID =
+		mapping_social.NEWS_ID
+		INNER JOIN social_corporations ON
+		mapping_social.SOCIAL_CORPCODE =
+		social_corporations.CODE
+		WHERE
+		DATE=#{date}
+	</select>
+
+	<insert id="insertNews" parameterType="News">
+		INSERT INTO news(TITLE,
+		PREVIEW, DATE, IMAGE, LINK, PROVIDER, READCNT)
+		VALUES(#{newsTitle}, #{newsPreview}, #{newsDate}, #{newsImage}, #{newsLink}, #{newsProvider}, 0);
+	</insert>
+
+</mapper>
