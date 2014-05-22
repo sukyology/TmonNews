@@ -1,26 +1,22 @@
 package kr.co.tmon.socialnews.bo;
 
-import java.util.Date;
 import java.util.List;
 
 import kr.co.tmon.socialnews.model.News;
 
-public class SocialCategoryBO {
-	private List<News> newsList;
-	private String socialCorpCode;
-	private Date newsDate;
+/**
+ * 
+ * @author 김종환
+ * 
+ */
 
-	public List<News> getNewsList() {
-		return null;
-	}
+/*
+ * 카데고리와 Date에 맞게 데이터를 Select하기위한 로직이 들어있는 클래스
+ */
 
-	public void setSocialCorpCode(String socialCorpCode) {
-		this.socialCorpCode = socialCorpCode;
+public class SocialCategoryBO extends GetNews {
+	public List<News> getNewsByCategory(String changedCategoty) {
+		super.setSocialCorpCode(changedCategoty);
+		return getNewsList();
 	}
-
-	public void setNewsDate(Date newsDate) {
-		this.newsDate = newsDate;
-	}
-	
-	
 }
