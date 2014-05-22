@@ -5,7 +5,7 @@ package kr.co.tmon.socialnews.controller;
  * @author 고영경
  * 
  */
-import java.util.Date;
+import java.sql.Date;
 
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpSession;
