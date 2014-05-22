@@ -4577,6 +4577,7 @@ a.thumbnail.active {
 .media-body {
   overflow: hidden;
   zoom: 1;
+  margin-left:20px;
 }
 .media,
 .media .media {
@@ -4592,7 +4593,8 @@ a.thumbnail.active {
   margin: 0 0 5px;
 }
 .media > .pull-left {
-  margin-right: 10px;
+  margin-right: 20px;
+  
 }
 .media > .pull-right {
   margin-left: 10px;

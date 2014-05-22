@@ -7,14 +7,15 @@ import java.util.Date;
 
 public class News {
 	private int newsID;
-	private String socialName;
-	private String title;
-	private String preview;
-	private Date date;
-	private String image;
-	private String link;
-	private String provider;
-	private String count;
+	private String socialCorpEnglishName;
+	private String socialCorpKoreanName;
+	private String newsTitle;
+	private String newsPreview;
+	private Date newsDate;
+	private String newsImage;
+	private String newsLink;
+	private String newsProvider;
+	private String newsCount;
 	
 	public int getNewsID() {
 		return newsID;
