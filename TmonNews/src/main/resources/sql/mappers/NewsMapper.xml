@@ -13,6 +13,7 @@
 		<result property="newsLink" column="LINK" />
 		<result property="newsProvider" column="PROVIDER" />
 		<result property="newsSocialCorpCode" column="mapping_social.SOCIAL_CORP" />
+		<result property="newsCount" column="READCNT" />
 	</resultMap>
 
 	<select id="getNewsList" resultMap="NewsResult">
