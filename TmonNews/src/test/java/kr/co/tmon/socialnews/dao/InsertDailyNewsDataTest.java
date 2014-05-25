@@ -37,7 +37,7 @@ public class InsertDailyNewsDataTest {
 	public void 여러개의_뉴스데이터가_주어졌을때_전체적인_insert프로세스가_정상적으로_작동하는지_확인하는_테스트() {
 		makeSampleDate(100);
 		insertDailyNewsData.insertNews(newsList);
-		
+
 		List<News> result = getNews.getNewsList();
 		assertFalse(result.isEmpty());
 	}
@@ -48,17 +48,17 @@ public class InsertDailyNewsDataTest {
 
 		while (dailyIndex < numberOfItem) {
 			Date date = new Date(System.currentTimeMillis());
-			
+
 			news = new News();
 			news.setNewsCount(0);
 			news.setNewsDate(date);
-			news.setNewsID((int)date.getTime() + dailyIndex);
+			news.setNewsID((int) date.getTime() + dailyIndex);
 			news.setNewsImage(Integer.toString(dailyIndex));
 			news.setNewsLink(Integer.toString(dailyIndex));
 			news.setNewsPreview(Integer.toString(dailyIndex));
 			news.setNewsProvider(Integer.toString(dailyIndex));
 			news.setNewsTitle(Integer.toString(dailyIndex));
-			
+
 			if ((dailyIndex % 2) == 0)
 				news.setNewsSocialCorpCode("tm");
 
@@ -68,9 +68,9 @@ public class InsertDailyNewsDataTest {
 			else if ((dailyIndex % 5) == 0)
 				news.setNewsSocialCorpCode("wmp");
 
-			else if((dailyIndex % 7) == 0)
+			else if ((dailyIndex % 7) == 0)
 				news.setNewsSocialCorpCode("cp,tm");
-		
+
 			else
 				news.setNewsSocialCorpCode("etc");
 

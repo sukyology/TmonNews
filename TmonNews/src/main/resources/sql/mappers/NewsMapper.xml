@@ -33,8 +33,7 @@
 	<select id="getNewsListByAllCorp" parameterType="String"
 		resultMap="NewsResult">
 		SELECT news.*,
-		social_corporations.KORNAME,
-		social_corporations.ENGNAME
+		social_corporations.CODE
 		FROM news INNER JOIN mapping_social ON
 		news.ID =
 		mapping_social.NEWS_ID
