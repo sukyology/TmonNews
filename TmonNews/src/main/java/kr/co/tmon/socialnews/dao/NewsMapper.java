@@ -19,4 +19,5 @@ public interface NewsMapper {
 	List<News> getNewsListByAllCorp(String newsDate);
 	void insertNews(News news);
 	void mappingSocialCode(News news);
+	void readCountUpdate(int newsID);
 }

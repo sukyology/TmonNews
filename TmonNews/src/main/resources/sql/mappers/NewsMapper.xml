@@ -12,8 +12,8 @@
 		<result property="newsImage" column="IMAGE" />
 		<result property="newsLink" column="LINK" />
 		<result property="newsProvider" column="PROVIDER" />
-		<result property="newsSocialCorpCode" column="mapping_social.SOCIAL_CORP" />
 		<result property="newsCount" column="READCNT" />
+		<result property="newsSocialCorpCode" column="mapping_social.SOCIAL_CORP" />
 	</resultMap>
 
 	<select id="getNewsList" resultMap="NewsResult">
@@ -35,10 +35,12 @@
 		resultMap="NewsResult">
 		SELECT news.*,
 		social_corporations.CODE
-		FROM news INNER JOIN mapping_social ON
+		FROM news INNER JOIN
+		mapping_social ON
 		news.ID =
 		mapping_social.NEWS_ID
-		INNER JOIN social_corporations ON
+		INNER JOIN
+		social_corporations ON
 		mapping_social.SOCIAL_CORPCODE =
 		social_corporations.CODE
 		WHERE
@@ -54,10 +56,12 @@
 		#{newsTitle}, #{newsPreview}, #{newsDate}, #{newsImage}, #{newsLink},
 		#{newsProvider}, 0);
 	</insert>
-	
+
 	<insert id="mappingSocialCode" parameterType="News">
-		INSERT INTO mapping_social(SOCIAL_CORPCODE, NEWS_ID)
-		VALUES(#{newsSocialCorpCode}, #{newsID})
+		INSERT INTO
+		mapping_social(SOCIAL_CORPCODE, NEWS_ID)
+		VALUES(#{newsSocialCorpCode},
+		#{newsID})
 	</insert>
 
 </mapper>
