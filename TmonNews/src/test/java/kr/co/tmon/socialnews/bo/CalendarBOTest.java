@@ -16,8 +16,8 @@ public class CalendarBOTest {
 	@Before
 	public void setup() {
 		calendarBO = new CalendarBO();
-		calendarBO.setSocialCorpCode("");
-		calendarBO.setNewsDate(new Date(2014 - 1900, 4, 21));
+		calendarBO.setSocialCorpCode("all");
+		calendarBO.setNewsDate(new Date(System.currentTimeMillis()));
 	}
 
 	@Test
@@ -28,7 +28,7 @@ public class CalendarBOTest {
 	
 	@Test
 	public void 날짜를_전환했을떄_정상적으로_반환하는지_테스트() {
-		calendarBO.setNewsDate(new Date(2014 - 1900, 4, 20));
+		calendarBO.setNewsDate(new Date(2014 - 1900, 4, 21));
 
 		List<News> newsList = calendarBO.getNewsList();
 		assertNotNull(newsList);

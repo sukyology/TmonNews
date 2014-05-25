@@ -16,8 +16,8 @@ public class SocialCategoryBOTest {
 	@Before
 	public void setup() {
 		socialCategoryBO = new SocialCategoryBO();
-		socialCategoryBO.setSocialCorpCode("");
-		socialCategoryBO.setNewsDate(new Date(2014 - 1900, 4, 21));
+		socialCategoryBO.setSocialCorpCode("all");
+		socialCategoryBO.setNewsDate(new Date(System.currentTimeMillis()));
 	}
 
 	@Test

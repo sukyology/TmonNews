@@ -14,8 +14,10 @@ import java.sql.Date;
  */
 
 public class TypeChangeBetweenDateAndString {
+	private static final String SQL_DATE_STYLE = "yyyy-MM-dd";
+
 	public String exchangeToStringType(Date date) {
-		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		SimpleDateFormat dateFormat = new SimpleDateFormat(SQL_DATE_STYLE);
 		return dateFormat.format(date);
 	}
 	
