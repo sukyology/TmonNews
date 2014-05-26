@@ -7,6 +7,8 @@ import kr.co.tmon.socialnews.bo.CorpDataConvertForMapping;
 import kr.co.tmon.socialnews.model.News;
 
 import org.apache.ibatis.session.SqlSession;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 /**
  * 
@@ -20,31 +22,25 @@ import org.apache.ibatis.session.SqlSession;
 
 public class InsertDailyNewsData {
 	private NewsMapper newsMapper;
+	private SqlSession sqlSession;
+	private ApplicationContext applicationContext;
 
 	public void insertNews(List<News> parsedNewsList) {
-		SqlSession sqlSession = MybatisSqlSessionFactory.openSession();
+		applicationContext = new ClassPathXmlApplicationContext("spring/applicationContext.xml");
+		sqlSession = (SqlSession) applicationContext.getBean("sqlSession");
 
-		try {
-			newsMapper = sqlSession.getMapper(NewsMapper.class);
-			CorpDataConvertForMapping corpDataConvertForMapping = new CorpDataConvertForMapping();
-			parsedNewsList = corpDataConvertForMapping.divideByCorps(parsedNewsList);
+		newsMapper = sqlSession.getMapper(NewsMapper.class);
+		CorpDataConvertForMapping corpDataConvertForMapping = new CorpDataConvertForMapping();
+		parsedNewsList = corpDataConvertForMapping.divideByCorps(parsedNewsList);
 
-			ConvertKoreanCorpNameToCode convertKoreanCorpNameToCode = new ConvertKoreanCorpNameToCode();
-			parsedNewsList = convertKoreanCorpNameToCode.exchangNameToCode(parsedNewsList);
-			newsMapper.insertNews(parsedNewsList.get(0));
+		ConvertKoreanCorpNameToCode convertKoreanCorpNameToCode = new ConvertKoreanCorpNameToCode();
+		parsedNewsList = convertKoreanCorpNameToCode.exchangNameToCode(parsedNewsList);
+		newsMapper.insertNews(parsedNewsList.get(0));
 
-			insertNewsAsUnique(parsedNewsList);
+		insertNewsAsUnique(parsedNewsList);
 
-			sqlSession.commit();
-
-			for (News news : parsedNewsList)
-				newsMapper.mappingSocialCode(news);
-
-			sqlSession.commit();
-
-		} finally {
-			sqlSession.close();
-		}
+		for (News news : parsedNewsList)
+			newsMapper.mappingSocialCode(news);
 	}
 
 	private void insertNewsAsUnique(List<News> parsedNewsList) {

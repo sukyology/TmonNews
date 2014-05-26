@@ -3,6 +3,7 @@ package kr.co.tmon.socialnews.bo;
 import java.sql.Date;
 import java.util.List;
 
+import kr.co.tmon.socialnews.dao.GetNewsDAO;
 import kr.co.tmon.socialnews.model.News;
 
 /**
@@ -15,7 +16,7 @@ import kr.co.tmon.socialnews.model.News;
  * 날짜가 바뀔때 이 조건에 맞는 데이터를 요청하는 BO
  */
 
-public class CalendarBO extends GetNews {
+public class CalendarBO extends GetNewsDAO {
 	public List<News> getNewsByChangingDate(Date changedDate) {
 		super.setNewsDate(changedDate);
 		return getNewsList();

@@ -1,32 +1,26 @@
 package kr.co.tmon.socialnews.dao;
 
-import static org.junit.Assert.*;
-import static org.mockito.Matchers.*;
-import static org.mockito.Mockito.*;
+import static org.junit.Assert.assertFalse;
 
-import java.util.ArrayList;
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 
-import kr.co.tmon.socialnews.bo.GetNews;
 import kr.co.tmon.socialnews.model.News;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.Mock;
-import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 public class InsertDailyNewsDataTest {
 	private InsertDailyNewsData insertDailyNewsData;
 	private News news;
 	private List<News> newsList;
-	private GetNews getNews;
+	private GetNewsDAO getNews;
 
 	@Before
 	public void setup() {
-		getNews = new GetNews();
+		getNews = new GetNewsDAO();
 		insertDailyNewsData = new InsertDailyNewsData();
 		getNews.setSocialCorpCode("all");
 		getNews.setNewsDate(new Date(System.currentTimeMillis()));
@@ -57,7 +51,7 @@ public class InsertDailyNewsDataTest {
 			news.setNewsLink(Integer.toString(dailyIndex));
 			news.setNewsPreview(Integer.toString(dailyIndex));
 			news.setNewsProvider(Integer.toString(dailyIndex));
-			news.setNewsTitle(Integer.toString(dailyIndex));
+			news.setNewsTitle("가나다라마바사");
 
 			if ((dailyIndex % 2) == 0)
 				news.setNewsSocialCorpCode("티켓몬스터");

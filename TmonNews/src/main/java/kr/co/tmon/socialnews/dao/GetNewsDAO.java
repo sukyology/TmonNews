@@ -1,13 +1,14 @@
-package kr.co.tmon.socialnews.bo;
+package kr.co.tmon.socialnews.dao;
 
 import java.sql.Date;
 import java.util.List;
 
-import kr.co.tmon.socialnews.dao.MybatisSqlSessionFactory;
-import kr.co.tmon.socialnews.dao.NewsMapper;
+import kr.co.tmon.socialnews.bo.TypeChangeBetweenDateAndString;
 import kr.co.tmon.socialnews.model.News;
 
 import org.apache.ibatis.session.SqlSession;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 /**
  * 
@@ -20,35 +21,34 @@ import org.apache.ibatis.session.SqlSession;
  * SocialCategoryBO에서 작업을 처리한다.
  */
 
-public class GetNews {
+public class GetNewsDAO {
 	private static final String DEFAULT_CATEGORY = "all";
 	private List<News> newsList;
 	private String socialCorpCode;
 	private Date newsDate;
 	private NewsMapper newsMapper;
+	private SqlSession sqlSession;
+	private ApplicationContext applicationContext;
 
-	public GetNews() {
+	public GetNewsDAO() {
+		applicationContext = new ClassPathXmlApplicationContext("spring/applicationContext.xml");
 		setNewsDate(new Date(System.currentTimeMillis()));
-		setSocialCorpCode("all");
+		setSocialCorpCode(DEFAULT_CATEGORY);
 	}
 
 	public List<News> getNewsList() {
-		SqlSession sqlSession = MybatisSqlSessionFactory.openSession();
+		sqlSession = (SqlSession) applicationContext.getBean("sqlSession");
+
 		TypeChangeBetweenDateAndString dateToString = new TypeChangeBetweenDateAndString();
 		String newsDateString = dateToString.exchangeToStringType(newsDate);
 
-		try {
-			newsMapper = sqlSession.getMapper(NewsMapper.class);
+		newsMapper = sqlSession.getMapper(NewsMapper.class);
 
-			if (socialCorpCode.compareTo(DEFAULT_CATEGORY) == 0)
-				newsList = (List<News>) newsMapper.getNewsListByAllCorp(newsDateString);
-			else
-				newsList = (List<News>) newsMapper.getNewsList(socialCorpCode, newsDateString);
-			
-		} finally {
-			sqlSession.close();
-		}
-
+		if (socialCorpCode.compareTo(DEFAULT_CATEGORY) == 0)
+			newsList = (List<News>) newsMapper.getNewsListByAllCorp(newsDateString);
+		else
+			newsList = (List<News>) newsMapper.getNewsList(socialCorpCode, newsDateString);
+		
 		return newsList;
 	}
 

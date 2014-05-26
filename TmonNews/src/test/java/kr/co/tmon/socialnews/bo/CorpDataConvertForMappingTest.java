@@ -1,20 +1,15 @@
 package kr.co.tmon.socialnews.bo;
 
+import static org.junit.Assert.assertEquals;
+
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
 import kr.co.tmon.socialnews.model.News;
 
-import static org.junit.Assert.*;
-import static org.mockito.Matchers.*;
-import static org.mockito.Mockito.*;
-
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.Mock;
-import org.mockito.runners.MockitoJUnitRunner;
 
 public class CorpDataConvertForMappingTest {
 	private CorpDataConvertForMapping corpDateConvertForMapping;
