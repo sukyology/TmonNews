@@ -1,45 +1,39 @@
-package kr.co.tmon.socialnews.dao;
+package kr.co.tmon.socialnews.bo;
 
-import static org.junit.Assert.*;
-import static org.mockito.Matchers.*;
-import static org.mockito.Mockito.*;
+import static org.junit.Assert.assertTrue;
 
-import java.util.ArrayList;
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 
-import kr.co.tmon.socialnews.bo.GetNews;
 import kr.co.tmon.socialnews.model.News;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.Mock;
-import org.mockito.runners.MockitoJUnitRunner;
-import org.springframework.transaction.annotation.Transactional;
 
-public class InsertDailyNewsDataTest {
-	private InsertDailyNewsData insertDailyNewsData;
-	private News news;
+public class ConvertKoreanCorpNameToCodeTest {
+	private ConvertKoreanCorpNameToCode convertKoreanCorpNameToCode;
 	private List<News> newsList;
-	private GetNews getNews;
+	private News news;
 
 	@Before
 	public void setup() {
-		getNews = new GetNews();
-		insertDailyNewsData = new InsertDailyNewsData();
-		getNews.setSocialCorpCode("all");
-		getNews.setNewsDate(new Date(System.currentTimeMillis()));
+		convertKoreanCorpNameToCode = new ConvertKoreanCorpNameToCode();
 	}
 
-	@Transactional
 	@Test
-	public void 여러개의_뉴스데이터가_주어졌을때_전체적인_insert프로세스가_정상적으로_작동하는지_확인하는_테스트() {
+	public void 모든_corp를_코드로_정상적으로_치환하는지_테스트() {
 		makeSampleDate(100);
-		insertDailyNewsData.insertNews(newsList);
+		newsList = convertKoreanCorpNameToCode.exchangNameToCode(newsList);
 
-		List<News> result = getNews.getNewsList();
-		assertFalse(result.isEmpty());
+		boolean isValid = true;
+
+		for (News news : newsList) {
+			if (news.getNewsSocialCorpCode().compareTo("tm") != 0 && news.getNewsSocialCorpCode().compareTo("cp") != 0 && news.getNewsSocialCorpCode().compareTo("etc") != 0 && news.getNewsSocialCorpCode().compareTo("wmp") != 0)
+				isValid = false;
+		}
+
+		assertTrue(isValid);
 	}
 
 	private void makeSampleDate(int numberOfItem) {
@@ -77,6 +71,7 @@ public class InsertDailyNewsDataTest {
 			newsList.add(news);
 			dailyIndex++;
 		}
+
 	}
 
 }

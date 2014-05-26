@@ -44,6 +44,7 @@ public class GetNews {
 				newsList = (List<News>) newsMapper.getNewsListByAllCorp(newsDateString);
 			else
 				newsList = (List<News>) newsMapper.getNewsList(socialCorpCode, newsDateString);
+			
 		} finally {
 			sqlSession.close();
 		}

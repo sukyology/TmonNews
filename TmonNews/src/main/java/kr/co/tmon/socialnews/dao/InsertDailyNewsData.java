@@ -2,6 +2,7 @@ package kr.co.tmon.socialnews.dao;
 
 import java.util.List;
 
+import kr.co.tmon.socialnews.bo.ConvertKoreanCorpNameToCode;
 import kr.co.tmon.socialnews.bo.CorpDataConvertForMapping;
 import kr.co.tmon.socialnews.model.News;
 
@@ -10,7 +11,7 @@ import org.apache.ibatis.session.SqlSession;
 /**
  * 
  * @author 김종환
- *
+ * 
  */
 
 /*
@@ -27,11 +28,13 @@ public class InsertDailyNewsData {
 			newsMapper = sqlSession.getMapper(NewsMapper.class);
 			CorpDataConvertForMapping corpDataConvertForMapping = new CorpDataConvertForMapping();
 			parsedNewsList = corpDataConvertForMapping.divideByCorps(parsedNewsList);
-			
+
+			ConvertKoreanCorpNameToCode convertKoreanCorpNameToCode = new ConvertKoreanCorpNameToCode();
+			parsedNewsList = convertKoreanCorpNameToCode.exchangNameToCode(parsedNewsList);
 			newsMapper.insertNews(parsedNewsList.get(0));
-			
+
 			insertNewsAsUnique(parsedNewsList);
-				
+
 			sqlSession.commit();
 
 			for (News news : parsedNewsList)
@@ -45,11 +48,11 @@ public class InsertDailyNewsData {
 	}
 
 	private void insertNewsAsUnique(List<News> parsedNewsList) {
-		for (int index = 1; index < parsedNewsList.size(); index++){
+		for (int index = 1; index < parsedNewsList.size(); index++) {
 			News news = parsedNewsList.get(index);
-			if(news.getNewsID() != parsedNewsList.get(index-1).getNewsID())
+			if (news.getNewsID() != parsedNewsList.get(index - 1).getNewsID())
 				newsMapper.insertNews(news);
 		}
 	}
-	
+
 }
