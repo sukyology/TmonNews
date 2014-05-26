@@ -29,15 +29,16 @@
 		WHERE
 		social_corporations.CODE=#{param1} AND
 		DATE=#{param2}
+		LIMIT 
+		10 OFFSET #{param3}
 	</select>
 
-	<select id="getNewsListByAllCorp" parameterType="String"
-		resultMap="NewsResult">
+	<select id="getNewsListByAllCorp"	resultMap="NewsResult">
 		SELECT news.*, social_corporations.CODE
 		FROM news INNER JOIN mapping_social ON news.ID = mapping_social.NEWS_ID
 		INNER JOIN social_corporations ON mapping_social.SOCIAL_CORPCODE =
 		social_corporations.CODE
-		WHERE DATE=#{date}
+		WHERE DATE=#{param1}
 		GROUP BY news.ID
 		ORDER BY
 		CASE WHEN CODE = "tm" THEN 1
@@ -45,6 +46,8 @@
 		WHEN CODE = "wmp" THEN 3
 		WHEN CODE ="etc" THEN 4
 		END ASC
+		LIMIT 
+		10 OFFSET #{param2}
 
 	</select>
 

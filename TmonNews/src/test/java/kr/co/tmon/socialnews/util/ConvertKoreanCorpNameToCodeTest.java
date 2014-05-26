@@ -1,4 +1,4 @@
-package kr.co.tmon.socialnews.bo;
+package kr.co.tmon.socialnews.util;
 
 import static org.junit.Assert.assertTrue;
 
@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import kr.co.tmon.socialnews.model.News;
+import kr.co.tmon.socialnews.util.ConvertKoreanCorpNameToCode;
 
 import org.junit.Before;
 import org.junit.Test;

@@ -1,15 +1,25 @@
-package kr.co.tmon.socialnews.bo;
+package kr.co.tmon.socialnews.util;
 
 import java.util.List;
 
 import kr.co.tmon.socialnews.model.News;
+
+/**
+ * 
+ * @author 김종환
+ * 
+ */
+
+/*
+ * 한글로 넘어오는 카데고리 이름으로 코드명으로 변환해주는 클래스
+ */
 
 public class ConvertKoreanCorpNameToCode {
 	public List<News> exchangNameToCode(List<News> newsList) {
 		for (News news : newsList) {
 			news.setNewsSocialCorpCode(koreanCorpNameToCode(news.getNewsSocialCorpCode()));
 		}
-		
+
 		return newsList;
 	}
 

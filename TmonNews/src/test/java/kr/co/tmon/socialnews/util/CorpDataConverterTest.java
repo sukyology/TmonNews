@@ -1,4 +1,4 @@
-package kr.co.tmon.socialnews.bo;
+package kr.co.tmon.socialnews.util;
 
 import static org.junit.Assert.assertEquals;
 
@@ -7,17 +7,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 import kr.co.tmon.socialnews.model.News;
+import kr.co.tmon.socialnews.util.CorpDataConverter;
 
 import org.junit.Before;
 import org.junit.Test;
 
-public class CorpDataConvertForMappingTest {
-	private CorpDataConvertForMapping corpDateConvertForMapping;
+public class CorpDataConverterTest {
+	private CorpDataConverter corpDateConvertForMapping;
 	private List<News> newsList;
 
 	@Before
 	public void setup() {
-		corpDateConvertForMapping = new CorpDataConvertForMapping();
+		corpDateConvertForMapping = new CorpDataConverter();
 	}
 
 	@Test
@@ -28,12 +29,12 @@ public class CorpDataConvertForMappingTest {
 		newsList.get(2).setNewsSocialCorpCode("wmp");
 		newsList.get(3).setNewsSocialCorpCode("etc");
 		newsList.get(4).setNewsSocialCorpCode("cp");
-		
-		newsList= corpDateConvertForMapping.divideByCorps(newsList);
-		
+
+		newsList = corpDateConvertForMapping.divideByCorps(newsList);
+
 		assertEquals(7, newsList.size());
-		
-		for(News news : newsList)
+
+		for (News news : newsList)
 			System.out.println(news.getNewsSocialCorpCode());
 	}
 

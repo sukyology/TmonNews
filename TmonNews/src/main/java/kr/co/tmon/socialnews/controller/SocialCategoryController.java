@@ -24,26 +24,26 @@ public class SocialCategoryController extends HttpServlet {
 	private SocialCategoryBO socialCategoryBO;
 
 	@RequestMapping("/socials")
-	public ModelAndView ControlAllSocialNews(HttpSession session) {
-		return settingModelAndView("socials", session);
+	public ModelAndView ControlAllSocialNews(HttpSession session, int page) {
+		return settingModelAndView("socials", session, page);
 	}
 
 	@RequestMapping("/coupang")
-	public ModelAndView ControlCoupangNews(HttpSession session) {
-		return settingModelAndView("coupang", session);
+	public ModelAndView ControlCoupangNews(HttpSession session, int page) {
+		return settingModelAndView("coupang", session, page);
 	}
 
 	@RequestMapping("/tmon")
-	public ModelAndView ControlTmonNews(HttpSession session) {
-		return settingModelAndView("tmon", session);
+	public ModelAndView ControlTmonNews(HttpSession session, int page) {
+		return settingModelAndView("tmon", session, page);
 	}
 
 	@RequestMapping("/wemap")
-	public ModelAndView ControlWemapNews(HttpSession session) {
-		return settingModelAndView("wemap", session);
+	public ModelAndView ControlWemapNews(HttpSession session, int page) {
+		return settingModelAndView("wemap", session, page);
 	}
 
-	private ModelAndView settingModelAndView(String socialCorpName, HttpSession session) {
+	private ModelAndView settingModelAndView(String socialCorpName, HttpSession session, int page) {
 		ModelAndView socialCorpModelAndView = new ModelAndView();
 
 		session.setAttribute("selectedSocialCorp", socialCorpName);
@@ -51,7 +51,7 @@ public class SocialCategoryController extends HttpServlet {
 		socialCategoryBO.setNewsDate((Date) session.getAttribute("selectedDate"));
 		socialCategoryBO.setSocialCorpCode(socialCorpName);
 
-		socialCorpModelAndView.addObject("newsList", socialCategoryBO.getNewsList());
+		socialCorpModelAndView.addObject("newsList", socialCategoryBO.getNewsList(page));
 
 		if (socialCorpName.equals("socialCorpName") == false)
 			socialCorpModelAndView.setViewName("newspage");

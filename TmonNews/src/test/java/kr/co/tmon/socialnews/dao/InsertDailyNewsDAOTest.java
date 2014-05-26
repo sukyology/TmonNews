@@ -10,29 +10,30 @@ import kr.co.tmon.socialnews.model.News;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
-public class InsertDailyNewsDataTest {
-	private InsertDailyNewsData insertDailyNewsData;
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations = { "classpath:spring/applicationContext*.xml" })
+public class InsertDailyNewsDAOTest {
+	@Autowired
+	private InsertDailyNewsDAO insertDailyNewsDAO;
+	@Autowired
+	private GetNewsDAO getNewsDAO;
+	
 	private News news;
 	private List<News> newsList;
-	private GetNewsDAO getNews;
 
-	@Before
-	public void setup() {
-		getNews = new GetNewsDAO();
-		insertDailyNewsData = new InsertDailyNewsData();
-		getNews.setSocialCorpCode("all");
-		getNews.setNewsDate(new Date(System.currentTimeMillis()));
-	}
-
-	@Transactional
+	
 	@Test
 	public void 여러개의_뉴스데이터가_주어졌을때_전체적인_insert프로세스가_정상적으로_작동하는지_확인하는_테스트() {
 		makeSampleDate(100);
-		insertDailyNewsData.insertNews(newsList);
+		insertDailyNewsDAO.insertNews(newsList);
 
-		List<News> result = getNews.getNewsList();
+		List<News> result = getNewsDAO.getNewsList(new Date(System.currentTimeMillis()), "socials", 1);
 		assertFalse(result.isEmpty());
 	}
 

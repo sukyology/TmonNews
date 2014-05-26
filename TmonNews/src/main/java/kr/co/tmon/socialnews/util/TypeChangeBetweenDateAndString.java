@@ -1,4 +1,4 @@
-package kr.co.tmon.socialnews.bo;
+package kr.co.tmon.socialnews.util;
 
 import java.text.SimpleDateFormat;
 import java.sql.Date;
@@ -6,7 +6,7 @@ import java.sql.Date;
 /**
  * 
  * @author 김종환
- *
+ * 
  */
 
 /*
@@ -20,5 +20,5 @@ public class TypeChangeBetweenDateAndString {
 		SimpleDateFormat dateFormat = new SimpleDateFormat(SQL_DATE_STYLE);
 		return dateFormat.format(date);
 	}
-	
+
 }

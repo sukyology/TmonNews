@@ -3,12 +3,12 @@ package kr.co.tmon.socialnews.dao;
 import java.sql.Date;
 import java.util.List;
 
-import kr.co.tmon.socialnews.bo.TypeChangeBetweenDateAndString;
 import kr.co.tmon.socialnews.model.News;
+import kr.co.tmon.socialnews.util.TypeChangeBetweenDateAndString;
 
 import org.apache.ibatis.session.SqlSession;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 /**
  * 
@@ -17,39 +17,43 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
  */
 
 /*
- * 뉴스데이터를 가져오는 클래스. 날짜, 혹은 카테고리가 바뀔경우에는 이 클래스를 상속받은 CalenderBO와
- * SocialCategoryBO에서 작업을 처리한다.
+ * 뉴스데이터를 가져오는 클래스. 날짜, 혹은 카테고리가 바뀔경우에는 이 클래스를 상속받은 CalenderDAO와
+ * SocialCategoryDAO에서 작업을 처리한다.
  */
 
+@Repository
 public class GetNewsDAO {
-	private static final String DEFAULT_CATEGORY = "all";
-	private List<News> newsList;
-	private String socialCorpCode;
-	private Date newsDate;
-	private NewsMapper newsMapper;
-	private SqlSession sqlSession;
-	private ApplicationContext applicationContext;
+	private static final String DEFAULT_CATEGORY = "socials";
 
-	public GetNewsDAO() {
-		applicationContext = new ClassPathXmlApplicationContext("spring/applicationContext.xml");
-		setNewsDate(new Date(System.currentTimeMillis()));
-		setSocialCorpCode(DEFAULT_CATEGORY);
+	private int numberOfPage;
+	protected String socialCorpCode;
+	protected Date newsDate;
+
+	@Autowired
+	private SqlSession sqlSession;
+
+	public List<News> getNewsList(Date date, String corpCode, int page) {
+		setNewsDate(date);
+		setSocialCorpCode(corpCode);
+		setNumberOfPage(page);
+		
+		return accessDbToGetNewsList();
 	}
 
-	public List<News> getNewsList() {
-		sqlSession = (SqlSession) applicationContext.getBean("sqlSession");
-
+	private String setCurrentDateToSqlDateType() {
 		TypeChangeBetweenDateAndString dateToString = new TypeChangeBetweenDateAndString();
 		String newsDateString = dateToString.exchangeToStringType(newsDate);
+		return newsDateString;
+	}
 
-		newsMapper = sqlSession.getMapper(NewsMapper.class);
+	private List<News> accessDbToGetNewsList() {
+		String newsDateString = setCurrentDateToSqlDateType();
+		NewsMapper newsMapper = sqlSession.getMapper(NewsMapper.class);
 
 		if (socialCorpCode.compareTo(DEFAULT_CATEGORY) == 0)
-			newsList = (List<News>) newsMapper.getNewsListByAllCorp(newsDateString);
+			return (List<News>) newsMapper.getNewsListByAllCorp(newsDateString, getNumberOfPage());
 		else
-			newsList = (List<News>) newsMapper.getNewsList(socialCorpCode, newsDateString);
-		
-		return newsList;
+			return (List<News>) newsMapper.getNewsList(socialCorpCode, newsDateString, getNumberOfPage());
 	}
 
 	public void setSocialCorpCode(String socialCorpCode) {
@@ -58,5 +62,13 @@ public class GetNewsDAO {
 
 	public void setNewsDate(Date newsDate) {
 		this.newsDate = newsDate;
+	}
+
+	public int getNumberOfPage() {
+		return numberOfPage;
+	}
+
+	public void setNumberOfPage(int numberOfPage) {
+		this.numberOfPage = numberOfPage;
 	}
 }

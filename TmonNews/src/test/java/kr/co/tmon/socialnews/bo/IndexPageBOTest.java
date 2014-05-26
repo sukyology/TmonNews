@@ -1,26 +1,26 @@
 package kr.co.tmon.socialnews.bo;
 
-import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.*;
+import static org.mockito.Matchers.*;
+import static org.mockito.Mockito.*;
 
-import java.sql.Date;
-
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:spring/applicationContext*.xml" })
-public class SocialCategoryBOTest {
+public class IndexPageBOTest {
 	@Autowired
-	private SocialCategoryBO socialCategoryBO;
+	private IndexPageBO indexPageBO;
 
 	@Test
-	public void 바뀐_날짜로부터_정상적으로_뉴스리스트가_리턴되는지_테스트() {
-		socialCategoryBO.setNewsDate(new Date(System.currentTimeMillis()));
-		socialCategoryBO.setSocialCorpCode("tm");
-
-		assertNotNull(socialCategoryBO.getNewsList(1));
+	public void 첫번째_페이지에서_정상적으로_뉴스리스트를_리턴하는지_테스트() {
+		assertNotNull(indexPageBO.getDailyIndexNewsList());
 	}
 }
