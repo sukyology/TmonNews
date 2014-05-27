@@ -191,12 +191,6 @@
 					<center>
 						<ul class="pagination">
 							<li class="disabled"><a href="#">&laquo;</a></li>
-							<li><a href="#">1</a></li>
-							<li><a href="#">2</a></li>
-							<li><a href="#">3</a></li>
-							<li><a href="#">4</a></li>
-							<li><a href="#">5</a></li>
-							<li><a href="#">&raquo;</a></li>
 						</ul>
 					</center>
 
@@ -214,7 +208,19 @@
 	<script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>
-
-
+	<script src="js/UrlParser.js"></script>
+<script>
+var totalNewsPage = 7;
+function createPagination(Page){
+		$(".pagination").append("<li><a href='#'>"+Page+"</a></li>");	
+}
+for(var currentPage=1; currentPage <= totalNewsPage; currentPage++){
+	createPagination(currentPage);
+}
+</script>
+<script>
+var currentPage = url('?page');
+$(".pagination li").eq(currentPage).addClass("disabled");
+</script>
 </body>
 </html>
