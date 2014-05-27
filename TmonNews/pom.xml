@@ -108,7 +108,7 @@
 				<directory>src/test/resources</directory>
 			</testResource>
 		</testResources>
-		
+
 		<pluginManagement>
 			<plugins>
 				<plugin>
@@ -335,6 +335,23 @@
 			<groupId>org.mybatis</groupId>
 			<artifactId>mybatis-spring</artifactId>
 			<version>1.2.2</version>
+		</dependency>
+
+		<!-- was -->
+	
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<scope>provided</scope>
+			<version>3.0.1</version>
+		</dependency>
+
+
+		<dependency>
+			<groupId>javax.servlet.jsp</groupId>
+			<artifactId>jsp-api</artifactId>
+			<scope>provided</scope>
+			<version>2.2</version>
 		</dependency>
 	</dependencies>
 </project>
