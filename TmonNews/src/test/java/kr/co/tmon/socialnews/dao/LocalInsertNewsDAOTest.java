@@ -18,11 +18,11 @@ import org.springframework.transaction.annotation.Transactional;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:spring/applicationContext*.xml" })
-public class InsertDailyNewsDAOTest {
+public class LocalInsertNewsDAOTest {
 	@Autowired
-	private InsertDailyNewsDAO insertDailyNewsDAO;
+	private LocalInsertNewsDAO insertDailyNewsDAO;
 	@Autowired
-	private GetNewsDAO getNewsDAO;
+	private LocalGetNewsDAO getNewsDAO;
 	
 	private News news;
 	private List<News> newsList;

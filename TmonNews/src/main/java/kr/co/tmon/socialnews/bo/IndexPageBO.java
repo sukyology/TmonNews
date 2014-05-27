@@ -6,13 +6,14 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import kr.co.tmon.socialnews.dao.GetNewsDAO;
+import kr.co.tmon.socialnews.dao.LocalDailyNewsCountDAO;
+import kr.co.tmon.socialnews.dao.LocalGetNewsDAO;
 import kr.co.tmon.socialnews.model.News;
 
 /**
  * 
  * @author 김종환
- *
+ * 
  */
 
 /*
@@ -23,11 +24,24 @@ import kr.co.tmon.socialnews.model.News;
 public class IndexPageBO {
 	private static final int DEFALUT_PAGE_NUMBER = 1;
 	private static final String DEFALUT_CORPCODE = "socials";
-	
+
+	private int newsCount;
+
 	@Autowired
-	private GetNewsDAO getNewsDAO;
+	private LocalGetNewsDAO getNewsDAO;
+	@Autowired
+	private LocalDailyNewsCountDAO localDailyNewsCountDAO;
 
 	public List<News> getDailyIndexNewsList() {
+		setNewsCount(localDailyNewsCountDAO.getNewsCount(new Date(System.currentTimeMillis()), DEFALUT_CORPCODE));
 		return getNewsDAO.getNewsList(new Date(System.currentTimeMillis()), DEFALUT_CORPCODE, DEFALUT_PAGE_NUMBER);
+	}
+
+	public int getNewsCount() {
+		return newsCount;
+	}
+
+	public void setNewsCount(int newsCount) {
+		this.newsCount = newsCount;
 	}
 }

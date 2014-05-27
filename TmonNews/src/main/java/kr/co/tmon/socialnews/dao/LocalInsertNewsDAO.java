@@ -20,7 +20,7 @@ import org.springframework.stereotype.Repository;
  * 파싱된 뉴스데이터를 DB에 집어넣는 클래스
  */
 @Repository
-public class InsertDailyNewsDAO {
+public class LocalInsertNewsDAO {
 	@Autowired
 	private SqlSession sqlSession;
 
