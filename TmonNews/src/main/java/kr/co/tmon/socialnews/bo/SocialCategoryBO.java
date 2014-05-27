@@ -1,7 +1,12 @@
 package kr.co.tmon.socialnews.bo;
 
+import java.sql.Date;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
+import kr.co.tmon.socialnews.dao.GetNewsDAO;
 import kr.co.tmon.socialnews.model.News;
 
 /**
@@ -14,9 +19,42 @@ import kr.co.tmon.socialnews.model.News;
  * 카데고리와 Date에 맞게 데이터를 Select하기위한 로직이 들어있는 클래스
  */
 
-public class SocialCategoryBO extends GetNews {
-	public List<News> getNewsByCategory(String changedCategoty) {
-		super.setSocialCorpCode(changedCategoty);
-		return getNewsList();
+@Repository
+public class SocialCategoryBO {
+	@Autowired
+	private GetNewsDAO getNewsDAO;
+
+	private Date newsDate;
+	private String socialCorpCode;
+	private int page;
+
+	public List<News> getNewsList(int numberOfPage) {
+		this.page = numberOfPage;
+		return getNewsDAO.getNewsList(newsDate, socialCorpCode, page);
 	}
+
+	public Date getNewsDate() {
+		return newsDate;
+	}
+
+	public void setNewsDate(Date newsDate) {
+		this.newsDate = newsDate;
+	}
+
+	public String getSocialCorpCode() {
+		return socialCorpCode;
+	}
+
+	public void setSocialCorpCode(String socialCorpCode) {
+		this.socialCorpCode = socialCorpCode;
+	}
+
+	public int getPage() {
+		return page;
+	}
+
+	public void setPage(int page) {
+		this.page = page;
+	}
+
 }

@@ -12,39 +12,63 @@
 		<result property="newsImage" column="IMAGE" />
 		<result property="newsLink" column="LINK" />
 		<result property="newsProvider" column="PROVIDER" />
+		<result property="newsCount" column="READCNT" />
+		<result property="newsSocialCorpCode" column="mapping_social.SOCIAL_CORP" />
 	</resultMap>
 
 	<select id="getNewsList" resultMap="NewsResult">
 		SELECT news.*,
-		social_corporations.KORNAME, social_corporations.ENGNAME
-		FROM news
-		INNER JOIN mapping_social ON news.ID = mapping_social.NEWS_ID
-		INNER
-		JOIN social_corporations ON mapping_social.SOCIAL_CORPCODE =
 		social_corporations.CODE
-		WHERE social_corporations.CODE=#{param1} AND
+		FROM news
+		INNER JOIN mapping_social ON news.ID
+		= mapping_social.NEWS_ID
+		INNER
+		JOIN social_corporations ON
+		mapping_social.SOCIAL_CORPCODE =
+		social_corporations.CODE
+		WHERE
+		social_corporations.CODE=#{param1} AND
 		DATE=#{param2}
+		LIMIT
+		10 OFFSET #{param3}
 	</select>
 
-	<select id="getNewsListByAllCorp" parameterType="String"
-		resultMap="NewsResult">
+	<select id="getNewsListByAllCorp" resultMap="NewsResult">
 		SELECT news.*,
-		social_corporations.KORNAME,
-		social_corporations.ENGNAME
-		FROM news INNER JOIN mapping_social ON
-		news.ID =
-		mapping_social.NEWS_ID
+		social_corporations.CODE
+		FROM news INNER JOIN mapping_social ON news.ID
+		= mapping_social.NEWS_ID
 		INNER JOIN social_corporations ON
 		mapping_social.SOCIAL_CORPCODE =
 		social_corporations.CODE
 		WHERE
-		DATE=#{date}
+		DATE=#{param1}
+		GROUP BY news.ID
+		ORDER BY
+		CASE WHEN CODE = "tm" THEN 1
+		WHEN CODE = "cp" THEN 2
+		WHEN CODE = "wmp" THEN 3
+		WHEN CODE ="etc" THEN 4
+		END ASC
+		LIMIT
+		10 OFFSET #{param2}
+
 	</select>
 
 	<insert id="insertNews" parameterType="News">
-		INSERT INTO news(TITLE,
+		INSERT INTO news(ID,
+		TITLE,
 		PREVIEW, DATE, IMAGE, LINK, PROVIDER, READCNT)
-		VALUES(#{newsTitle}, #{newsPreview}, #{newsDate}, #{newsImage}, #{newsLink}, #{newsProvider}, 0);
+		VALUES(#{newsID},
+		#{newsTitle}, #{newsPreview}, #{newsDate}, #{newsImage}, #{newsLink},
+		#{newsProvider}, 0);
+	</insert>
+
+	<insert id="mappingSocialCode" parameterType="News">
+		INSERT INTO
+		mapping_social(SOCIAL_CORPCODE, NEWS_ID)
+		VALUES(#{newsSocialCorpCode},
+		#{newsID})
 	</insert>
 
 </mapper>

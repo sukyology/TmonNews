@@ -4,9 +4,9 @@ logAppender=stdout
 logFileName=D:/social_batch/socialDataLog.log
 
 # DB url, username, password
-url=dbsafer.tmonc.net:4005/tmon_mobile
+url=10.5.208.35:3306/front_db
 username=headcha
-password=ckwjdgus!
+password=admin
 
 #data.xml
 testData=test

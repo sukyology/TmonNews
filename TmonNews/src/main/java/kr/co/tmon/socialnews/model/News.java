@@ -5,11 +5,10 @@ package kr.co.tmon.socialnews.model;
  * 
  */
 import java.util.Date;
-import java.util.List;
 
 public class News {
 	private int newsID;
-	private List<String> newsSocialCorpCodeList;
+	private String newsSocialCorpCode;
 	private String newsTitle;
 	private String newsPreview;
 	private Date newsDate;
@@ -26,12 +25,12 @@ public class News {
 		this.newsID = newsID;
 	}
 
-	public List<String> getNewsSocialCorpList() {
-		return newsSocialCorpCodeList;
+	public String getNewsSocialCorpCode() {
+		return newsSocialCorpCode;
 	}
 
-	public void setNewsSocialCorpList(List<String> newsSocialCorpList) {
-		this.newsSocialCorpCodeList = newsSocialCorpList;
+	public void setNewsSocialCorpCode(String newsSocialCorpCodeList) {
+		this.newsSocialCorpCode = newsSocialCorpCodeList;
 	}
 
 	public String getNewsTitle() {
