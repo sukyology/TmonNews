@@ -9,12 +9,24 @@
 		http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-3.0.xsd">
 
 	<!-- DataSource -->
-	<bean id="dataSource"
-		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
+		destroy-method="close">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver"></property>
-		<property name="url" value="jdbc:mysql://@url@"></property>
-		<property name="username" value="@username@"></property>
-		<property name="password" value="@password@"></property>
+		<property name="url" value="jdbc:mysql://localhost:3306/front_db"></property>
+		<property name="username" value="root"></property>
+		<property name="password" value="admin"></property>
+		<property name="removeAbandoned" value="true"></property>
+		<property name="removeAbandonedTimeout" value="30"></property>
+		<property name="logAbandoned" value="true"></property>
+		<property name="testOnBorrow" value="false"></property>
+		<property name="initialSize" value="10"></property>
+		<property name="maxActive" value="40"></property>
+		<property name="minIdle" value="6"></property>
+		<property name="maxIdle" value="40"></property>
+		<property name="maxWait" value="1000"></property>
+		<property name="testWhileIdle" value="true"></property>
+		<property name="timeBetweenEvictionRunsMillis" value="30000"></property>
+
 	</bean>
 
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
