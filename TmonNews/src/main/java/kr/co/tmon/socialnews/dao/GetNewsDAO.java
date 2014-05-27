@@ -36,7 +36,7 @@ public class GetNewsDAO {
 		setNewsDate(date);
 		setSocialCorpCode(corpCode);
 		setNumberOfPage(page);
-		
+
 		return accessDbToGetNewsList();
 	}
 
@@ -51,9 +51,9 @@ public class GetNewsDAO {
 		NewsMapper newsMapper = sqlSession.getMapper(NewsMapper.class);
 
 		if (socialCorpCode.compareTo(DEFAULT_CATEGORY) == 0)
-			return (List<News>) newsMapper.getNewsListByAllCorp(newsDateString, getNumberOfPage());
+			return (List<News>) newsMapper.getNewsListByAllCorp(newsDateString, convertPageNumberToNewsIndex(getNumberOfPage()));
 		else
-			return (List<News>) newsMapper.getNewsList(socialCorpCode, newsDateString, getNumberOfPage());
+			return (List<News>) newsMapper.getNewsList(socialCorpCode, newsDateString, convertPageNumberToNewsIndex(getNumberOfPage()));
 	}
 
 	public void setSocialCorpCode(String socialCorpCode) {
@@ -70,5 +70,9 @@ public class GetNewsDAO {
 
 	public void setNumberOfPage(int numberOfPage) {
 		this.numberOfPage = numberOfPage;
+	}
+
+	public int convertPageNumberToNewsIndex(int page) {
+		return (page - 1) * 10;
 	}
 }

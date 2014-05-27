@@ -30,7 +30,7 @@
 		social_corporations.CODE=#{param1} AND
 		DATE=#{param2}
 		LIMIT
-		10 OFFSET #{param3}
+		#{param3}, 5
 	</select>
 
 	<select id="getNewsListByAllCorp" resultMap="NewsResult">
@@ -51,7 +51,7 @@
 		WHEN CODE ="etc" THEN 4
 		END ASC
 		LIMIT
-		10 OFFSET #{param2}
+		#{param2}, 5
 
 	</select>
 
