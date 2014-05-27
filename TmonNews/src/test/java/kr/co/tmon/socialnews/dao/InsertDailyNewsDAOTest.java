@@ -27,7 +27,7 @@ public class InsertDailyNewsDAOTest {
 	private News news;
 	private List<News> newsList;
 
-	
+	@Transactional
 	@Test
 	public void 여러개의_뉴스데이터가_주어졌을때_전체적인_insert프로세스가_정상적으로_작동하는지_확인하는_테스트() {
 		makeSampleDate(100);

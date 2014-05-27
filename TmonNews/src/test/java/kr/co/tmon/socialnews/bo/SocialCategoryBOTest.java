@@ -17,7 +17,7 @@ public class SocialCategoryBOTest {
 	private SocialCategoryBO socialCategoryBO;
 
 	@Test
-	public void 바뀐_날짜로부터_정상적으로_뉴스리스트가_리턴되는지_테스트() {
+	public void 바뀐_카테고리로부터_정상적으로_뉴스리스트가_리턴되는지_테스트() {
 		socialCategoryBO.setNewsDate(new Date(System.currentTimeMillis()));
 		socialCategoryBO.setSocialCorpCode("tm");
 
