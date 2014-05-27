@@ -6,7 +6,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import kr.co.tmon.socialnews.dao.GetNewsDAO;
+import kr.co.tmon.socialnews.dao.LocalDailyNewsCountDAO;
+import kr.co.tmon.socialnews.dao.LocalGetNewsDAO;
 import kr.co.tmon.socialnews.model.News;
 
 /**
@@ -22,14 +23,18 @@ import kr.co.tmon.socialnews.model.News;
 @Repository
 public class SocialCategoryBO {
 	@Autowired
-	private GetNewsDAO getNewsDAO;
+	private LocalGetNewsDAO getNewsDAO;
+	@Autowired
+	private LocalDailyNewsCountDAO localDailyNewsCountDAO;
 
 	private Date newsDate;
 	private String socialCorpCode;
 	private int page;
+	private int newsCount;
 
 	public List<News> getNewsList(int numberOfPage) {
 		this.page = numberOfPage;
+		setNewsCount(localDailyNewsCountDAO.getNewsCount(newsDate, socialCorpCode));
 		return getNewsDAO.getNewsList(newsDate, socialCorpCode, page);
 	}
 
@@ -55,6 +60,14 @@ public class SocialCategoryBO {
 
 	public void setPage(int page) {
 		this.page = page;
+	}
+
+	public int getNewsCount() {
+		return newsCount;
+	}
+
+	public void setNewsCount(int newsCount) {
+		this.newsCount = newsCount;
 	}
 
 }

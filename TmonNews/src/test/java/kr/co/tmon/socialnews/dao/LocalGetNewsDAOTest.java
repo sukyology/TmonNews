@@ -17,9 +17,9 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:spring/applicationContext*.xml" })
-public class GetNewsDAOTest {
+public class LocalGetNewsDAOTest {
 	@Autowired
-	private GetNewsDAO getNewsDAO;
+	private LocalGetNewsDAO getNewsDAO;
 
 	@Test
 	public void 당일_날짜의_전체_뉴스리스트를_정상적으로_불러오는지_확인하는_테스트() {

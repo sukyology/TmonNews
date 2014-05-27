@@ -22,7 +22,7 @@ import org.springframework.stereotype.Repository;
  */
 
 @Repository
-public class GetNewsDAO {
+public class LocalGetNewsDAO {
 	private static final String DEFAULT_CATEGORY = "socials";
 
 	private int numberOfPage;
