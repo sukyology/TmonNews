@@ -16,7 +16,6 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement(name = "news")
 public class SocialNewsDocument {
-
 	@XmlElement(name = "item")
 	private List<ParsedNews> parsedNewsList;
 

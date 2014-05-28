@@ -19,6 +19,6 @@ public class LocalDailyNewsCountDAOTest {
 	@Test
 	public void 정확한_뉴스리스트의_카운트를_리턴하는지_테스트() {
 		int result = getDailyNewsCountDAO.getNewsCount(new Date(System.currentTimeMillis()), "socials");
-		assertEquals(200, result);
+		assertEquals(21, result);
 	}
 }

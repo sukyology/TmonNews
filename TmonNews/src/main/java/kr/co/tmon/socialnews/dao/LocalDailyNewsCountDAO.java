@@ -10,6 +10,13 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+/**
+ * 
+ * @author 김종환
+ *
+ * 불러온 뉴스리스트의 전체 갯수를 세기 위해 만든 DAO 클래스
+ *
+ */
 @Repository
 public class LocalDailyNewsCountDAO {
 	private static String DEFAULT_CATEGORY = "socials";

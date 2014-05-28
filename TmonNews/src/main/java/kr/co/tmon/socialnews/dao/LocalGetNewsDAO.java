@@ -73,6 +73,6 @@ public class LocalGetNewsDAO {
 	}
 
 	public int convertPageNumberToNewsIndex(int page) {
-		return (page - 1) * 10;
+		return (page - 1) * 5;
 	}
 }

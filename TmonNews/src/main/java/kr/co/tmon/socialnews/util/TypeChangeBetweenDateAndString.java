@@ -1,7 +1,9 @@
 package kr.co.tmon.socialnews.util;
 
+import java.text.ParseException;
+
 import java.text.SimpleDateFormat;
-import java.sql.Date;
+import java.util.Date;
 
 /**
  * 
@@ -21,4 +23,11 @@ public class TypeChangeBetweenDateAndString {
 		return dateFormat.format(date);
 	}
 
+	public java.sql.Date exchangeToDateType(String dateString) throws ParseException {
+		SimpleDateFormat dateFormat = new SimpleDateFormat(SQL_DATE_STYLE);
+		
+		Date date = dateFormat.parse(dateString);
+		java.sql.Date sqlDate = new java.sql.Date(date.getTime());
+		return sqlDate;
+	}
 }

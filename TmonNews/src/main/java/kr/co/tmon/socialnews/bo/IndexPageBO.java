@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 
 import kr.co.tmon.socialnews.dao.LocalDailyNewsCountDAO;
 import kr.co.tmon.socialnews.dao.LocalGetNewsDAO;
@@ -20,7 +21,7 @@ import kr.co.tmon.socialnews.model.News;
  * 처음 사이트에 접속했을때 출력해야하는 전체 카테고리-오늘날짜 뉴스테이터를 뽑아오는 클래스
  */
 
-@Repository
+@Service
 public class IndexPageBO {
 	private static final int DEFALUT_PAGE_NUMBER = 1;
 	private static final String DEFALUT_CORPCODE = "socials";

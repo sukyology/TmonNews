@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 
 import kr.co.tmon.socialnews.dao.LocalDailyNewsCountDAO;
 import kr.co.tmon.socialnews.dao.LocalGetNewsDAO;
@@ -20,7 +21,7 @@ import kr.co.tmon.socialnews.model.News;
  * 카데고리와 Date에 맞게 데이터를 Select하기위한 로직이 들어있는 클래스
  */
 
-@Repository
+@Service
 public class SocialCategoryBO {
 	@Autowired
 	private LocalGetNewsDAO getNewsDAO;

@@ -5,6 +5,7 @@ import static org.mockito.Matchers.*;
 import static org.mockito.Mockito.*;
 
 import java.sql.Date;
+import java.text.ParseException;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -25,5 +26,13 @@ public class TypeChangeBetweenDateAndStringTest {
 		Date date = new Date(2014 - 1900, 4, 26);
 		String dateExpressedSqlStyle = typeChangeBetweenDateAndString.exchangeToStringType(date);
 		assertTrue(dateExpressedSqlStyle.compareTo("2014-05-26") == 0);
+	}
+
+	@Test
+	public void String타입을_Date타입으로_변환하는게_정상적인지_테스트() throws ParseException {
+		String dateString = "2014-05-28";
+		Date date = (Date) typeChangeBetweenDateAndString.exchangeToDateType(dateString);
+
+		assertTrue(dateString.compareTo(date.toString()) == 0);
 	}
 }

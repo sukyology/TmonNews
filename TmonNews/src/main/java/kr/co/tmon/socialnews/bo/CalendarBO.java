@@ -9,6 +9,7 @@ import kr.co.tmon.socialnews.model.News;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 
 /**
  * 
@@ -20,7 +21,7 @@ import org.springframework.stereotype.Repository;
  * 날짜의 변화에 따라서 뉴스리스트를 리턴하는 클래스
  */
 
-@Repository
+@Service
 public class CalendarBO {
 	@Autowired
 	private LocalGetNewsDAO getNewsDAO;

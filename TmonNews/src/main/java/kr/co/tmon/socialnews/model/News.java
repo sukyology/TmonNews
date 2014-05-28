@@ -4,7 +4,7 @@ package kr.co.tmon.socialnews.model;
  * @author GoYoungGyeong
  * 
  */
-import java.util.Date;
+import java.sql.Date;
 
 public class News {
 	private int newsID;

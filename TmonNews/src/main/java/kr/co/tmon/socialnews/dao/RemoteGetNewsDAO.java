@@ -20,7 +20,6 @@ public class RemoteGetNewsDAO {
 	private SocialNewsDocument socialNewsDocument;
 
 	public SocialNewsDocument getSocialNewsDocument() throws MalformedURLException, JAXBException {
-
 		URL url = new URL("http://10.5.220.81:8080/social/news.xml");
 		JAXBContext context = JAXBContext.newInstance(SocialNewsDocument.class);
 		Unmarshaller unmarshaller = context.createUnmarshaller();
