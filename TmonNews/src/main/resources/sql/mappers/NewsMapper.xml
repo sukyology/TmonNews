@@ -124,14 +124,19 @@
 	FROM DUAL
 		WHERE 
 			NOT EXISTS 
-				(SELECT id FROM news WHERE link=#{newsLink})
+				(SELECT id FROM news WHERE id=#{newsID})
 	</insert>
 
 	<insert id="mappingSocialCode" parameterType="News">
 		INSERT INTO
 			mapping_social(social_corpcode, news_id)
-		VALUES
-			(#{newsSocialCorpCode}, #{newsID})
+		SELECT
+			#{newsSocialCorpCode}, #{newsID}
+		FROM DUAL
+			WHERE
+				NOT EXISTS
+					(SELECT social_corpcode, news_id FROM mapping_social WHERE social_corpcode=#{newsSocialCorpCode} AND news_id=#{newsID})
+			
 	</insert>
 	
 	<update id="readCountUpdate" parameterType="int">

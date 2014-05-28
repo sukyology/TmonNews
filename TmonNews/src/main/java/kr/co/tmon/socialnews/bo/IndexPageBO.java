@@ -16,10 +16,8 @@ import kr.co.tmon.socialnews.util.TypeChangeBetweenDateAndString;
  * 
  * @author 김종환
  * 
- */
-
-/*
  * 처음 사이트에 접속했을때 출력해야하는 전체 카테고리-오늘날짜 뉴스테이터를 뽑아오는 클래스
+ * 
  */
 
 @Service

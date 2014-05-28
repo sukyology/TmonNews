@@ -17,4 +17,5 @@ public class RemoteGetNewsDAOTest {
 		System.out.println(remoteGetNewsDAO.generateTodayUrl());
 	}
 
+
 }

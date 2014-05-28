@@ -21,15 +21,12 @@ import kr.co.tmon.socialnews.util.TypeChangeBetweenDateAndString;
 @Repository
 public class RemoteGetNewsDAO {
 	private static final String BASIC_URL_FOR_GETTING_XML = "http://10.5.220.81:8080/social/news.tmon?date=";
-	private SocialNewsDocument socialNewsDocument;
-
+	
 	public SocialNewsDocument getSocialNewsDocument() throws MalformedURLException, JAXBException {
 		URL url = new URL(generateTodayUrl());
 		JAXBContext context = JAXBContext.newInstance(SocialNewsDocument.class);
 		Unmarshaller unmarshaller = context.createUnmarshaller();
-		socialNewsDocument = (SocialNewsDocument) unmarshaller.unmarshal(url);
-
-		return socialNewsDocument;
+		return (SocialNewsDocument) unmarshaller.unmarshal(url);
 	}
 
 	String generateTodayUrl() {

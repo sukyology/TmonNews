@@ -52,4 +52,5 @@ public class XmlParsingBOTest {
 
 		verify(localInsertNewsDAO, times(1));
 	}
+
 }

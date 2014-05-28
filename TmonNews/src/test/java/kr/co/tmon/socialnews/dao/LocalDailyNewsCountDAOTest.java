@@ -23,6 +23,6 @@ public class LocalDailyNewsCountDAOTest {
 		TypeChangeBetweenDateAndString typeChangeBetweenDateAndString = new TypeChangeBetweenDateAndString();
 		String dateString = typeChangeBetweenDateAndString.exchangeToStringType(new Date(System.currentTimeMillis()));
 		int result = getDailyNewsCountDAO.getNewsCount(dateString, "socials");
-		assertEquals(27, result);
+		assertEquals(36, result);
 	}
 }

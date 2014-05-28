@@ -14,11 +14,10 @@ import org.springframework.stereotype.Repository;
  * 
  * @author 김종환
  * 
+ * 파싱된 뉴스데이터를 DB에 집어넣는 클래스
+ * 
  */
 
-/*
- * 파싱된 뉴스데이터를 DB에 집어넣는 클래스
- */
 @Repository
 public class LocalInsertNewsDAO {
 	private static final int START_INSERT_INDEX_EXAMING_DUPLICATE = 1;

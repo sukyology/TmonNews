@@ -8,10 +8,8 @@ import kr.co.tmon.socialnews.model.News;
  * 
  * @author 김종환
  * 
- */
-
-/*
  * 한글로 넘어오는 카데고리 이름으로 코드명으로 변환해주는 클래스
+ * 
  */
 
 public class ConvertKoreanCorpNameToCode {

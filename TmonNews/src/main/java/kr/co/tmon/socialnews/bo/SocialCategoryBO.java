@@ -16,10 +16,8 @@ import kr.co.tmon.socialnews.util.TypeChangeBetweenDateAndString;
  * 
  * @author 김종환
  * 
- */
-
-/*
  * 카데고리와 Date에 맞게 데이터를 Select하기위한 로직이 들어있는 클래스
+ * 
  */
 
 @Service

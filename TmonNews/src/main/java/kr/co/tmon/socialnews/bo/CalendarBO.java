@@ -15,10 +15,8 @@ import org.springframework.stereotype.Service;
  * 
  * @author 김종환
  *
- */
-
-/*
  * 날짜의 변화에 따라서 뉴스리스트를 리턴하는 클래스
+ *
  */
 
 @Service
@@ -40,16 +38,8 @@ public class CalendarBO {
 		return getNewsDAO.getNewsList(newsDate, socialCorpCode, page);
 	}
 
-	public String getNewsDate() {
-		return newsDate;
-	}
-
 	public void setNewsDate(String newsDate) {
 		this.newsDate = newsDate;
-	}
-
-	public String getSocialCorpCode() {
-		return socialCorpCode;
 	}
 
 	public void setSocialCorpCode(String socialCorpCode) {
@@ -58,14 +48,6 @@ public class CalendarBO {
 
 	public int getPage() {
 		return page;
-	}
-
-	public void setPage(int page) {
-		this.page = page;
-	}
-
-	public int getNewsCount() {
-		return newsCount;
 	}
 
 	public void setNewsCount(int newsCount) {

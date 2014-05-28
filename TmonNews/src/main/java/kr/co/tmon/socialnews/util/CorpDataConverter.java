@@ -8,11 +8,10 @@ import kr.co.tmon.socialnews.model.News;
  * 
  * @author 김종환
  * 
+ * 하나의 기사에 여럿의 소셜회사가 연관될 경우, 이를 다중매핑시키기 위해 CorpCode를 분리하는 클래스
+ * 
  */
 
-/*
- * 하나의 기사에 여럿의 소셜회사가 연관될 경우, 이를 다중매핑시키기 위해 CorpCode를 분리하는 클래스
- */
 
 public class CorpDataConverter {
 	public List<News> divideByCorps(List<News> originalNewsList) {
