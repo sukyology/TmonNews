@@ -1,10 +1,10 @@
 package kr.co.tmon.socialnews.dao;
 
-import java.sql.Date;
+
+
 import java.util.List;
 
 import kr.co.tmon.socialnews.model.News;
-import kr.co.tmon.socialnews.util.TypeChangeBetweenDateAndString;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;

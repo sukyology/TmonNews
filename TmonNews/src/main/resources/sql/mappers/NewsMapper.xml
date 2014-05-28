@@ -133,5 +133,11 @@
 		VALUES
 			(#{newsSocialCorpCode}, #{newsID})
 	</insert>
+	
+	<update id="readCountUpdate" parameterType="int">
+		UPDATE news 
+		SET READCNT=READCNT+1
+		WHERE ID=#{newsID};
+	</update>
 
 </mapper>
