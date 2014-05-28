@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import kr.co.tmon.socialnews.dao.LocalDailyNewsCountDAO;
 import kr.co.tmon.socialnews.dao.LocalGetNewsDAO;
 import kr.co.tmon.socialnews.model.News;
+import kr.co.tmon.socialnews.util.TypeChangeBetweenDateAndString;
 
 /**
  * 
@@ -35,8 +36,10 @@ public class SocialCategoryBO {
 
 	public List<News> getNewsList(int numberOfPage) {
 		this.page = numberOfPage;
-		setNewsCount(localDailyNewsCountDAO.getNewsCount(newsDate, socialCorpCode));
-		return getNewsDAO.getNewsList(newsDate, socialCorpCode, page);
+		TypeChangeBetweenDateAndString typeChangeBetweenDateAndString = new TypeChangeBetweenDateAndString();
+		String dateString = typeChangeBetweenDateAndString.exchangeToStringType(newsDate);
+		setNewsCount(localDailyNewsCountDAO.getNewsCount(dateString, socialCorpCode));
+		return getNewsDAO.getNewsList(dateString, socialCorpCode, page);
 	}
 
 	public Date getNewsDate() {

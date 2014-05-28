@@ -4,6 +4,8 @@ import static org.junit.Assert.assertEquals;
 
 import java.sql.Date;
 
+import kr.co.tmon.socialnews.util.TypeChangeBetweenDateAndString;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +20,9 @@ public class LocalDailyNewsCountDAOTest {
 
 	@Test
 	public void 정확한_뉴스리스트의_카운트를_리턴하는지_테스트() {
-		int result = getDailyNewsCountDAO.getNewsCount(new Date(System.currentTimeMillis()), "socials");
-		assertEquals(21, result);
+		TypeChangeBetweenDateAndString typeChangeBetweenDateAndString = new TypeChangeBetweenDateAndString();
+		String dateString = typeChangeBetweenDateAndString.exchangeToStringType(new Date(System.currentTimeMillis()));
+		int result = getDailyNewsCountDAO.getNewsCount(dateString, "socials");
+		assertEquals(27, result);
 	}
 }

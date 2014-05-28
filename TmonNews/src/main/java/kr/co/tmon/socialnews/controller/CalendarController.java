@@ -20,7 +20,7 @@ public class CalendarController {
 	public ModelAndView ControlCalendar(HttpSession session, int page) {
 		ModelAndView calendarModelAndView = new ModelAndView();
 
-		calendarBO.setNewsDate((Date) session.getAttribute("selectedDate"));
+		calendarBO.setNewsDate((String)session.getAttribute("selectedDate"));
 		calendarBO.setSocialCorpCode((String) session.getAttribute("selectedSocialCorp"));
 
 		calendarModelAndView.addObject("newsList", calendarBO.getNewsList(page));

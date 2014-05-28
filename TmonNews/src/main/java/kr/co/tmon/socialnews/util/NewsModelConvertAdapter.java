@@ -20,7 +20,7 @@ public class NewsModelConvertAdapter {
 	public List<News> convertToNewsListForDB(List<ParsedNews> xmlParsedNewsList) throws ParseException {
 		ArrayList<News> newsList = new ArrayList<>();
 
-		for (int indexOfNewsList = 0; indexOfNewsList < xmlParsedNewsList.size(); indexOfNewsList++)
+		for (int indexOfNewsList = xmlParsedNewsList.size() - 1; indexOfNewsList >= 0; indexOfNewsList--)
 			newsList.add(convertParsedNews(xmlParsedNewsList.get(indexOfNewsList), indexOfNewsList));
 
 		return newsList;
@@ -44,16 +44,21 @@ public class NewsModelConvertAdapter {
 	}
 
 	int setNewsId(Date newsDate, int newsIndex) {
+		StringBuilder stringBuilder = dateToString(newsDate);
+
+		String newsIndexToString = String.format("%03d", newsIndex);
+		stringBuilder.append(newsIndexToString);
+
+		return Integer.valueOf(stringBuilder.toString());
+	}
+
+	private StringBuilder dateToString(Date newsDate) {
 		StringBuilder stringBuilder = new StringBuilder();
 		String[] splitedDateString = newsDate.toString().split("-");
 		splitedDateString[0] = splitedDateString[0].substring(2);
 
 		for (String string : splitedDateString)
 			stringBuilder.append(string);
-
-		String newsIndexToString = String.format("%03d", newsIndex);
-		stringBuilder.append(newsIndexToString);
-
-		return Integer.valueOf(stringBuilder.toString());
+		return stringBuilder;
 	}
 }

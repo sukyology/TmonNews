@@ -5,103 +5,133 @@
 
 <mapper namespace="kr.co.tmon.socialnews.dao.NewsMapper">
 	<resultMap type="News" id="NewsResult">
-		<id property="newsID" column="ID" />
-		<result property="newsTitle" column="TITLE" />
-		<result property="newsPreview" column="PREVIEW" />
-		<result property="newsDate" column="DATE" />
-		<result property="newsImage" column="IMAGE" />
-		<result property="newsLink" column="LINK" />
-		<result property="newsProvider" column="PROVIDER" />
-		<result property="newsCount" column="READCNT" />
-		<result property="newsSocialCorpCode" column="mapping_social.SOCIAL_CORP" />
+		<id property="newsID" column="id" />
+		<result property="newsTitle" column="title" />
+		<result property="newsPreview" column="preview" />
+		<result property="newsDate" column="date" />
+		<result property="newsImage" column="imgae" />
+		<result property="newsLink" column="link" />
+		<result property="newsProvider" column="provider" />
+		<result property="newsCount" column="readcnt" />
+		<result property="newsSocialCorpCode" column="mapping_social.social_corpcode" />
 	</resultMap>
 
 	<select id="getNewsList" resultMap="NewsResult">
-		SELECT news.*,
-		social_corporations.CODE
-		FROM news
-		INNER JOIN mapping_social ON news.ID
-		= mapping_social.NEWS_ID
-		INNER
-		JOIN social_corporations ON
-		mapping_social.SOCIAL_CORPCODE =
-		social_corporations.CODE
+		SELECT 
+			news.id, 
+			news.title, 
+			news.preview, 
+			news.date, news.image, 
+			news.link, 
+			news.provider, 
+			news.readcnt,
+			social_corporations.code
+		FROM 
+			news
+		INNER JOIN 
+			mapping_social ON news.id = mapping_social.news_id
+		INNER JOIN 
+			social_corporations ON mapping_social.SOCIAL_CORPCODE = social_corporations.code
 		WHERE
-		social_corporations.CODE=#{param1} AND
-		DATE=#{param2}
+			social_corporations.code=#{param1} AND
+			date=#{param2}
 		LIMIT
-		#{param3}, 5
+			#{param3}, 5
 	</select>
 
 	<select id="getNewsListByAllCorp" resultMap="NewsResult">
-		SELECT news.*,
-		social_corporations.CODE
-		FROM news INNER JOIN mapping_social ON news.ID
-		= mapping_social.NEWS_ID
-		INNER JOIN social_corporations ON
-		mapping_social.SOCIAL_CORPCODE =
-		social_corporations.CODE
+		SELECT 
+			news.id, 
+			news.title, 
+			news.preview, 
+			news.date, 
+			news.image, 
+			news.link, 
+			news.provider, 
+			news.readcnt,
+			social_corporations.code
+		FROM 
+			news 
+		INNER JOIN 
+			mapping_social ON news.id = mapping_social.news_id
+		INNER JOIN 
+			social_corporations ON mapping_social.social_corpcode =social_corporations.code
 		WHERE
-		DATE=#{param1}
-		GROUP BY news.ID
+			date=#{param1}
+		GROUP BY 
+		news.id
 		ORDER BY
-		CASE WHEN CODE = "tm" THEN 1
-		WHEN CODE = "cp" THEN 2
-		WHEN CODE = "wmp" THEN 3
-		WHEN CODE ="etc" THEN 4
+			CASE 
+				WHEN 
+					CODE = "tm" THEN 1
+				WHEN
+					CODE = "cp" THEN 2
+				WHEN 
+					CODE = "wmp" THEN 3
+				WHEN 
+					CODE ="etc" THEN 4
 		END ASC
 		LIMIT
 		#{param2}, 5
 	</select>
 	
 	<select id="getNewsListForDailyNewsCount" resultMap="NewsResult">
-		SELECT news.*,
-		social_corporations.CODE
-		FROM news
-		INNER JOIN mapping_social ON news.ID
-		= mapping_social.NEWS_ID
-		INNER
-		JOIN social_corporations ON
-		mapping_social.SOCIAL_CORPCODE =
-		social_corporations.CODE
+		SELECT 
+			news.id, 
+			social_corporations.code
+		FROM 
+			news
+		INNER JOIN 
+			mapping_social ON news.id = mapping_social.news_id
+		INNER JOIN 
+			social_corporations ON mapping_social.social_corpcode = social_corporations.code
 		WHERE
-		social_corporations.CODE=#{param1} AND
-		DATE=#{param2}
+			social_corporations.code=#{mapping_social.social_corpcode} AND date=#{date}
 	</select>
 
 	<select id="getNewsListByAllCorpForDailyNewsCount" resultMap="NewsResult">
-		SELECT news.*,
-		social_corporations.CODE
-		FROM news INNER JOIN mapping_social ON news.ID
-		= mapping_social.NEWS_ID
-		INNER JOIN social_corporations ON
-		mapping_social.SOCIAL_CORPCODE =
-		social_corporations.CODE
+		SELECT 
+			news.id, 
+			social_corporations.code
+		FROM 
+			news 
+		INNER JOIN 
+			mapping_social ON news.id = mapping_social.news_id
+		INNER JOIN 
+			social_corporations ON mapping_social.social_corpcode = social_corporations.code
 		WHERE
-		DATE=#{newsDate}
-		GROUP BY news.ID
+			date=#{newsDate}
+		GROUP BY 
+			news.id
 		ORDER BY
-		CASE WHEN CODE = "tm" THEN 1
-		WHEN CODE = "cp" THEN 2
-		WHEN CODE = "wmp" THEN 3
-		WHEN CODE ="etc" THEN 4
+			CASE 
+				WHEN 
+					CODE = "tm" THEN 1
+				WHEN 
+					CODE = "cp" THEN 2
+				WHEN 
+					CODE = "wmp" THEN 3
+				WHEN 
+					CODE ="etc" THEN 4
 		END ASC
 	</select>
 
 	<insert id="insertNews" parameterType="News">
-		INSERT INTO news(ID,
-		TITLE,
-		PREVIEW, DATE, IMAGE, LINK, PROVIDER, READCNT)
-		VALUES(#{newsID},
-		#{newsTitle}, #{newsPreview}, #{newsDate}, #{newsImage}, #{newsLink},
-		#{newsProvider}, 0);
+	INSERT INTO 
+		news(id, title, preview, DATE, image, link, provider, readcnt)
+	SELECT
+		#{newsID}, #{newsTitle}, #{newsPreview}, #{newsDate}, #{newsImage}, #{newsLink}, #{newsProvider}, 0
+	FROM DUAL
+		WHERE 
+			NOT EXISTS 
+				(SELECT id FROM news WHERE link=#{newsLink})
 	</insert>
 
 	<insert id="mappingSocialCode" parameterType="News">
 		INSERT INTO
-		mapping_social(SOCIAL_CORPCODE, NEWS_ID)
-		VALUES(#{newsSocialCorpCode},
-		#{newsID})
+			mapping_social(social_corpcode, news_id)
+		VALUES
+			(#{newsSocialCorpCode}, #{newsID})
 	</insert>
 
 </mapper>

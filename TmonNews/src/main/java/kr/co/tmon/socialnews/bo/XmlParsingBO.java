@@ -33,4 +33,12 @@ public class XmlParsingBO {
 		List<News> newsList = newsModelConvertAdapter.convertToNewsListForDB(parsedNewsList);
 		localInsertNewsDAO.insertNews(newsList);
 	}
+
+	public void setLocalInsertNewsDAO(LocalInsertNewsDAO localInsertNewsDAO) {
+		this.localInsertNewsDAO = localInsertNewsDAO;
+	}
+
+	public void setRemoteGetNewsDAO(RemoteGetNewsDAO remoteGetNewsDAO) {
+		this.remoteGetNewsDAO = remoteGetNewsDAO;
+	}
 }

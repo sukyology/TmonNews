@@ -21,11 +21,11 @@ public class NewsModelConvertAdapterTest {
 	@Before
 	public void setup() {
 		newsModelConvertAdapter = new NewsModelConvertAdapter();
-		xmlParsedNews = createTestXmlParsedData();
 	}
 
 	@Test
 	public void 파싱데이터를_DB뉴스리스트로_정상적으로_변환하는지_테스트() throws ParseException {
+		xmlParsedNews = createTestXmlParsedData();
 		List<News> convertedNewsList = newsModelConvertAdapter.convertToNewsListForDB(xmlParsedNews);
 		assertNotNull(convertedNewsList);
 		

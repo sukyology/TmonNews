@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import kr.co.tmon.socialnews.dao.LocalDailyNewsCountDAO;
 import kr.co.tmon.socialnews.dao.LocalGetNewsDAO;
 import kr.co.tmon.socialnews.model.News;
+import kr.co.tmon.socialnews.util.TypeChangeBetweenDateAndString;
 
 /**
  * 
@@ -34,8 +35,10 @@ public class IndexPageBO {
 	private LocalDailyNewsCountDAO localDailyNewsCountDAO;
 
 	public List<News> getDailyIndexNewsList() {
-		setNewsCount(localDailyNewsCountDAO.getNewsCount(new Date(System.currentTimeMillis()), DEFALUT_CORPCODE));
-		return getNewsDAO.getNewsList(new Date(System.currentTimeMillis()), DEFALUT_CORPCODE, DEFALUT_PAGE_NUMBER);
+		TypeChangeBetweenDateAndString typeChangeBetweenDateAndString = new TypeChangeBetweenDateAndString();
+		String dateString = typeChangeBetweenDateAndString.exchangeToStringType(new Date(System.currentTimeMillis()));
+		setNewsCount(localDailyNewsCountDAO.getNewsCount(dateString, DEFALUT_CORPCODE));
+		return getNewsDAO.getNewsList(dateString, DEFALUT_CORPCODE, DEFALUT_PAGE_NUMBER);
 	}
 
 	public int getNewsCount() {

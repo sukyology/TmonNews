@@ -28,7 +28,7 @@ public class CalendarBO {
 	@Autowired
 	private LocalDailyNewsCountDAO localDailyNewsCountDAO;
 
-	private Date newsDate;
+	private String newsDate;
 	private String socialCorpCode;
 	private int page;
 	
@@ -40,11 +40,11 @@ public class CalendarBO {
 		return getNewsDAO.getNewsList(newsDate, socialCorpCode, page);
 	}
 
-	public Date getNewsDate() {
+	public String getNewsDate() {
 		return newsDate;
 	}
 
-	public void setNewsDate(Date newsDate) {
+	public void setNewsDate(String newsDate) {
 		this.newsDate = newsDate;
 	}
 

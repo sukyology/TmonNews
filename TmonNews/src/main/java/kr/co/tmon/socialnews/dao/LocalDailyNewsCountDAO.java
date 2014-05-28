@@ -25,9 +25,9 @@ public class LocalDailyNewsCountDAO {
 	private SqlSession sqlSession;
 
 	protected String socialCorpCode;
-	protected Date newsDate;
+	protected String newsDate;
 
-	public int getNewsCount(Date date, String corpCode) {
+	public int getNewsCount(String date, String corpCode) {
 		setNewsDate(date);
 		setSocialCorpCode(corpCode);
 
@@ -36,19 +36,12 @@ public class LocalDailyNewsCountDAO {
 	}
 
 	private List<News> accessDbToGetNewsList() {
-		String newsDateString = setCurrentDateToSqlDateType();
 		NewsMapper newsMapper = sqlSession.getMapper(NewsMapper.class);
 
 		if (socialCorpCode.compareTo(DEFAULT_CATEGORY) == 0)
-			return newsMapper.getNewsListByAllCorpForDailyNewsCount(newsDateString);
+			return newsMapper.getNewsListByAllCorpForDailyNewsCount(newsDate);
 		else
-			return newsMapper.getNewsListForDailyNewsCount(socialCorpCode, newsDateString);
-	}
-
-	private String setCurrentDateToSqlDateType() {
-		TypeChangeBetweenDateAndString dateToString = new TypeChangeBetweenDateAndString();
-		String newsDateString = dateToString.exchangeToStringType(newsDate);
-		return newsDateString;
+			return newsMapper.getNewsListForDailyNewsCount(socialCorpCode, newsDate);
 	}
 
 	public String getSocialCorpCode() {
@@ -59,11 +52,11 @@ public class LocalDailyNewsCountDAO {
 		this.socialCorpCode = socialCorpCode;
 	}
 
-	public Date getNewsDate() {
+	public String getNewsDate() {
 		return newsDate;
 	}
 
-	public void setNewsDate(Date newsDate) {
+	public void setNewsDate(String newsDate) {
 		this.newsDate = newsDate;
 	}
 }

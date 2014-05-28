@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import kr.co.tmon.socialnews.model.News;
+import kr.co.tmon.socialnews.util.TypeChangeBetweenDateAndString;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -32,8 +33,9 @@ public class LocalInsertNewsDAOTest {
 	public void 여러개의_뉴스데이터가_주어졌을때_전체적인_insert프로세스가_정상적으로_작동하는지_확인하는_테스트() {
 		makeSampleDate(100);
 		insertDailyNewsDAO.insertNews(newsList);
-
-		List<News> result = getNewsDAO.getNewsList(new Date(System.currentTimeMillis()), "socials", 1);
+		TypeChangeBetweenDateAndString typeChangeBetweenDateAndString = new TypeChangeBetweenDateAndString();
+		String newsDateString = typeChangeBetweenDateAndString.exchangeToStringType(new Date(System.currentTimeMillis()));
+		List<News> result = getNewsDAO.getNewsList(newsDateString, "socials", 1);
 		assertFalse(result.isEmpty());
 	}
 
@@ -47,7 +49,7 @@ public class LocalInsertNewsDAOTest {
 			news = new News();
 			news.setNewsCount(0);
 			news.setNewsDate(date);
-			news.setNewsID((int) date.getTime() + dailyIndex);
+			news.setNewsID(dailyIndex);
 			news.setNewsImage(Integer.toString(dailyIndex));
 			news.setNewsLink(Integer.toString(dailyIndex));
 			news.setNewsPreview(Integer.toString(dailyIndex));

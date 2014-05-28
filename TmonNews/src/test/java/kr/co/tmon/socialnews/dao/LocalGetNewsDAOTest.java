@@ -6,6 +6,8 @@ import static org.mockito.Mockito.*;
 
 import java.sql.Date;
 
+import kr.co.tmon.socialnews.util.TypeChangeBetweenDateAndString;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -23,6 +25,8 @@ public class LocalGetNewsDAOTest {
 
 	@Test
 	public void 당일_날짜의_전체_뉴스리스트를_정상적으로_불러오는지_확인하는_테스트() {
-		assertNotNull(getNewsDAO.getNewsList(new Date(System.currentTimeMillis()), "socials", 1));
+		TypeChangeBetweenDateAndString typeChangeBetweenDateAndString= new TypeChangeBetweenDateAndString();
+		String dateString = typeChangeBetweenDateAndString.exchangeToStringType(new Date(System.currentTimeMillis()));
+		assertNotNull(getNewsDAO.getNewsList(dateString, "socials", 1));
 	}
 }

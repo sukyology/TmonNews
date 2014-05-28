@@ -21,6 +21,7 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public class LocalInsertNewsDAO {
+	private static final int START_INSERT_INDEX_EXAMING_DUPLICATE = 1;
 	@Autowired
 	private SqlSession sqlSession;
 
@@ -44,10 +45,8 @@ public class LocalInsertNewsDAO {
 		return parsedNewsList;
 	}
 
-	
-
 	private void insertNewsAsUnique(List<News> parsedNewsList, NewsMapper newsMapper) {
-		for (int index = 1; index < parsedNewsList.size(); index++) {
+		for (int index = START_INSERT_INDEX_EXAMING_DUPLICATE; index < parsedNewsList.size(); index++) {
 			News news = parsedNewsList.get(index);
 			if (news.getNewsID() != parsedNewsList.get(index - 1).getNewsID())
 				newsMapper.insertNews(news);
