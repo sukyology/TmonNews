@@ -1,19 +1,27 @@
 package kr.co.tmon.socialnews.bo;
 
+import java.net.MalformedURLException;
 import java.util.List;
 
-import kr.co.tmon.socialnews.model.News;
+import javax.xml.bind.JAXBException;
 
-/*
- * 1팀에서 넘어온 xml데이터를 DAO에서 파싱한 것을 DB에 삽입하는 것을 담당하는 Business Logic
+import kr.co.tmon.socialnews.dao.RemoteGetNewsDAO;
+import kr.co.tmon.socialnews.model.ParsedNews;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+/**
+ * 
+ * @author yeseul23
+ *
  */
-
 public class XmlParsingBO {
-	public void getNewsFromXmlData(String fileName) {
-
+	@Autowired
+	private RemoteGetNewsDAO remoteGetNewsDAO;
+	
+	public List<ParsedNews> getRemoteNewsList() throws MalformedURLException, JAXBException{
+		return remoteGetNewsDAO.getSocialNewsDocument().getParsedNewsList();
 	}
-
-	public List<News> extractNewsList() {
-		return null;
-	}
+	
+	//디비에 넣는dao
 }
