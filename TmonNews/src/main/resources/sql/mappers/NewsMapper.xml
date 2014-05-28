@@ -9,7 +9,7 @@
 		<result property="newsTitle" column="title" />
 		<result property="newsPreview" column="preview" />
 		<result property="newsDate" column="date" />
-		<result property="newsImage" column="imgae" />
+		<result property="newsImage" column="image" />
 		<result property="newsLink" column="link" />
 		<result property="newsProvider" column="provider" />
 		<result property="newsCount" column="readcnt" />
