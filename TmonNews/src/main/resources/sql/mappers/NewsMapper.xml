@@ -33,10 +33,10 @@
 		INNER JOIN 
 			social_corporations ON mapping_social.SOCIAL_CORPCODE = social_corporations.code
 		WHERE
-			social_corporations.code=#{param1} AND
-			date=#{param2}
+			social_corporations.code=#{corpCode} AND
+			date=#{newsDate}
 		LIMIT
-			#{param3}, 5
+			#{page}, 5
 	</select>
 
 	<select id="getNewsListByAllCorp" resultMap="NewsResult">
@@ -57,7 +57,7 @@
 		INNER JOIN 
 			social_corporations ON mapping_social.social_corpcode =social_corporations.code
 		WHERE
-			date=#{param1}
+			date=#{newsDate}
 		GROUP BY 
 		news.id
 		ORDER BY
@@ -72,7 +72,7 @@
 					CODE ="etc" THEN 4
 		END ASC
 		LIMIT
-		#{param2}, 5
+		#{page}, 5
 	</select>
 	
 	<select id="getNewsListForDailyNewsCount" resultMap="NewsResult">

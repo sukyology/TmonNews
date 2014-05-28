@@ -2,6 +2,8 @@ package kr.co.tmon.socialnews.dao;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import kr.co.tmon.socialnews.model.News;
 
 /**
@@ -15,9 +17,9 @@ import kr.co.tmon.socialnews.model.News;
  */
 
 public interface NewsMapper {
-	List<News> getNewsList(String corpCode, String newsDate, int page);
+	List<News> getNewsList(@Param("corpCode") String corpCode, @Param("newsDate") String newsDate, @Param("page") int page);
 
-	List<News> getNewsListByAllCorp(String newsDate, int page);
+	List<News> getNewsListByAllCorp(@Param("newsDate") String newsDate, @Param("page") int page);
 
 	List<News> getNewsListForDailyNewsCount(String corpCode, String newsDate);
 	
