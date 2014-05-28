@@ -3,7 +3,7 @@ package kr.co.tmon.socialnews.bo;
 import java.sql.Date;
 import java.util.List;
 
-import kr.co.tmon.socialnews.dao.LocalDailyNewsCountDAO;
+import kr.co.tmon.socialnews.dao.LocalGetNumberOfNewsDAO;
 import kr.co.tmon.socialnews.dao.LocalGetNewsDAO;
 import kr.co.tmon.socialnews.model.News;
 
@@ -24,17 +24,17 @@ public class CalendarBO {
 	@Autowired
 	private LocalGetNewsDAO getNewsDAO;
 	@Autowired
-	private LocalDailyNewsCountDAO localDailyNewsCountDAO;
+	private LocalGetNumberOfNewsDAO localDailyNewsCountDAO;
 
 	private String newsDate;
 	private String socialCorpCode;
 	private int page;
 	
-	private int newsCount;
+	private int numberOfNews;
 
 	public List<News> getNewsList(int page) {
 		this.page = page;
-		setNewsCount(localDailyNewsCountDAO.getNewsCount(newsDate, socialCorpCode));
+		setNewsCount(localDailyNewsCountDAO.getNumberOfNews(newsDate, socialCorpCode));
 		return getNewsDAO.getNewsList(newsDate, socialCorpCode, page);
 	}
 
@@ -51,7 +51,7 @@ public class CalendarBO {
 	}
 
 	public void setNewsCount(int newsCount) {
-		this.newsCount = newsCount;
+		this.numberOfNews = newsCount;
 	}
 
 }

@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
-import kr.co.tmon.socialnews.dao.LocalDailyNewsCountDAO;
+import kr.co.tmon.socialnews.dao.LocalGetNumberOfNewsDAO;
 import kr.co.tmon.socialnews.dao.LocalGetNewsDAO;
 import kr.co.tmon.socialnews.model.News;
 import kr.co.tmon.socialnews.util.TypeChangeBetweenDateAndString;
@@ -25,25 +25,29 @@ public class IndexPageBO {
 	private static final int DEFALUT_PAGE_NUMBER = 1;
 	private static final String DEFALUT_CORPCODE = "socials";
 
-	private int newsCount;
+	private int numberOfNews;
 
 	@Autowired
 	private LocalGetNewsDAO getNewsDAO;
 	@Autowired
-	private LocalDailyNewsCountDAO localDailyNewsCountDAO;
+	private LocalGetNumberOfNewsDAO localDailyNewsCountDAO;
 
 	public List<News> getDailyIndexNewsList() {
+		setNewsCount(localDailyNewsCountDAO.getNumberOfNews(generateDateString(), DEFALUT_CORPCODE));
+		return getNewsDAO.getNewsList(generateDateString(), DEFALUT_CORPCODE, DEFALUT_PAGE_NUMBER);
+	}
+
+	private String generateDateString() {
 		TypeChangeBetweenDateAndString typeChangeBetweenDateAndString = new TypeChangeBetweenDateAndString();
 		String dateString = typeChangeBetweenDateAndString.exchangeToStringType(new Date(System.currentTimeMillis()));
-		setNewsCount(localDailyNewsCountDAO.getNewsCount(dateString, DEFALUT_CORPCODE));
-		return getNewsDAO.getNewsList(dateString, DEFALUT_CORPCODE, DEFALUT_PAGE_NUMBER);
+		return dateString;
 	}
 
 	public int getNewsCount() {
-		return newsCount;
+		return numberOfNews;
 	}
 
 	public void setNewsCount(int newsCount) {
-		this.newsCount = newsCount;
+		this.numberOfNews = newsCount;
 	}
 }

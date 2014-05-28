@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
-import kr.co.tmon.socialnews.dao.LocalDailyNewsCountDAO;
+import kr.co.tmon.socialnews.dao.LocalGetNumberOfNewsDAO;
 import kr.co.tmon.socialnews.dao.LocalGetNewsDAO;
 import kr.co.tmon.socialnews.model.News;
 import kr.co.tmon.socialnews.util.TypeChangeBetweenDateAndString;
@@ -25,19 +25,24 @@ public class SocialCategoryBO {
 	@Autowired
 	private LocalGetNewsDAO getNewsDAO;
 	@Autowired
-	private LocalDailyNewsCountDAO localDailyNewsCountDAO;
+	private LocalGetNumberOfNewsDAO localDailyNewsCountDAO;
 
 	private Date newsDate;
 	private String socialCorpCode;
 	private int page;
-	private int newsCount;
+	private int numberOfNews;
 
 	public List<News> getNewsList(int numberOfPage) {
 		this.page = numberOfPage;
+		String dateString = generateDateString();
+		setNewsCount(localDailyNewsCountDAO.getNumberOfNews(dateString, socialCorpCode));
+		return getNewsDAO.getNewsList(dateString, socialCorpCode, page);
+	}
+
+	private String generateDateString() {
 		TypeChangeBetweenDateAndString typeChangeBetweenDateAndString = new TypeChangeBetweenDateAndString();
 		String dateString = typeChangeBetweenDateAndString.exchangeToStringType(newsDate);
-		setNewsCount(localDailyNewsCountDAO.getNewsCount(dateString, socialCorpCode));
-		return getNewsDAO.getNewsList(dateString, socialCorpCode, page);
+		return dateString;
 	}
 
 	public Date getNewsDate() {
@@ -65,11 +70,11 @@ public class SocialCategoryBO {
 	}
 
 	public int getNewsCount() {
-		return newsCount;
+		return numberOfNews;
 	}
 
 	public void setNewsCount(int newsCount) {
-		this.newsCount = newsCount;
+		this.numberOfNews = newsCount;
 	}
 
 }

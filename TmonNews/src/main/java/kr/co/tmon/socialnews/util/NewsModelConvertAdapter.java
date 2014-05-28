@@ -12,7 +12,7 @@ import kr.co.tmon.socialnews.model.ParsedNews;
  * 
  * @author 김종환
  * 
- *         xml로 넘어온 데이터를 news Model에 맞게끔 전환시켜주는 util클래스
+ * xml로 넘어온 데이터를 news Model에 맞게끔 전환시켜주는 util클래스
  * 
  */
 
@@ -59,6 +59,7 @@ public class NewsModelConvertAdapter {
 
 		for (String string : splitedDateString)
 			stringBuilder.append(string);
+		
 		return stringBuilder;
 	}
 }

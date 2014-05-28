@@ -18,13 +18,13 @@ import org.springframework.stereotype.Repository;
  *
  */
 @Repository
-public class LocalDailyNewsCountDAO {
+public class LocalGetNumberOfNewsDAO {
 	private static String DEFAULT_CATEGORY = "socials";
 
 	@Autowired
 	private SqlSession sqlSession;
 
-	public int getNewsCount(String date, String corpCode) {
+	public int getNumberOfNews(String date, String corpCode) {
 		List<News> newsList = accessDbToGetNewsList(date, corpCode);
 		return newsList.size();
 	}

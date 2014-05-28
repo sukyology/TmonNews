@@ -1,5 +1,11 @@
 package kr.co.tmon.socialnews.dao;
 
+import static org.junit.Assert.assertNotNull;
+
+import java.net.MalformedURLException;
+
+import javax.xml.bind.JAXBException;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,9 +19,8 @@ public class RemoteGetNewsDAOTest {
 	private RemoteGetNewsDAO remoteGetNewsDAO;
 
 	@Test
-	public void 오늘날짜에_맞게_정상적으로_get메소드의_패러미터를_생성하는지_테스트() {
-		System.out.println(remoteGetNewsDAO.generateTodayUrl());
+	public void 파싱한_데이터를_정상적으로_넘겨주는지_여부_테스트() throws MalformedURLException, JAXBException {
+		assertNotNull(remoteGetNewsDAO.getSocialNewsDocument());
 	}
-
 
 }

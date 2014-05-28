@@ -29,7 +29,7 @@ public class RemoteGetNewsDAO {
 		return (SocialNewsDocument) unmarshaller.unmarshal(url);
 	}
 
-	String generateTodayUrl() {
+	private String generateTodayUrl() {
 		StringBuilder stringBuilder = new StringBuilder();
 		stringBuilder.append(BASIC_URL_FOR_GETTING_XML);
 		Date date = new Date(System.currentTimeMillis());
