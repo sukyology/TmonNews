@@ -37,7 +37,7 @@ public class LocalGetNewsDAOTest {
 		TypeChangeBetweenDateAndString typeChangeBetweenDateAndString = new TypeChangeBetweenDateAndString();
 		String dateString = typeChangeBetweenDateAndString.exchangeToStringType(new Date(System.currentTimeMillis()));
 
-		List<News> newsList = getNewsDAO.getNewsList(dateString, "tm", 1);
+		List<News> newsList = getNewsDAO.getNewsList(dateString, "cp", 1);
 		News news = newsList.get(0);
 
 		System.out.println(news.getNewsCount());
