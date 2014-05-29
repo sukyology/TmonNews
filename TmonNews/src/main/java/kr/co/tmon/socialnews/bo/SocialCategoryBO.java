@@ -33,7 +33,7 @@ public class SocialCategoryBO {
 	public List<News> getNewsList(String newsDate, String socialCorpCode, int numberOfPage) {
 		ConvertCorpNameToCode convertCorpNameToCode = new ConvertCorpNameToCode();
 		numberOfNews = localDailyNewsCountDAO.getNumberOfNews(newsDate, convertCorpNameToCode.corpNameToCode(socialCorpCode));
-		return getNewsDAO.getNewsList(newsDate, socialCorpCode, numberOfPage);
+		return getNewsDAO.getNewsList(newsDate, convertCorpNameToCode.corpNameToCode(socialCorpCode), numberOfPage);
 	}
 
 	public int getNumberOfNews() {

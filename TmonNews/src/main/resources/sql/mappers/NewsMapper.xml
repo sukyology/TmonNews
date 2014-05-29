@@ -36,6 +36,8 @@
 		WHERE
 			social_corporations.code=#{corpCode} AND
 			date=#{newsDate}
+		ORDER BY 
+			news.id DESC
 		LIMIT
 			#{page}, 5
 	</select>
@@ -62,6 +64,7 @@
 		GROUP BY 
 		news.id
 		ORDER BY
+			news.id DESC,
 			CASE 
 				WHEN 
 					CODE = "tm" THEN 1
@@ -76,7 +79,7 @@
 		#{page}, 5
 	</select>
 	
-	<select id="getNewsListForDailyNewsCount" resultMap="NewsResult">
+	<select id="getNewsListForDailyNumberOfNews" resultMap="NewsResult">
 		SELECT 
 			news.id, 
 			mapping_social.social_corpcode
@@ -90,7 +93,7 @@
 			social_corporations.code=#{corpCode} AND date=#{date}
 	</select>
 
-	<select id="getNewsListByAllCorpForDailyNewsCount" resultMap="NewsResult">
+	<select id="getNewsListByAllCorpForDailyNumberOfNews" resultMap="NewsResult">
 		SELECT 
 			news.id, 
 			mapping_social.social_corpcode

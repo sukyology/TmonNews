@@ -33,8 +33,8 @@ public class LocalGetNumberOfNewsDAO {
 		NewsMapper newsMapper = sqlSession.getMapper(NewsMapper.class);
 
 		if (corpCode.compareTo(DEFAULT_CATEGORY) == 0)
-			return newsMapper.getNewsListByAllCorpForDailyNewsCount(date);
+			return newsMapper.getNewsListByAllCorpForDailyNumberOfNews(date);
 		else
-			return newsMapper.getNewsListForDailyNewsCount(corpCode, date);
+			return newsMapper.getNewsListForDailyNumberOfNews(corpCode, date);
 	}
 }

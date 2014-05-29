@@ -20,10 +20,9 @@ public class LocalGetNumberOfNewsDAOTest {
 
 	@Test
 	public void 정확한_뉴스리스트의_카운트를_리턴하는지_테스트() {
-		TypeChangeBetweenDateAndString typeChangeBetweenDateAndString = new TypeChangeBetweenDateAndString();
-		String dateString = typeChangeBetweenDateAndString.exchangeToStringType(new Date(System.currentTimeMillis()));
+		String dateString = "2014-05-28";
 		int result = getDailyNewsCountDAO.getNumberOfNews(dateString, "socials");
-		assertEquals(32, result);
+		assertEquals(36, result);
 	}
 
 	@Test
