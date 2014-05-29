@@ -18,7 +18,7 @@
 
 <!-- Custom styles for this template -->
 <link href="css/dashboard.css" rel="stylesheet">
-
+<link href="/css/jquery-ui-1.10.4.css" rel="stylesheet">
 <style type="text/css"></style>
 <style id="holderjs-style" type="text/css"></style>
 </head>
@@ -65,7 +65,18 @@
 			</div>
 <decorator:body />
 
-
+<script src="/js/jquery-1.10.2.js"></script>
+<script src="/js/jquery-ui-1.10.4.js"></script>
+<script>
+$.datepicker.setDefaults({
+    showOn:"button",
+    buttonImageOnly: true,
+    buttonImage:"image/calendar_Icon.png",
+});
+$( "#datepicker" ).datepicker({ dateFormat: "yy-mm-dd" });
+$(".datesubmit").on("click", function(){
+   location.assign(location.hostname+location.pathname+"?date="+$("#datepicker").val()+"&page=1"); 
+});
 </body>
 </html>
 
