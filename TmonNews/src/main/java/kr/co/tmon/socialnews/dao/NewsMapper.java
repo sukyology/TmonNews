@@ -21,7 +21,7 @@ public interface NewsMapper {
 
 	List<News> getNewsListByAllCorp(@Param("newsDate") String newsDate, @Param("page") int page);
 
-	List<News> getNewsListForDailyNewsCount(String corpCode, String newsDate);
+	List<News> getNewsListForDailyNewsCount(@Param("corpCode") String corpCode, @Param("date") String newsDate);
 	
 	List<News> getNewsListByAllCorpForDailyNewsCount(String newsDate);
 	
