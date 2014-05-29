@@ -141,9 +141,12 @@
 	</insert>
 	
 	<update id="readCountUpdate" parameterType="int">
-		UPDATE news 
-		SET READCNT=READCNT+1
-		WHERE ID=#{newsID};
+		UPDATE 
+			news 
+		SET 
+			readcnt=readcnt+1
+		WHERE 
+			id=#{newsID};
 	</update>
 
 </mapper>

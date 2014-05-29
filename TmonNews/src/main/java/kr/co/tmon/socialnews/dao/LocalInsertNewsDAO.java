@@ -3,7 +3,7 @@ package kr.co.tmon.socialnews.dao;
 import java.util.List;
 
 import kr.co.tmon.socialnews.model.News;
-import kr.co.tmon.socialnews.util.ConvertKoreanCorpNameToCode;
+import kr.co.tmon.socialnews.util.ConvertCorpNameToCode;
 import kr.co.tmon.socialnews.util.CorpDataConverter;
 
 import org.apache.ibatis.session.SqlSession;
@@ -39,7 +39,7 @@ public class LocalInsertNewsDAO {
 	private List<News> convertingCorpCode(List<News> parsedNewsList) {
 		CorpDataConverter corpDataConverter = new CorpDataConverter();
 		parsedNewsList = corpDataConverter.divideByCorps(parsedNewsList);
-		ConvertKoreanCorpNameToCode convertKoreanCorpNameToCode = new ConvertKoreanCorpNameToCode();
+		ConvertCorpNameToCode convertKoreanCorpNameToCode = new ConvertCorpNameToCode();
 		parsedNewsList = convertKoreanCorpNameToCode.exchangNameToCode(parsedNewsList);
 		return parsedNewsList;
 	}

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import kr.co.tmon.socialnews.dao.LocalGetNumberOfNewsDAO;
 import kr.co.tmon.socialnews.dao.LocalGetNewsDAO;
 import kr.co.tmon.socialnews.model.News;
+import kr.co.tmon.socialnews.util.ConvertCorpNameToCode;
 import kr.co.tmon.socialnews.util.TypeChangeBetweenDateAndString;
 
 /**
@@ -30,7 +31,8 @@ public class SocialCategoryBO {
 	private int numberOfNews;
 
 	public List<News> getNewsList(String newsDate, String socialCorpCode, int numberOfPage) {
-		numberOfNews = localDailyNewsCountDAO.getNumberOfNews(newsDate, socialCorpCode);
+		ConvertCorpNameToCode convertCorpNameToCode = new ConvertCorpNameToCode();
+		numberOfNews = localDailyNewsCountDAO.getNumberOfNews(newsDate, convertCorpNameToCode.corpNameToCode(socialCorpCode));
 		return getNewsDAO.getNewsList(newsDate, socialCorpCode, numberOfPage);
 	}
 

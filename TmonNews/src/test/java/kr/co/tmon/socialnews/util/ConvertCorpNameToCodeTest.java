@@ -7,25 +7,25 @@ import java.util.ArrayList;
 import java.util.List;
 
 import kr.co.tmon.socialnews.model.News;
-import kr.co.tmon.socialnews.util.ConvertKoreanCorpNameToCode;
+import kr.co.tmon.socialnews.util.ConvertCorpNameToCode;
 
 import org.junit.Before;
 import org.junit.Test;
 
-public class ConvertKoreanCorpNameToCodeTest {
-	private ConvertKoreanCorpNameToCode convertKoreanCorpNameToCode;
+public class ConvertCorpNameToCodeTest {
+	private ConvertCorpNameToCode convertCorpNameToCode;
 	private List<News> newsList;
 	private News news;
 
 	@Before
 	public void setup() {
-		convertKoreanCorpNameToCode = new ConvertKoreanCorpNameToCode();
+		convertCorpNameToCode = new ConvertCorpNameToCode();
 	}
 
 	@Test
-	public void 모든_corp를_코드로_정상적으로_치환하는지_테스트() {
+	public void 모든_corp를_코드로_정상적으로_치환해_리스트로_보내는지_테스트() {
 		makeSampleDate(100);
-		newsList = convertKoreanCorpNameToCode.exchangNameToCode(newsList);
+		newsList = convertCorpNameToCode.exchangNameToCode(newsList);
 
 		boolean isValid = true;
 
@@ -35,6 +35,11 @@ public class ConvertKoreanCorpNameToCodeTest {
 		}
 
 		assertTrue(isValid);
+	}
+
+	@Test
+	public void 영문corp코드에서도_정상적으로_변환하는지_테스트() {
+		assertTrue(convertCorpNameToCode.corpNameToCode("tmon").compareTo("tm") == 0);
 	}
 
 	private void makeSampleDate(int numberOfItem) {
