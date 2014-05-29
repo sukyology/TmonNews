@@ -13,7 +13,7 @@
 		<result property="newsLink" column="link" />
 		<result property="newsProvider" column="provider" />
 		<result property="newsCount" column="readcnt" />
-		<result property="newsSocialCorpCode" column="mapping_social.social_corpcode" />
+		<result property="newsSocialCorpCode" column="social_corpcode" />
 	</resultMap>
 
 	<select id="getNewsList" resultMap="NewsResult">
@@ -21,17 +21,18 @@
 			news.id, 
 			news.title, 
 			news.preview, 
-			news.date, news.image, 
+			news.date, 
+			news.image, 
 			news.link, 
 			news.provider, 
 			news.readcnt,
-			social_corporations.code
+			mapping_social.social_corpcode
 		FROM 
 			news
 		INNER JOIN 
 			mapping_social ON news.id = mapping_social.news_id
 		INNER JOIN 
-			social_corporations ON mapping_social.SOCIAL_CORPCODE = social_corporations.code
+			social_corporations ON mapping_social.social_corpcode = social_corporations.code
 		WHERE
 			social_corporations.code=#{corpCode} AND
 			date=#{newsDate}
@@ -49,7 +50,7 @@
 			news.link, 
 			news.provider, 
 			news.readcnt,
-			social_corporations.code
+			mapping_social.social_corpcode
 		FROM 
 			news 
 		INNER JOIN 
@@ -78,7 +79,7 @@
 	<select id="getNewsListForDailyNewsCount" resultMap="NewsResult">
 		SELECT 
 			news.id, 
-			social_corporations.code
+			mapping_social.social_corpcode
 		FROM 
 			news
 		INNER JOIN 
@@ -86,13 +87,13 @@
 		INNER JOIN 
 			social_corporations ON mapping_social.social_corpcode = social_corporations.code
 		WHERE
-			social_corporations.code=#{mapping_social.social_corpcode} AND date=#{date}
+			social_corporations.code=#{corpCode} AND date=#{date}
 	</select>
 
 	<select id="getNewsListByAllCorpForDailyNewsCount" resultMap="NewsResult">
 		SELECT 
 			news.id, 
-			social_corporations.code
+			mapping_social.social_corpcode
 		FROM 
 			news 
 		INNER JOIN 

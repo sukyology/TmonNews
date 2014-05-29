@@ -17,7 +17,7 @@ import kr.co.tmon.socialnews.model.News;
  */
 
 public interface NewsMapper {
-	List<News> getNewsList(@Param("corpCode") String corpCode, @Param("newsDate") String newsDate, @Param("page") int page);
+	List<News> getNewsList(@Param("newsDate") String newsDate, @Param("corpCode") String corpCode, @Param("page") int page);
 
 	List<News> getNewsListByAllCorp(@Param("newsDate") String newsDate, @Param("page") int page);
 

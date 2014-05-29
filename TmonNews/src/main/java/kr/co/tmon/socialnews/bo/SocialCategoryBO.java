@@ -27,54 +27,15 @@ public class SocialCategoryBO {
 	@Autowired
 	private LocalGetNumberOfNewsDAO localDailyNewsCountDAO;
 
-	private Date newsDate;
-	private String socialCorpCode;
-	private int page;
 	private int numberOfNews;
 
-	public List<News> getNewsList(int numberOfPage) {
-		this.page = numberOfPage;
-		String dateString = generateDateString();
-		setNewsCount(localDailyNewsCountDAO.getNumberOfNews(dateString, socialCorpCode));
-		return getNewsDAO.getNewsList(dateString, socialCorpCode, page);
+	public List<News> getNewsList(String newsDate, String socialCorpCode, int numberOfPage) {
+		numberOfNews = localDailyNewsCountDAO.getNumberOfNews(newsDate, socialCorpCode);
+		return getNewsDAO.getNewsList(newsDate, socialCorpCode, numberOfPage);
 	}
 
-	private String generateDateString() {
-		TypeChangeBetweenDateAndString typeChangeBetweenDateAndString = new TypeChangeBetweenDateAndString();
-		String dateString = typeChangeBetweenDateAndString.exchangeToStringType(newsDate);
-		return dateString;
-	}
-
-	public Date getNewsDate() {
-		return newsDate;
-	}
-
-	public void setNewsDate(Date newsDate) {
-		this.newsDate = newsDate;
-	}
-
-	public String getSocialCorpCode() {
-		return socialCorpCode;
-	}
-
-	public void setSocialCorpCode(String socialCorpCode) {
-		this.socialCorpCode = socialCorpCode;
-	}
-
-	public int getPage() {
-		return page;
-	}
-
-	public void setPage(int page) {
-		this.page = page;
-	}
-
-	public int getNewsCount() {
+	public int getNumberOfNews() {
 		return numberOfNews;
-	}
-
-	public void setNewsCount(int newsCount) {
-		this.numberOfNews = newsCount;
 	}
 
 }

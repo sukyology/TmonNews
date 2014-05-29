@@ -22,6 +22,7 @@ import org.junit.Test;
  * 
  * @author yeseul23
  * 
+ * 
  */
 public class SocialNewsDocumentTest {
 

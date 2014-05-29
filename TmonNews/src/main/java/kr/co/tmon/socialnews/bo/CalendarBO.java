@@ -26,32 +26,14 @@ public class CalendarBO {
 	@Autowired
 	private LocalGetNumberOfNewsDAO localDailyNewsCountDAO;
 
-	private String newsDate;
-	private String socialCorpCode;
-	private int page;
-	
 	private int numberOfNews;
 
-	public List<News> getNewsList(int page) {
-		this.page = page;
-		setNewsCount(localDailyNewsCountDAO.getNumberOfNews(newsDate, socialCorpCode));
+	public List<News> getNewsList(String newsDate, String socialCorpCode, int page) {
+		numberOfNews = localDailyNewsCountDAO.getNumberOfNews(newsDate, socialCorpCode);
 		return getNewsDAO.getNewsList(newsDate, socialCorpCode, page);
 	}
 
-	public void setNewsDate(String newsDate) {
-		this.newsDate = newsDate;
+	public int getNumberOfNews() {
+		return numberOfNews;
 	}
-
-	public void setSocialCorpCode(String socialCorpCode) {
-		this.socialCorpCode = socialCorpCode;
-	}
-
-	public int getPage() {
-		return page;
-	}
-
-	public void setNewsCount(int newsCount) {
-		this.numberOfNews = newsCount;
-	}
-
 }

@@ -5,7 +5,9 @@ import static org.mockito.Matchers.*;
 import static org.mockito.Mockito.*;
 
 import java.sql.Date;
+import java.util.List;
 
+import kr.co.tmon.socialnews.model.News;
 import kr.co.tmon.socialnews.util.TypeChangeBetweenDateAndString;
 
 import org.junit.Before;
@@ -25,8 +27,28 @@ public class LocalGetNewsDAOTest {
 
 	@Test
 	public void 당일_날짜의_전체_뉴스리스트를_정상적으로_불러오는지_확인하는_테스트() {
-		TypeChangeBetweenDateAndString typeChangeBetweenDateAndString= new TypeChangeBetweenDateAndString();
+		TypeChangeBetweenDateAndString typeChangeBetweenDateAndString = new TypeChangeBetweenDateAndString();
 		String dateString = typeChangeBetweenDateAndString.exchangeToStringType(new Date(System.currentTimeMillis()));
 		assertNotNull(getNewsDAO.getNewsList(dateString, "socials", 1));
+	}
+
+	@Test
+	public void 뉴스데이터가_정상적으로_담기는지_확인하는_테스트() {
+		TypeChangeBetweenDateAndString typeChangeBetweenDateAndString = new TypeChangeBetweenDateAndString();
+		String dateString = typeChangeBetweenDateAndString.exchangeToStringType(new Date(System.currentTimeMillis()));
+
+		List<News> newsList = getNewsDAO.getNewsList(dateString, "tm", 1);
+		News news = newsList.get(0);
+
+		System.out.println(news.getNewsCount());
+		System.out.println(news.getNewsID());
+		System.out.println(news.getNewsImage());
+		System.out.println(news.getNewsLink());
+		System.out.println(news.getNewsPreview());
+		System.out.println(news.getNewsProvider());
+		System.out.println(news.getNewsSocialCorpCode());
+		System.out.println(news.getNewsTitle());
+		System.out.println(news.getNewsDate());
+
 	}
 }

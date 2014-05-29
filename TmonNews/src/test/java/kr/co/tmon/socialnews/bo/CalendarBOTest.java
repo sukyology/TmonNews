@@ -20,14 +20,13 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 public class CalendarBOTest {
 	@Test
 	public void 바뀐_날짜로부터_정상적으로_뉴스리스트가_리턴되는지_테스트() {
-		CalendarBO calendarBO = mock(CalendarBO.class);
-		when(calendarBO.getNewsList(0)).thenReturn(null);
-		
 		TypeChangeBetweenDateAndString typeChangeBetweenDateAndString = new TypeChangeBetweenDateAndString();
 		String dateString = typeChangeBetweenDateAndString.exchangeToStringType(new Date(System.currentTimeMillis()));
-		calendarBO.setNewsDate(dateString);
-		calendarBO.setSocialCorpCode("tm");
-		List<News> newsList = calendarBO.getNewsList(0);
+		
+		CalendarBO calendarBO = mock(CalendarBO.class);
+		when(calendarBO.getNewsList(dateString, "tm", 0)).thenReturn(null);
+		
+		List<News> newsList = calendarBO.getNewsList(dateString, "tm", 0);
 		assertNull(newsList);
 	}
 
