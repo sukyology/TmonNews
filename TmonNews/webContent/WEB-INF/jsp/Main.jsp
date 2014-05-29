@@ -56,7 +56,7 @@
 
 					<center>
 						<ul class="pagination">
-							<%@ include file="Pagination.jsp" %>
+							<jsp:include page="./Pagination.jsp">
 						</ul>
 					</center>
 
