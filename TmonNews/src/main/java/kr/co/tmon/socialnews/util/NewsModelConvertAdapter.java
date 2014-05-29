@@ -21,7 +21,7 @@ public class NewsModelConvertAdapter {
 		ArrayList<News> newsList = new ArrayList<>();
 
 		for (int indexOfNewsList = xmlParsedNewsList.size() - 1; indexOfNewsList >= 0; indexOfNewsList--)
-			newsList.add(convertParsedNews(xmlParsedNewsList.get(indexOfNewsList), indexOfNewsList));
+			newsList.add(convertParsedNews(xmlParsedNewsList.get(indexOfNewsList), xmlParsedNewsList.size() - (1 + indexOfNewsList)));
 
 		return newsList;
 	}
