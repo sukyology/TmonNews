@@ -31,7 +31,7 @@ public class LocalGetNumberOfNewsDAOTest {
 		Date date = new Date(System.currentTimeMillis());
 		TypeChangeBetweenDateAndString typeChangeBetweenDateAndString = new TypeChangeBetweenDateAndString();
 		String currentDate = typeChangeBetweenDateAndString.exchangeToStringType(date);
-		String socialCorp = "tm";
+		String socialCorp = "cp";
 		String dateString = "2014-05-28";
 
 		int resultOfChangeDate = getDailyNewsCountDAO.getNumberOfNews(dateString, "socials");
