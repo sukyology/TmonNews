@@ -1,17 +1,11 @@
 package kr.co.tmon.socialnews.controller;
-
-/**
- * 
+/*
  * @author 고영경
- * 
- */
-
-import java.text.ParseException;
-
+ * */
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import kr.co.tmon.socialnews.bo.SocialCategoryBO;
-import kr.co.tmon.socialnews.util.TypeChangeBetweenDateAndString;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -25,46 +19,63 @@ public class SocialCategoryController {
 	private SocialCategoryBO socialCategoryBO;
 
 	@RequestMapping("/socials")
-	public ModelAndView ControlAllSocialNews(HttpSession session, int page, String date) throws ParseException {
+	public ModelAndView controlAllSocialNews(HttpServletRequest request, int page, String date) {
 		final String socialCorpName = "socials";
-		makeSelectedSocialCorp(session, socialCorpName);
+
+		makeCorpToSessionAttribute(request, socialCorpName);
+
+		makeTotalPageToAttribute(request);
+
 		return settingModelAndView(socialCorpName, page, date);
 	}
 
 	@RequestMapping("/coupang")
-	public ModelAndView ControlCoupangNews(HttpSession session, int page, String date) throws ParseException {
+	public ModelAndView controlCoupangNews(HttpServletRequest request, int page, String date) {
 		final String socialCorpName = "coupang";
-		makeSelectedSocialCorp(session, socialCorpName);
+
+		makeCorpToSessionAttribute(request, socialCorpName);
+
+		makeTotalPageToAttribute(request);
+
 		return settingModelAndView(socialCorpName, page, date);
 	}
 
 	@RequestMapping("/tmon")
-	public ModelAndView ControlTmonNews(HttpSession session, int page, String date) throws ParseException {
+	public ModelAndView controlTmonNews(HttpServletRequest request, int page, String date) {
 		final String socialCorpName = "tmon";
-		makeSelectedSocialCorp(session, socialCorpName);
+
+		makeCorpToSessionAttribute(request, socialCorpName);
+
+		makeTotalPageToAttribute(request);
 		return settingModelAndView(socialCorpName, page, date);
 	}
 
 	@RequestMapping("/wemap")
-	public ModelAndView ControlWemapNews(HttpSession session, int page, String date) throws ParseException {
+	public ModelAndView controlWemapNews(HttpServletRequest request, int page, String date) {
 		final String socialCorpName = "wemap";
-		makeSelectedSocialCorp(session, socialCorpName);
+
+		makeCorpToSessionAttribute(request, socialCorpName);
+
+		makeTotalPageToAttribute(request);
+
 		return settingModelAndView(socialCorpName, page, date);
 	}
 
-	private void makeSelectedSocialCorp(HttpSession session, String socialCorpName) {
-		session.setAttribute("selectedSocialCorp", socialCorpName);
+	private void makeCorpToSessionAttribute(HttpServletRequest request, final String socialCorpName) {
+		HttpSession session = request.getSession();
+		session.setAttribute("corp", socialCorpName);
 	}
 
-	private ModelAndView settingModelAndView(String socialCorpName, int page, String date) throws ParseException {
+	private void makeTotalPageToAttribute(HttpServletRequest request) {
+		request.setAttribute("totalPage", socialCategoryBO.getNumberOfNews());
+	}
+
+	private ModelAndView settingModelAndView(String socialCorpName, int page, String date) {
 		ModelAndView socialCorpModelAndView = new ModelAndView();
-		TypeChangeBetweenDateAndString typeChangeBetweenDateAndString = new TypeChangeBetweenDateAndString();
-		socialCategoryBO.setNewsDate(typeChangeBetweenDateAndString.exchangeToDateType(date));
-		socialCategoryBO.setSocialCorpCode(socialCorpName);
 
-		socialCorpModelAndView.addObject("newsList", socialCategoryBO.getNewsList(page));
+		socialCorpModelAndView.addObject("newsList", socialCategoryBO.getNewsList(date, socialCorpName, page));
 
-		socialCorpModelAndView.setViewName("newspage");
+		socialCorpModelAndView.setViewName("test");
 
 		return socialCorpModelAndView;
 	}
