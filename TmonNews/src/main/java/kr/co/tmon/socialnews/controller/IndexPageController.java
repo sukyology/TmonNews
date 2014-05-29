@@ -9,6 +9,6 @@ public class IndexPageController {
 
 	@RequestMapping("index")
 	public String ControlCalendar() {
-		return "Main";
+		return "Index";
 	}
 }
