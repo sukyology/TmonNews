@@ -11,7 +11,8 @@
 
 			<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 				<center>
-					<h1 class="page-header">날짜표시공간</h1>
+					<h1 class="page-header"><%=request.getParameter("date")%></h1>
+					<input id="datepicker"></input><button class='btn btn-warning btn-sm datesubmit'>확인</button>
 				</center>
 
 				<h2 class="sub-header">오늘의 뉴스</h2>
@@ -27,7 +28,7 @@
 					<div class="row">
 						<div class="col-lg-9">
 							<div class="media">
-								<a href="http://getbootstrap.com"> <img
+								<a href="127.0.0.1:8080/NewsOpen.tmon?newsLink=${news.newsLink}&newsID=${news.newsID}" target="_blank"> <img
 									class="media-object pull-left" src="${news.newsImage}"
 									style="width: 100px; height: 100px; margin-right: 20px" />
 
@@ -56,7 +57,7 @@
 
 					<center>
 						<ul class="pagination">
-							<jsp:include page="./Pagination.jsp">
+							<jsp:include page="./Pagination.jsp"></jsp:include>
 						</ul>
 					</center>
 
