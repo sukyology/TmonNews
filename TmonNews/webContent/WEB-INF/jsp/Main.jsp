@@ -27,7 +27,7 @@
 					<div class="row">
 						<div class="col-lg-9">
 							<div class="media">
-								<a href="../newsOpen.tmon?newsLink=${news.newsLink}&newsID=${news.newsID}" target="_blank"> <img
+								<a href="../NewsOpen.tmon?newsLink=${news.newsLink}&newsID=${news.newsID}" target="_blank"> <img
 									class="media-object pull-left" src="${news.newsImage}"
 									style="width: 100px; height: 100px; margin-right: 20px" />
 
