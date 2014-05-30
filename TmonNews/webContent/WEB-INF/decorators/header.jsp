@@ -58,6 +58,12 @@
 				</ul>
 				<ul class="nav nav-sidebar">
 					<li><a class="wemap">위메프</a></li>
+<<<<<<< HEAD
+=======
+				</ul>
+				<ul class="nav nav-sidebar">
+					<li><a href="">기타둥둥</a></li>
+>>>>>>> refs/remotes/origin/master
 				</ul>
 			</div>
 <decorator:body />
