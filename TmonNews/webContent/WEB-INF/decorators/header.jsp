@@ -12,13 +12,13 @@
 <title>Tmon News에 오신 것을 환영합니다.<decorator:title /></title>
 
 <decorator:head />
-
+<link href="/css/jquery-ui-1.10.4.css" rel="stylesheet">
 <!-- Bootstrap core CSS -->
 <link href="/css/bootstrap.css" rel="stylesheet">
 
 <!-- Custom styles for this template -->
 <link href="/css/dashboard.css" rel="stylesheet">
-<link href="/css/jquery-ui-1.10.4.css" rel="stylesheet">
+
 <style type="text/css"></style>
 <style id="holderjs-style" type="text/css"></style>
 </head>
@@ -48,47 +48,45 @@
 		<div class="row">
 			<div class="col-sm-3 col-md-2 sidebar">
 				<ul class="nav nav-sidebar">
-					<li class="active"><a class="#allSocial">소셜3사</a></li>
+					<li><a class="socials" href="">소셜3사</a></li>
 				</ul>
 				<ul class="nav nav-sidebar">
-					<li><a class="#tmon">티몬</a></li>
+					<li><a class="tmon">티몬</a></li>
 				</ul>
 				<ul class="nav nav-sidebar">
-					<li><a class="#coupang">쿠팡</a></li>
+					<li><a class="coupang">쿠팡</a></li>
 				</ul>
 				<ul class="nav nav-sidebar">
-					<li><a class="#wemap">위메프</a></li>
-				</ul>
-				<ul class="nav nav-sidebar">
-					<li><a href="">기타둥둥</a></li>
+					<li><a class="wemap">위메프</a></li>
 				</ul>
 			</div>
 <decorator:body />
-
 <script src="/js/jquery-1.10.2.js"></script>
 <script src="/js/jquery-ui-1.10.4.js"></script>
+<script src="/js/bootstrap.js"></script>
+
 <script>
 $.datepicker.setDefaults({
     showOn:"button",
     buttonImageOnly: true,
-    buttonImage:"image/calendar_Icon.png",
+    buttonImage:"/image/calendarglyphicon.png",
 });
 $( "#datepicker" ).datepicker({ dateFormat: "yy-mm-dd" });
-$(".datesubmit").on("click", function(){
-   location.assign(location.hostname+location.pathname+"?date="+$("#datepicker").val()+"&page=1"); 
+$("input").on("change", function(){
+   location.assign(location.pathname+"?date="+$("#datepicker").val()+"&page=1"); 
 });
-$(".allSocial").on("click", function(){
-	location.assign(location.hostname+"/category/socials.tmon?"+location.href.substr(location.href.search("date="),15)+"&page=1");
+$(".socials").on("click", function(){
+	location.assign("/category/socials.tmon?"+location.href.substr(location.href.search("date="),15)+"&page=1");
 });
 $(".tmon").on("click", function(){
-	location.assign(location.hostname+"/category/tmon.tmon?"+location.href.substr(location.href.search("date="),15)+"&page=1");
+	location.assign("/category/tmon.tmon?"+location.href.substr(location.href.search("date="),15)+"&page=1");
 });
 $(".coupang").on("click", function(){
-	location.assign(location.hostname+"/category/coupang.tmon?"+location.href.substr(location.href.search("date="),15)+"&page=1");
+	location.assign("/category/coupang.tmon?"+location.href.substr(location.href.search("date="),15)+"&page=1");
 });
 $(".wemap").on("click", function(){
-	location.assign(location.hostname+"/category/wemap.tmon?"+location.href.substr(location.href.search("date="),15)+"&page=1");
-});
+	location.assign("/category/wemap.tmon?"+location.href.substr(location.href.search("date="),15)+"&page=1");
+}); 
 </script>
 </body>
 </html>

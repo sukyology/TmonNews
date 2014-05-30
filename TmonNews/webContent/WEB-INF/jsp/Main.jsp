@@ -1,24 +1,23 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=utf-8"
+    pageEncoding="utf-8"%>
     <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
-<title> - ¸ÞÀÎ ÆäÀÌÁö</title>
+<title> - ë©”ì¸ íŽ˜ì´ì§€</title>
 </head>
 <body>
 
 			<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 				<center>
-					<h1 class="page-header"><%=request.getParameter("date")%></h1>
-					<input id="datepicker"></input><button class='btn btn-warning btn-sm datesubmit'>È®ÀÎ</button>
+					<h1 class="page-header"><%=request.getParameter("date")%><input id="datepicker" type="hidden"></input></h1>
 				</center>
 
-				<h2 class="sub-header">¿À´ÃÀÇ ´º½º</h2>
+				<h2 class="sub-header">ì˜¤ëŠ˜ì˜ ë‰´ìŠ¤</h2>
 
 
-				<!--±â»ç ³»¿ë½ÃÀÛ-->
+				<!--ê¸°ì‚¬ ë‚´ìš©ì‹œìž‘-->
 				<div class="col-lg-1"></div>
 				<div class="col-lg-10">
 
@@ -28,7 +27,7 @@
 					<div class="row">
 						<div class="col-lg-9">
 							<div class="media">
-								<a href="127.0.0.1:8080/NewsOpen.tmon?newsLink=${news.newsLink}&newsID=${news.newsID}" target="_blank"> <img
+								<a href="../newsOpen.tmon?newsLink=${news.newsLink}&newsID=${news.newsID}" target="_blank"> <img
 									class="media-object pull-left" src="${news.newsImage}"
 									style="width: 100px; height: 100px; margin-right: 20px" />
 
@@ -44,7 +43,7 @@
 
 						<div class="col-lg-1">
 							<center>
-								<br> <font size="2">Á¶È¸¼ö</font><br>
+								<br> <font size="2">ì¡°íšŒìˆ˜</font><br>
 								<font size="4">${news.newsCount}</font>
 							</center>
 						</div>
@@ -66,7 +65,5 @@
 
 
 			</div>
-		</div>
-	</div>
 </body>
 </html>
