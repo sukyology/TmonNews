@@ -7,8 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-<script>
-location.assign('${request.getAttribute("newsLink")}');
-</script>
+<% response.sendRedirect((String)request.getAttribute("newsLink")); %>
 </body>
 </html>

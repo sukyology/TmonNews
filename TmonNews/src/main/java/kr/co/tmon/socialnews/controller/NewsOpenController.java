@@ -17,7 +17,7 @@ public class NewsOpenController {
 	@Autowired
 	private NewsCountBO newsCountBO;
 	
-	@RequestMapping("/newsOpen")
+	@RequestMapping("/NewsOpen")
 	public String ControllerNewsCount(HttpServletRequest request, int newsID, String newsLink){
 		request.setAttribute("newsID", newsID);
 		request.setAttribute("newsLink", newsLink);
