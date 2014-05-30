@@ -18,7 +18,7 @@ function addingZeroToDate(){
 }
 var todayInString = today.getFullYear()+"-"+addingZeroToMonth()+"-"+today.getDate();
 $(document).ready(function(){
-	location.assign(location.hostname+"/category/socials.tmon?date="+todayInString+"&page=1");
+	location.assign("/category/socials.tmon?date="+todayInString+"&page=1");
 });
 </script>
 </body>
