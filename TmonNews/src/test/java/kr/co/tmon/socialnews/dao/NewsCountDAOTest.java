@@ -27,7 +27,7 @@ public class NewsCountDAOTest {
 	@Test
 	public void countTest() {
 		TypeChangeBetweenDateAndString typeChangeBetweenDateAndString = new TypeChangeBetweenDateAndString();
-		String dateString = typeChangeBetweenDateAndString.exchangeToStringType(new Date(System.currentTimeMillis()));
+		String dateString = typeChangeBetweenDateAndString.exchangeToStringType(new Date(2014 - 1900, 4, 29));
 		List<News> newsList = getNewsDAO.getNewsList(dateString, "socials", 1);
 		News news = newsList.get(0);
 		int newsId = news.getNewsID();
@@ -40,7 +40,5 @@ public class NewsCountDAOTest {
 		int afterExcuteQueryCount = news.getNewsCount();
 
 		assertEquals(currentCount + 1, afterExcuteQueryCount);
-
 	}
-
 }

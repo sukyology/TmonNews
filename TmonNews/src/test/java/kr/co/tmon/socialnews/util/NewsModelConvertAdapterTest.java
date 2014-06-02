@@ -36,7 +36,8 @@ public class NewsModelConvertAdapterTest {
 	@Test
 	public void newsID를_설정하는_메소드_테스트() {
 		int expected = 140529003;
-		int result = newsModelConvertAdapter.setNewsId(new Date(System.currentTimeMillis()), 3);
+		Date date = new Date(2014,4,29);
+		int result = newsModelConvertAdapter.setNewsId(date, 3);
 
 		assertEquals(expected, result);
 	}

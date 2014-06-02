@@ -33,24 +33,10 @@ public class XmlParsingBOTest {
 	@Autowired
 	private XmlParsingBO xmlParsingBO;
 
-	@Transactional
 	@Test
 	public void Xml을_파싱해서_DB에_넣는_작동에_대한_테스트() throws MalformedURLException, JAXBException, ParseException {
-		List<ParsedNews> parsedNewsList = new ArrayList<>();
-		SocialNewsDocument socialNewsDocument = mock(SocialNewsDocument.class);
-		when(socialNewsDocument.getParsedNewsList()).thenReturn(parsedNewsList);
-
-		RemoteGetNewsDAO remoteGetNewsDAO = mock(RemoteGetNewsDAO.class);
-		when(remoteGetNewsDAO.getSocialNewsDocument()).thenReturn(socialNewsDocument);
-
-		LocalInsertNewsDAO localInsertNewsDAO = mock(LocalInsertNewsDAO.class);
-
-		xmlParsingBO.setLocalInsertNewsDAO(localInsertNewsDAO);
-		xmlParsingBO.setRemoteGetNewsDAO(remoteGetNewsDAO);
-
+		
 		xmlParsingBO.insertParsingNewsData();
-
-		verify(localInsertNewsDAO, times(1));
 	}
 
 }

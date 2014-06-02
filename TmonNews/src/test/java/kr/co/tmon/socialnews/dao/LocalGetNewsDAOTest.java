@@ -28,7 +28,7 @@ public class LocalGetNewsDAOTest {
 	@Test
 	public void 당일_날짜의_전체_뉴스리스트를_정상적으로_불러오는지_확인하는_테스트() {
 		TypeChangeBetweenDateAndString typeChangeBetweenDateAndString = new TypeChangeBetweenDateAndString();
-		String dateString = typeChangeBetweenDateAndString.exchangeToStringType(new Date(System.currentTimeMillis()));
+		String dateString = typeChangeBetweenDateAndString.exchangeToStringType(new Date(2014 - 1900, 4, 30));
 		assertNotNull(getNewsDAO.getNewsList(dateString, "socials", 1));
 	}
 

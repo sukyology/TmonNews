@@ -14,7 +14,7 @@ import org.springframework.stereotype.Repository;
  * 
  * @author 김종환
  * 
- * 파싱된 뉴스데이터를 DB에 집어넣는 클래스
+ *         파싱된 뉴스데이터를 DB에 집어넣는 클래스
  * 
  */
 
@@ -47,8 +47,11 @@ public class LocalInsertNewsDAO {
 	private void insertNewsAsUnique(List<News> parsedNewsList, NewsMapper newsMapper) {
 		for (int index = START_INSERT_INDEX_EXAMING_DUPLICATE; index < parsedNewsList.size(); index++) {
 			News news = parsedNewsList.get(index);
-			if (news.getNewsID() != parsedNewsList.get(index - 1).getNewsID())
+			if (news.getNewsID() != parsedNewsList.get(index - 1).getNewsID()) {
+				if (news.getNewsTitle().length() > 20)
+					news.setNewsTitle(news.getNewsTitle().substring(0, 18) + "..");
 				newsMapper.insertNews(news);
+			}
 		}
 	}
 
