@@ -31,10 +31,13 @@ public class SocialCategoryBO {
 	private int numberOfNews;
 
 	public List<News> getNewsList(String newsDate, String socialCorpCode, int numberOfPage) {
+		numberOfNews = 0;
 		ConvertCorpNameToCode convertCorpNameToCode = new ConvertCorpNameToCode();
-		String dateString = convertCorpNameToCode.corpNameToCode(socialCorpCode);
-		numberOfNews = localDailyNewsCountDAO.getNumberOfNews(newsDate, dateString);
-		return getNewsDAO.getNewsList(newsDate, dateString, numberOfPage);
+		String corpCode = convertCorpNameToCode.corpNameToCode(socialCorpCode);
+		List<News> newsList = getNewsDAO.getNewsList(newsDate, corpCode, numberOfPage);
+		numberOfNews = localDailyNewsCountDAO.getNumberOfNews(newsDate, corpCode);
+		
+		return newsList;
 	}
 
 	public int getNumberOfNews() {

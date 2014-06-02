@@ -1,4 +1,5 @@
 package kr.co.tmon.socialnews.controller;
+
 /*
  * @author 고영경
  * */
@@ -24,9 +25,7 @@ public class SocialCategoryController {
 
 		makeCorpToSessionAttribute(request, socialCorpName);
 
-		makeTotalPageToAttribute(request);
-
-		return settingModelAndView(socialCorpName, page, date);
+		return settingModelAndView(socialCorpName, page, date, request);
 	}
 
 	@RequestMapping("/coupang")
@@ -35,9 +34,7 @@ public class SocialCategoryController {
 
 		makeCorpToSessionAttribute(request, socialCorpName);
 
-		makeTotalPageToAttribute(request);
-
-		return settingModelAndView(socialCorpName, page, date);
+		return settingModelAndView(socialCorpName, page, date, request);
 	}
 
 	@RequestMapping("/tmon")
@@ -46,8 +43,7 @@ public class SocialCategoryController {
 
 		makeCorpToSessionAttribute(request, socialCorpName);
 
-		makeTotalPageToAttribute(request);
-		return settingModelAndView(socialCorpName, page, date);
+		return settingModelAndView(socialCorpName, page, date, request);
 	}
 
 	@RequestMapping("/wemap")
@@ -56,20 +52,16 @@ public class SocialCategoryController {
 
 		makeCorpToSessionAttribute(request, socialCorpName);
 
-		makeTotalPageToAttribute(request);
-
-		return settingModelAndView(socialCorpName, page, date);
+		return settingModelAndView(socialCorpName, page, date, request);
 	}
-	
+
 	@RequestMapping("/etc")
 	public ModelAndView controlEtcNews(HttpServletRequest request, int page, String date) {
 		final String socialCorpName = "etc";
 
 		makeCorpToSessionAttribute(request, socialCorpName);
 
-		makeTotalPageToAttribute(request);
-
-		return settingModelAndView(socialCorpName, page, date);
+		return settingModelAndView(socialCorpName, page, date, request);
 	}
 
 	private void makeCorpToSessionAttribute(HttpServletRequest request, final String socialCorpName) {
@@ -81,13 +73,13 @@ public class SocialCategoryController {
 		request.setAttribute("totalPage", socialCategoryBO.getNumberOfNews());
 	}
 
-	private ModelAndView settingModelAndView(String socialCorpName, int page, String date) {
+	private ModelAndView settingModelAndView(String socialCorpName, int page, String date, HttpServletRequest request) {
 		ModelAndView socialCorpModelAndView = new ModelAndView();
 
 		socialCorpModelAndView.addObject("newsList", socialCategoryBO.getNewsList(date, socialCorpName, page));
 
 		socialCorpModelAndView.setViewName("Main");
-
+		makeTotalPageToAttribute(request);
 		return socialCorpModelAndView;
 	}
 

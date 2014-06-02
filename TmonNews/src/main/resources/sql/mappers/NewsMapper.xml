@@ -107,6 +107,10 @@
 			social_corporations ON mapping_social.social_corpcode = social_corporations.code
 		WHERE
 			date=#{newsDate}
+			AND
+				(social_corporations.code = "tm" 
+				OR social_corporations.code = "wmp" 
+				OR social_corporations.code = "cp")
 		GROUP BY 
 			news.id
 		ORDER BY
