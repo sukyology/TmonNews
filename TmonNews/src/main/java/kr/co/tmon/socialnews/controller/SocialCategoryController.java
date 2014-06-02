@@ -60,6 +60,17 @@ public class SocialCategoryController {
 
 		return settingModelAndView(socialCorpName, page, date);
 	}
+	
+	@RequestMapping("/etc")
+	public ModelAndView controlEtcNews(HttpServletRequest request, int page, String date) {
+		final String socialCorpName = "etc";
+
+		makeCorpToSessionAttribute(request, socialCorpName);
+
+		makeTotalPageToAttribute(request);
+
+		return settingModelAndView(socialCorpName, page, date);
+	}
 
 	private void makeCorpToSessionAttribute(HttpServletRequest request, final String socialCorpName) {
 		HttpSession session = request.getSession();

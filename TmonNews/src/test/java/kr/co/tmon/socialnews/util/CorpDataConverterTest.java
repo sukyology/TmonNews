@@ -27,12 +27,12 @@ public class CorpDataConverterTest {
 		newsList.get(0).setNewsSocialCorpCode("tm");
 		newsList.get(1).setNewsSocialCorpCode("tm,cp,wmp");
 		newsList.get(2).setNewsSocialCorpCode("wmp");
-		newsList.get(3).setNewsSocialCorpCode("etc");
+		newsList.get(3).setNewsSocialCorpCode("소셜커머스");
 		newsList.get(4).setNewsSocialCorpCode("cp");
 
 		newsList = corpDateConvertForMapping.divideByCorps(newsList);
 
-		assertEquals(7, newsList.size());
+		assertEquals(9, newsList.size());
 
 		for (News news : newsList)
 			System.out.println(news.getNewsSocialCorpCode());
