@@ -22,7 +22,7 @@ public class LocalGetNumberOfNewsDAOTest {
 	public void 정확한_뉴스리스트의_카운트를_리턴하는지_테스트() {
 		String dateString = "2014-05-28";
 		int result = getDailyNewsCountDAO.getNumberOfNews(dateString, "socials");
-		assertEquals(36, result);
+		assertEquals(32, result);
 	}
 
 	@Test
