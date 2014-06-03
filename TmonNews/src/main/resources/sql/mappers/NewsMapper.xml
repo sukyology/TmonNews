@@ -15,6 +15,12 @@
 		<result property="newsCount" column="readcnt" />
 		<result property="newsSocialCorpCode" column="social_corpcode" />
 	</resultMap>
+	
+	<resultMap type="CountSocialNews" id="CountSocialNews">
+		<result property="date" column="date" />
+		<result property="socialCorpCode" column="corp_code" />
+		<result property="newsCount" column="count" />
+	</resultMap>
 
 	<select id="getNewsList" resultMap="NewsResult">
 		SELECT 
@@ -155,5 +161,23 @@
 		WHERE 
 			id=#{newsID};
 	</update>
+
+	<select id="selectTodayNewsCountForInsert" resultType="int">
+		SELECT
+		COUNT(NEWS_ID)
+		FROM MAPPING_SOCIAL mapping natural join news news
+		WHERE
+		mapping.social_corpCode = #{socialCorpCode} and news.date = #{today}
+	</select>
+	<insert id="insertNewsCount" parameterType="countSocialNews">
+		INSERT INTO
+		NEWS_COUNT(DATE, corp_code, COUNT)
+		VALUES (#{date}, #{socialCorpCode}, #{newsCount});
+		
+	</insert>
+	<select id="selectNewsCount" resultType="CountSocialNews">
+		SELECT date AS date, corp_code AS socialCorpCode, count AS newsCount
+		FROM news_count
+	</select>
 
 </mapper>
