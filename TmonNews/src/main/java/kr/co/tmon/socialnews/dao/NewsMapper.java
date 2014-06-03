@@ -4,11 +4,13 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
+import kr.co.tmon.socialnews.model.CountSocialNews;
 import kr.co.tmon.socialnews.model.News;
 
 /**
  * 
  * @author 김종환
+ * @author 고영경
  * 
  */
 
@@ -30,4 +32,10 @@ public interface NewsMapper {
 	void mappingSocialCode(News news);
 
 	void readCountUpdate(int newsID);
+	
+	int selectTodayNewsCountForInsert(@Param("socialCorpCode") String social_corpCode, @Param("today") String today);
+	
+	List<CountSocialNews> selectNewsCount();
+	
+	void insertNewsCount(CountSocialNews countSocialNews);
 }
