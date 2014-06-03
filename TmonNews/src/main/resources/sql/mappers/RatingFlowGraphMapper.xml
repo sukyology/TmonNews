@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace="kr.co.tmon.appreview.dao.RatingFlowGraphMapper">
+	<resultMap type="RatingFlowGraphModel" id="RatingFlowDataResult">
+		<result property="reviewTitle" column="title" />
+		<result property="reviewContent" column="content" />
+		<result property="writtenDate" column="date" />
+		<result property="appName" column="app_name" />
+		<result property="appVersion" column="app_version" />
+		<result property="reviewLink" column="link" />
+		<result property="corpCode" column="social_corpcode"/>
+		<result property="rating" column="rating" />
+	</resultMap>
+	
+	<select id="selectRatingFlowData" resultMap="RatingFlowDataResult">
+		SELECT 
+			rating, title, content, date, app_name, app_version, link, social_corpcode
+		FROM
+			review
+			INNER JOIN social_corporations ON social_corpcode = social_corporations.code
+		WHERE
+		<![CDATA[
+			date >= #{startDate} 
+				AND 
+					date <= #{endDate}
+					 ]]>
+					AND 
+						social_corpcode = #{corpCode}
+	
+	</select>
+	
+	<select id="selectAllCorpRatingFlowDate" resultMap="RatingFlowDataResult">
+		SELECT 
+			rating, title, content, date, app_name, app_version, link, social_corpcode
+		FROM
+			review
+			INNER JOIN social_corporations ON social_corpcode = social_corporations.code
+		WHERE
+		<![CDATA[
+			date >= #{startDate} 
+				AND 
+					date <= #{endDate}
+					 ]]>
+	</select>
+	
+</mapper>

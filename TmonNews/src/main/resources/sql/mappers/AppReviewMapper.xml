@@ -48,4 +48,5 @@
  		 		NOT EXISTS
  		 			(SELECT review.link FROM review WHERE review.link=#{reviewLink})
 	</insert>
+	
 </mapper>

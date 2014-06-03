@@ -22,10 +22,20 @@ import kr.co.tmon.appreview.model.AppReviewModel;
 public class InsertAppReviewBO {
 	@Autowired
 	private InsertAppReviewDAO insertAppReviewDAO;
+	
+	@Autowired
+	private GetReviewListBO getReviewListBO;
 
 	public void insertReviewList() throws IOException, ParseException, java.text.ParseException {
-		GetReviewListBO getReviewListBO = new GetReviewListBO();
 		List<AppReviewModel> appReviewList = getReviewListBO.getAppReviewList();
 		insertAppReviewDAO.insertAppReviewList(appReviewList);
+	}
+
+	public void setInsertAppReviewDAO(InsertAppReviewDAO insertAppReviewDAO) {
+		this.insertAppReviewDAO = insertAppReviewDAO;
+	}
+
+	public void setGetReviewListBO(GetReviewListBO getReviewListBO) {
+		this.getReviewListBO = getReviewListBO;
 	}
 }

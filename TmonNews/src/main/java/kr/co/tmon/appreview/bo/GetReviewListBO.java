@@ -13,7 +13,6 @@ import kr.co.tmon.socialnews.util.TypeChangeBetweenDateAndString;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.ParseException;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
@@ -51,7 +50,7 @@ public class GetReviewListBO {
 		Iterator<JSONObject> arrayIterator = jsonParsedArray.iterator();
 		return arrayIterator;
 	}
-
+	
 	private AppReviewModel bindIteratorToModel(JSONObject parsedObject) throws java.text.ParseException {
 		AppReviewModel appModel = new AppReviewModel();
 
