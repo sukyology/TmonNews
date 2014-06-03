@@ -54,6 +54,7 @@ public class InsertAppReviewDAOTest {
 		appReview.setReviewerLink("aksdjghkadsfg");
 		appReview.setReviewLink("asdlgyhasdougyhuahewfhu");
 		appReview.setReviewTitle("어쩌구");
+		appReview.setAppName("블라블라");
 
 		TypeChangeBetweenDateAndString typeChangeBetweenDateAndString = new TypeChangeBetweenDateAndString();
 		String dateString = "2014-06-02";
