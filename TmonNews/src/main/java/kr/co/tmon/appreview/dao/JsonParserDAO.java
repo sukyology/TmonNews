@@ -7,6 +7,7 @@ import java.net.URL;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 import org.json.simple.parser.ParseException;
+import org.springframework.stereotype.Repository;
 
 /**
  * 
@@ -16,6 +17,7 @@ import org.json.simple.parser.ParseException;
  *
  */
 
+@Repository
 public class JsonParserDAO {
 	public JSONObject getJson(String urlToGetJsonDocument) throws IOException, ParseException {
 		URL url = new URL(urlToGetJsonDocument);

@@ -121,8 +121,6 @@
 					CODE = "cp" THEN 2
 				WHEN 
 					CODE = "wmp" THEN 3
-				WHEN 
-					CODE ="etc" THEN 4
 		END ASC
 	</select>
 

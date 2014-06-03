@@ -13,6 +13,8 @@ import kr.co.tmon.socialnews.util.TypeChangeBetweenDateAndString;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.ParseException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 /**
  * 
@@ -22,6 +24,7 @@ import org.json.simple.parser.ParseException;
  *
  */
 
+@Service
 public class GetReviewListBO {
 	private static String appReviewsUrl = "http://10.5.220.81:8080/social/appReview.tmon";
 
@@ -58,6 +61,7 @@ public class GetReviewListBO {
 		appModel.setReviewerLink((String) parsedObject.get("userLink"));
 		appModel.setReviewLink((String) parsedObject.get("reviewLink"));
 		appModel.setReviewTitle((String) parsedObject.get("reviewTitle"));
+		appModel.setAppName((String) parsedObject.get("androidAppName"));
 
 		TypeChangeBetweenDateAndString typeChangeBetweenDateAndString = new TypeChangeBetweenDateAndString();
 		String dateString = (String) parsedObject.get("reviewDate");

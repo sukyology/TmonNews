@@ -10,14 +10,16 @@ import kr.co.tmon.appreview.model.AppReviewModel;
 import org.json.simple.parser.ParseException;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations = { "classpath:spring/applicationContext*.xml" })
 public class GetReviewListBOTest {
+	@Autowired
 	private GetReviewListBO getReviewListBO;
-
-	@Before
-	public void setup() {
-		getReviewListBO = new GetReviewListBO();
-	}
 
 	@Test
 	public void appReview_리스트를_정상적으로_리턴하는지_테스트() throws IOException, ParseException, java.text.ParseException {

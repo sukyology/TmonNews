@@ -5,8 +5,47 @@
 	
 <mapper namespace="kr.co.tmon.appreview.dao.AppReviewMapper">
 	<resultMap type="AppReviewModel" id="appReviewResult">
-	
-	
+		<result property="reviewTitle" column="title" />
+		<result property="reviewContext" column="content" />
+		<result property="writtenDate" column="date" />
+		<result property="reviewLink" column="link" />
+		<result property="reviewerLink" column="user.user_link" />
+		<result property="appVersion" column="app_version" />
+		<result property="corpCode" column="social_corpcode" />
+		<result property="rating" column="rating" />
+		<result property="reviewerID" column="user.name" />
+		<result property="userID" column="user.id" />
+		<result property="appName" column="app_name"/>
 	</resultMap>
-
+	
+	<insert id="insertAppReviewToUserTable" useGeneratedKeys="true" keyProperty="userID">
+		INSERT INTO 
+			user(user_link, name)
+		SELECT
+			#{reviewerLink}, #{reviewerID}
+		FROM DUAL
+			WHERE
+				NOT EXISTS
+					(SELECT user_link FROM user WHERE user_link = #{reviewerLink})
+	</insert>
+	
+	<insert id="insertAppReviewToReviewTable" useGeneratedKeys="true" keyProperty="review_id">
+		 <selectKey keyProperty="userID" resultType="int" order="BEFORE">
+    		SELECT
+    			id
+    		FROM
+    			user
+    		WHERE
+    			user_link = #{reviewerLink}
+ 		 </selectKey>
+ 		 
+ 		 INSERT INTO
+ 		 	review(rating, title, content, date, app_name, app_version, link, user_id, social_corpcode)
+ 		 SELECT
+ 		 	#{rating}, #{reviewTitle}, #{reviewContext}, #{writtenDate}, #{appName}, #{appVersion}, #{reviewLink}, #{userID}, #{corpCode}
+ 		 FROM DUAL
+ 		 	WHERE
+ 		 		NOT EXISTS
+ 		 			(SELECT review.link FROM review WHERE review.link=#{reviewLink})
+	</insert>
 </mapper>

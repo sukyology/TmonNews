@@ -2,6 +2,14 @@ package kr.co.tmon.appreview.model;
 
 import java.sql.Date;
 
+/**
+ * 
+ * @author 김종환
+ *
+ * appReview의 모델클래스
+ *
+ */
+
 public class AppReviewModel {
 	private String reviewerID;
 	private String reviewTitle;
@@ -12,6 +20,24 @@ public class AppReviewModel {
 	private String appVersion;
 	private String corpCode;
 	private int rating;
+	private int userID;
+	private String appName;
+
+	public String getAppName() {
+		return appName;
+	}
+
+	public void setAppName(String appName) {
+		this.appName = appName;
+	}
+
+	public int getUserID() {
+		return userID;
+	}
+
+	public void setUserID(int userID) {
+		this.userID = userID;
+	}
 
 	public String getReviewerID() {
 		return reviewerID;
