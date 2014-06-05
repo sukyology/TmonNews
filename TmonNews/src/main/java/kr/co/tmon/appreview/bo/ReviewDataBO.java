@@ -28,4 +28,8 @@ public class ReviewDataBO {
 	public float selectWemapAvgGrade(){
 		return GetReviewDataDAO.SelectWemapAvgGrade();
 	}
+	
+	public float selectTmonPlusAvgGrade(){
+		return GetReviewDataDAO.SelectTmonPlusAvgGrade();
+	}
 }

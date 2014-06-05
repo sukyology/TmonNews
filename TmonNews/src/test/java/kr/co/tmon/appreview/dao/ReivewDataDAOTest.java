@@ -19,7 +19,7 @@ public class ReivewDataDAOTest {
 		float tmonAvgGrade = reviewDataDAO.SelectTmonAvgGrade();
 		String convertedTmonAvgGrade = String.valueOf(tmonAvgGrade);
 		
-		assertEquals("2.4608", convertedTmonAvgGrade);
+		assertEquals("4.0", convertedTmonAvgGrade);
 	}
 	
 	@Test
@@ -27,7 +27,23 @@ public class ReivewDataDAOTest {
 		float coupangAvgGrade = reviewDataDAO.SelectCoupangAvgGrade();
 		String convertedCoupangAvgGrade = String.valueOf(coupangAvgGrade);
 		
-		assertEquals("3.96", convertedCoupangAvgGrade);
+		assertEquals("3.9", convertedCoupangAvgGrade);
+	}
+	
+	@Test
+	public void 위메프_전체평균평점_데이터_확인_테스트() {
+		float wemapAvgGrade = reviewDataDAO.SelectCoupangAvgGrade();
+		String convertedwemapAvgGrade = String.valueOf(wemapAvgGrade);
+		
+		assertEquals("3.9", convertedwemapAvgGrade);
+	}
+	
+	@Test
+	public void 티몬플러스_전체평균평점_데이터_확인_테스트() {
+		float tmonPlusgAvgGrade = reviewDataDAO.SelectTmonPlusAvgGrade();
+		String convertedtmonPlusAvgGrade = String.valueOf(tmonPlusgAvgGrade);
+		
+		assertEquals("4.1", convertedtmonPlusAvgGrade);
 	}
 
 }

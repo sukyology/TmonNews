@@ -50,20 +50,26 @@
 	</insert>
 	
 	<select id="SelectTmonReviewAvgGrade" resultType="float">
-		SELECT AVG(rating)
-		FROM review 
-		WHERE app_name="티몬";
+		SELECT rating
+		FROM app_review_ratings 
+		WHERE app_name="티몬";	
 	</select>
 	
 	<select id="SelectCoupangReviewAvgGrade" resultType="float">
-		SELECT AVG(rating)
-		FROM review 
-		WHERE app_name="쿠팡";
+		SELECT rating
+		FROM app_review_ratings 
+		WHERE app_name="쿠팡";	
 	</select>
 	
 	<select id="SelectWemapReviewAvgGrade" resultType="float">
-		SELECT AVG(rating)
-		FROM review 
+		SELECT rating
+		FROM app_review_ratings 
 		WHERE app_name="위메프";	
+	</select>
+	
+	<select id="SelectTmonPlusReviewAvgGrade" resultType="float">
+		SELECT rating
+		FROM app_review_ratings 
+		WHERE app_name="티몬플러스";	
 	</select>
 </mapper>

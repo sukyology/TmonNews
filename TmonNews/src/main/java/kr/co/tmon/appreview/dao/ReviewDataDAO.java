@@ -31,4 +31,9 @@ public class ReviewDataDAO {
 		AppReviewMapper appReviewMapper = sqlSession.getMapper(AppReviewMapper.class);
 		return appReviewMapper.SelectWemapReviewAvgGrade();
 	}
+	
+	public float SelectTmonPlusAvgGrade() {
+		AppReviewMapper appReviewMapper = sqlSession.getMapper(AppReviewMapper.class);
+		return appReviewMapper.SelectTmonPlusReviewAvgGrade();
+	}
 }

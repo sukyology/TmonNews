@@ -16,5 +16,5 @@ public interface AppReviewMapper {
 	float SelectTmonReviewAvgGrade();
 	float SelectCoupangReviewAvgGrade();
 	float SelectWemapReviewAvgGrade();
-
+	float SelectTmonPlusReviewAvgGrade();
 }
