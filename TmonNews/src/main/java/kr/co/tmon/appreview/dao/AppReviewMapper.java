@@ -4,7 +4,7 @@ import kr.co.tmon.appreview.model.AppReviewModel;
 
 /**
  * 
- * @author 김종환
+ * @author 김종환, YoungKyo LEE
  *
  * AppReview의 Mapper
  *
@@ -13,5 +13,8 @@ import kr.co.tmon.appreview.model.AppReviewModel;
 public interface AppReviewMapper {
 	void insertAppReviewToUserTable(AppReviewModel appReview);
 	void insertAppReviewToReviewTable(AppReviewModel appReview);
-	
+	float SelectTmonReviewAvgGrade();
+	float SelectCoupangReviewAvgGrade();
+	float SelectWemapReviewAvgGrade();
+
 }
