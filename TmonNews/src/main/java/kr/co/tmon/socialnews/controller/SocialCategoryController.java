@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-@RequestMapping("/category")
+@RequestMapping("/news")
 public class SocialCategoryController {
 	@Autowired
 	private SocialCategoryBO socialCategoryBO;
