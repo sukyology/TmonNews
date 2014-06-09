@@ -78,7 +78,7 @@ public class SocialCategoryController {
 
 		socialCorpModelAndView.addObject("newsList", socialCategoryBO.getNewsList(date, socialCorpName, page));
 
-		socialCorpModelAndView.setViewName("Main");
+		socialCorpModelAndView.setViewName("NewsContents");
 		makeTotalPageToAttribute(request);
 		return socialCorpModelAndView;
 	}

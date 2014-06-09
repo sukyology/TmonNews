@@ -3,12 +3,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="f" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
-<%-- 
-<h1><%=request.getParameter("date") %></h1>
---%>
 
-<c:set var="date" value='<%=request.getParameter("date") %>' scope="request" />
-<c:set var="currentPage" value='<%=request.getParameter("page") %>' scope="request" />
+<c:set var="date" value='<%=request.getParameter("date") %>'/>
+<c:set var="currentPage" value='<%=request.getParameter("page") %>' />
 
 
 
@@ -35,20 +32,19 @@
 	</c:if>
 
 	<c:if test="${numPageGroup > 1}">
-		<a
-			href="./${corp}.tmon?page=${(numPageGroup-2)*pageGroupSize+1 }&date=${date}">[pre]</a>
+		<li><a
+			href="./${corp}.tmon?page=${(numPageGroup-2)*pageGroupSize+1 }&date=${date}">[pre]</a></li>
 	</c:if>
 
 	<c:forEach var="i" begin="${startPage}" end="${endPage}">
-		<a href="/category/${corp}.tmon?page=${i}&date=${date}">[ <font
-			color="#000000" /> <c:if test="${currentPage == i}">
-				<font color="#bbbbbb" />
-			</c:if> ${i} </font>]
-		</a>
+		<li><a href="/category/${corp}.tmon?page=${i}&date=${date}">  <c:if test="${currentPage == i}">
+				<span style="color:navy; font-weight:700;">
+			</c:if> ${i}  </span>
+		</a></li>
 	</c:forEach>
 
 	<c:if test="${numPageGroup < pageGroupCount}">
-		<a
-			href="./${corp}.tmon?page=${numPageGroup*pageGroupSize+1}&date=${date}">[next]</a>
+		<li><a
+			href="./${corp}.tmon?page=${numPageGroup*pageGroupSize+1}&date=${date}">[next]</a></li>
 	</c:if>
 </c:if>

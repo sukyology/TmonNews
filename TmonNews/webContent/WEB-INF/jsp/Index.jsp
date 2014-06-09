@@ -11,14 +11,14 @@
 <script>
 var today = new Date();
 function addingZeroToMonth(){
-    return ((today.getMonth()<9) ? ("0"+(today.getMonth()+1)):(today.getMonth()+1));
+    return ((today.getMonth()<9) ? ("0"+(today.getMonth()+1)) : (today.getMonth()+1));
 }
 function addingZeroToDate(){
-	return ((today.getDate()<10) ? "0"+(today.getDate()):today.getDate());
+	return ((today.getDate()<10) ? ("0"+today.getDate()) : today.getDate());
 }
-var todayInString = today.getFullYear()+"-"+addingZeroToMonth()+"-"+today.getDate();
+var todayInString = today.getFullYear() + "-" + addingZeroToMonth() + "-" + addingZeroToDate();
 $(document).ready(function(){
-	location.assign("/category/socials.tmon?date="+todayInString+"&page=1");
+	location.assign("/news/socials.tmon?date="+todayInString+"&page=1");
 });
 </script>
 </body>
