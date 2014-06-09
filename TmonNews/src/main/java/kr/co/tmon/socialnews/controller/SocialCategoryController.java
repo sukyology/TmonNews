@@ -1,11 +1,14 @@
 package kr.co.tmon.socialnews.controller;
 
-/*
+/**
  * @author 고영경
  * */
+import java.text.ParseException;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import kr.co.tmon.socialnews.bo.CountSocialNewsBO;
 import kr.co.tmon.socialnews.bo.SocialCategoryBO;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,9 +21,11 @@ import org.springframework.web.servlet.ModelAndView;
 public class SocialCategoryController {
 	@Autowired
 	private SocialCategoryBO socialCategoryBO;
+	@Autowired
+	private CountSocialNewsBO countSocialNewsBO;
 
 	@RequestMapping("/socials")
-	public ModelAndView controlAllSocialNews(HttpServletRequest request, int page, String date) {
+	public ModelAndView controlAllSocialNews(HttpServletRequest request, int page, String date) throws ParseException {
 		final String socialCorpName = "socials";
 
 		makeCorpToSessionAttribute(request, socialCorpName);
@@ -29,7 +34,7 @@ public class SocialCategoryController {
 	}
 
 	@RequestMapping("/coupang")
-	public ModelAndView controlCoupangNews(HttpServletRequest request, int page, String date) {
+	public ModelAndView controlCoupangNews(HttpServletRequest request, int page, String date) throws ParseException {
 		final String socialCorpName = "coupang";
 
 		makeCorpToSessionAttribute(request, socialCorpName);
@@ -38,7 +43,7 @@ public class SocialCategoryController {
 	}
 
 	@RequestMapping("/tmon")
-	public ModelAndView controlTmonNews(HttpServletRequest request, int page, String date) {
+	public ModelAndView controlTmonNews(HttpServletRequest request, int page, String date) throws ParseException {
 		final String socialCorpName = "tmon";
 
 		makeCorpToSessionAttribute(request, socialCorpName);
@@ -47,7 +52,7 @@ public class SocialCategoryController {
 	}
 
 	@RequestMapping("/wemap")
-	public ModelAndView controlWemapNews(HttpServletRequest request, int page, String date) {
+	public ModelAndView controlWemapNews(HttpServletRequest request, int page, String date) throws ParseException {
 		final String socialCorpName = "wemap";
 
 		makeCorpToSessionAttribute(request, socialCorpName);
@@ -56,7 +61,7 @@ public class SocialCategoryController {
 	}
 
 	@RequestMapping("/etc")
-	public ModelAndView controlEtcNews(HttpServletRequest request, int page, String date) {
+	public ModelAndView controlEtcNews(HttpServletRequest request, int page, String date) throws ParseException {
 		final String socialCorpName = "etc";
 
 		makeCorpToSessionAttribute(request, socialCorpName);
@@ -73,10 +78,11 @@ public class SocialCategoryController {
 		request.setAttribute("totalPage", socialCategoryBO.getNumberOfNews());
 	}
 
-	private ModelAndView settingModelAndView(String socialCorpName, int page, String date, HttpServletRequest request) {
+	private ModelAndView settingModelAndView(String socialCorpName, int page, String date, HttpServletRequest request) throws ParseException {
 		ModelAndView socialCorpModelAndView = new ModelAndView();
 
 		socialCorpModelAndView.addObject("newsList", socialCategoryBO.getNewsList(date, socialCorpName, page));
+		socialCorpModelAndView.addObject("countSocialNews", countSocialNewsBO.getNewsCount());
 
 		socialCorpModelAndView.setViewName("NewsContents");
 		makeTotalPageToAttribute(request);
