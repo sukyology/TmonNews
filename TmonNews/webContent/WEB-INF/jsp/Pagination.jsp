@@ -37,7 +37,7 @@
 	</c:if>
 
 	<c:forEach var="i" begin="${startPage}" end="${endPage}">
-		<li><a href="/category/${corp}.tmon?page=${i}&date=${date}">  <c:if test="${currentPage == i}">
+		<li><a href="/news/${corp}.tmon?page=${i}&date=${date}">  <c:if test="${currentPage == i}">
 				<span style="color:navy; font-weight:700;">
 			</c:if> ${i}  </span>
 		</a></li>
