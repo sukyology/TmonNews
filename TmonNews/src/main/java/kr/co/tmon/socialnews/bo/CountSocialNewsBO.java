@@ -1,12 +1,14 @@
 package kr.co.tmon.socialnews.bo;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
-import java.util.Locale;
 
 import kr.co.tmon.socialnews.dao.CountSocialNewsDAO;
 import kr.co.tmon.socialnews.model.CountSocialNews;
+import kr.co.tmon.socialnews.model.NewsChartModel;
+import kr.co.tmon.socialnews.util.DateCalculator;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,36 +22,52 @@ import org.springframework.stereotype.Service;
 @Service
 public class CountSocialNewsBO {
 	@Autowired
-	private CountSocialNewsDAO countSocialNewsDAO;
+	private CountSocialNewsDAO countSocialNewsDAO = new CountSocialNewsDAO();
+	private static final int TWOWEEKS = 14;
 
-	public void recordTodayNewsCount() {
-		CountSocialNews countTmonNews = makeCountSocialNews("tm");
-		CountSocialNews countCoupangNews = makeCountSocialNews("cp");
-		CountSocialNews countWemapNews = makeCountSocialNews("wmp");
+	public List<NewsChartModel> getNewsCount() throws ParseException {
+		List<NewsChartModel> newsChartList = new ArrayList<>();
+		DateCalculator dateCalculator = new DateCalculator();
 
-		countSocialNewsDAO.insertNews(countTmonNews);
-		countSocialNewsDAO.insertNews(countCoupangNews);
-		countSocialNewsDAO.insertNews(countWemapNews);
-	}
-	
-	public List<CountSocialNews> getNewsCount () {
-		List<CountSocialNews> newsCountInformation = countSocialNewsDAO.selectNewsCount();
-		return newsCountInformation;
-	}
+		for (int index = 0; index < TWOWEEKS; index++) {
+			List<CountSocialNews> newsCountInformation = new ArrayList<>();
+			newsCountInformation = countSocialNewsDAO.selectNewsCount(dateCalculator.calculateBeforeDate(dateCalculator.getToday(), index));
 
-	private CountSocialNews makeCountSocialNews(String socialCorpCode) {
-		CountSocialNews countSocialNews = new CountSocialNews();
+			newsChartList.add(changeFromCountSocialNewsToNewsChartModel(newsCountInformation, dateCalculator.calculateBeforeDate(dateCalculator.getToday(), index)));
+		}
 
-		countSocialNews.setDate(getToday());
-		countSocialNews.setNewsCount(countSocialNewsDAO.selectTodayNewsCountForInsert(socialCorpCode, getToday()));
-		countSocialNews.setSocialCorpCode(socialCorpCode);
+		reverseList(newsChartList);
 
-		return countSocialNews;
+		return newsChartList;
 	}
 
-	private String getToday() {
-		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd", Locale.KOREA);
-		Date currentTime = new Date();
-		return formatter.format(currentTime);
+	private void reverseList(List<NewsChartModel> newsChartList) {
+		Collections.reverse(newsChartList);
 	}
+
+	private NewsChartModel changeFromCountSocialNewsToNewsChartModel(List<CountSocialNews> newsCountInformation, String date) {
+		NewsChartModel tempNewsChartModel = new NewsChartModel();
+
+		initTempNewsChartModel(date, tempNewsChartModel);
+
+		for (CountSocialNews countSocialNews : newsCountInformation) {
+
+			if (countSocialNews.getSocialCorpCode().equals("cp"))
+				tempNewsChartModel.setCoupangNewsCount(countSocialNews.getNewsCount());
+			else if (countSocialNews.getSocialCorpCode().equals("tm"))
+				tempNewsChartModel.setTmonNewsCount(countSocialNews.getNewsCount());
+			else if (countSocialNews.getSocialCorpCode().equals("wmp"))
+				tempNewsChartModel.setWemapNewsCount(countSocialNews.getNewsCount());
+		}
+
+		return tempNewsChartModel;
+	}
+
+	private void initTempNewsChartModel(String date, NewsChartModel tempNewsChartModel) {
+		tempNewsChartModel.setDate(date);
+		tempNewsChartModel.setTmonNewsCount(0);
+		tempNewsChartModel.setCoupangNewsCount(0);
+		tempNewsChartModel.setWemapNewsCount(0);
+	}
+
 }

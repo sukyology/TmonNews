@@ -35,7 +35,7 @@ public interface NewsMapper {
 	
 	int selectTodayNewsCountForInsert(@Param("socialCorpCode") String social_corpCode, @Param("today") String today);
 	
-	List<CountSocialNews> selectNewsCount();
+	List<CountSocialNews> selectNewsCount(@Param("date") String today);
 	
 	void insertNewsCount(CountSocialNews countSocialNews);
 }

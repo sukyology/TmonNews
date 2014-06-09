@@ -17,22 +17,13 @@ public class CountSocialNewsDAO {
 	@Autowired
 	private SqlSession sqlSession;
 
-	public void insertNews(CountSocialNews countSocialNews) {
+	public List<CountSocialNews> selectNewsCount(String date) {
 		NewsMapper newsMapper = sqlSession.getMapper(NewsMapper.class);
+		List<CountSocialNews> newCountList = new ArrayList<CountSocialNews>();
 
-		newsMapper.insertNewsCount(countSocialNews);
-	}
-	public List<CountSocialNews> selectNewsCount() {
-		NewsMapper newsMapper = sqlSession.getMapper(NewsMapper.class);
-		 List<CountSocialNews> newCountList = new ArrayList<CountSocialNews>();	
-		 newCountList = newsMapper.selectNewsCount();
+		newCountList = newsMapper.selectNewsCount(date);
+
 		return newCountList;
-	}
-
-	public int selectTodayNewsCountForInsert(String Social_corpCode, String today) {
-		NewsMapper newsMapper = sqlSession.getMapper(NewsMapper.class);
-
-		return newsMapper.selectTodayNewsCountForInsert(Social_corpCode, today);
 	}
 
 }
