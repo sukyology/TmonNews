@@ -24,10 +24,10 @@ public class InsertAppReviewBO {
 	private InsertAppReviewDAO insertAppReviewDAO;
 	
 	@Autowired
-	private GetReviewListBO getReviewListBO;
+	private ParsingAndInsertReviewBO parsingAndInsertReviewBO;
 
 	public void insertReviewList() throws IOException, ParseException, java.text.ParseException {
-		List<AppReviewModel> appReviewList = getReviewListBO.getAppReviewList();
+		List<AppReviewModel> appReviewList = parsingAndInsertReviewBO.getAppReviewListAmongLastestWeek();
 		insertAppReviewDAO.insertAppReviewList(appReviewList);
 	}
 
@@ -35,7 +35,7 @@ public class InsertAppReviewBO {
 		this.insertAppReviewDAO = insertAppReviewDAO;
 	}
 
-	public void setGetReviewListBO(GetReviewListBO getReviewListBO) {
-		this.getReviewListBO = getReviewListBO;
+	public void setGetReviewListBO(ParsingAndInsertReviewBO parsingAndInsertReviewBO) {
+		this.parsingAndInsertReviewBO = parsingAndInsertReviewBO;
 	}
 }

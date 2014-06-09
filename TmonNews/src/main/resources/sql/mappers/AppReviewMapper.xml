@@ -18,6 +18,35 @@
 		<result property="appName" column="app_name"/>
 	</resultMap>
 	
+	<resultMap type="RatingOfAppByVersionModel" id="RatingByVersionResult">
+		<result property="ratingOne" column="rating_one" />
+		<result property="ratingTwo" column="rating_two" />
+		<result property="ratingThree" column="rating_three" />
+		<result property="ratingFour" column="rating_four" />
+		<result property="ratingFive" column="rating_five" />
+		<result property="appName" column="app_name" />
+		<result property="appVersion" column="app_version" />
+		<result property="averageRating" column="average_rating" />
+	</resultMap>
+	
+	<select id="selectReviewForRatingByVersion" resultMap="RatingByVersionResult">
+		SELECT
+			COUNT(IF(rating=1, rating, NULL)) AS rating_one, 
+			COUNT(IF(rating=2, rating, NULL)) AS rating_two, 
+			COUNT(IF(rating=3, rating, NULL)) AS rating_three, 
+			COUNT(IF(rating=4, rating, NULL)) AS rating_four, 
+			COUNT(IF(rating=5, rating, NULL)) AS rating_five, 
+			AVG(rating) AS average_rating, 
+			app_name, 
+			app_version
+		FROM
+			review
+		WHERE
+			app_name=#{appName}
+		GROUP BY
+			app_version
+	</select>
+	
 	<insert id="insertAppReviewToUserTable" useGeneratedKeys="true" keyProperty="userID">
 		INSERT INTO 
 			user(user_link, name)
@@ -49,4 +78,57 @@
  		 			(SELECT review.link FROM review WHERE review.link=#{reviewLink})
 	</insert>
 	
+	<select id="selectAppReviewAsMonth" resultMap="appReviewResult">
+		SELECT
+			rating, date, app_name
+		FROM
+			review
+		WHERE
+			app_name = #{appName}
+				AND
+					<![CDATA[
+						date >= #{startDate}
+							AND
+								date <= #{endDate}
+					]]>
+	</select>
+	
+	<select id="selectAppReviewByApp" resultMap="appReviewResult">
+		SELECT
+			review.title,
+			review.content,
+			review.date,
+			review.link,
+			review.app_version,
+			review.social_corpcode,
+			review.rating,
+			review.app_name,
+			user.user_link,
+			user.id,
+			user.name
+		FROM
+			user
+				INNER JOIN
+					review 
+					ON 
+						user.id = review.user_id
+		WHERE
+			review.app_name = #{appName}
+		ORDER BY
+			app_version
+	</select>
+	
+	<select id="getNumberOfAppReview" parameterType="String" resultType="Integer">
+		SELECT
+			count(link)
+		FROM
+			review
+		WHERE
+			app_name=#{appName}
+	</select>
+	
+	<select id="SelectTmonReviewAvgGrade" resultType="float"> SELECT rating FROM app_review_ratings WHERE app_name="티몬"; </select> 
+	<select id="SelectCoupangReviewAvgGrade" resultType="float"> SELECT rating FROM app_review_ratings WHERE app_name="쿠팡"; </select> 
+	<select id="SelectWemapReviewAvgGrade" resultType="float"> SELECT rating FROM app_review_ratings WHERE app_name="위메프"; </select> 
+	<select id="SelectTmonPlusReviewAvgGrade" resultType="float"> SELECT rating FROM app_review_ratings WHERE app_name="티몬플러스"; </select>
 </mapper>
