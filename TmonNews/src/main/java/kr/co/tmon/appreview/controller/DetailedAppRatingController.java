@@ -1,12 +1,9 @@
 package kr.co.tmon.appreview.controller;
 
-import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 
 import kr.co.tmon.appreview.bo.AppReviewBO;
 import kr.co.tmon.appreview.bo.RatingOfAppVersionBO;
-import kr.co.tmon.appreview.model.AppReviewModel;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

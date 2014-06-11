@@ -20,13 +20,15 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public class AppReviewDAO {
+	private static int SCROLLING_ON_LOAD = 20;
+	
 	@Autowired
 	private SqlSession sqlSession;
 
 	public List<AppReviewModel> selectAppReview(String appName, int numberOfLoad) {
 		AppReviewMapper appReviewMapper = sqlSession.getMapper(AppReviewMapper.class);
-
-		return appReviewMapper.selectAppReview(appName, numberOfLoad);
+		int pointOfAppReview = SCROLLING_ON_LOAD * numberOfLoad;
+		return appReviewMapper.selectAppReview(appName, pointOfAppReview);
 	}
 
 	public NumberOfAppReviewModel selectNumberOfAppReview(String monthString, Date startDate, Date endDate) throws ParseException {
