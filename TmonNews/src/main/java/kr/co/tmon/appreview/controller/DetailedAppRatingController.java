@@ -1,9 +1,12 @@
 package kr.co.tmon.appreview.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
-import kr.co.tmon.appreview.bo.GetRatingOfAppByVersionBO;
-import kr.co.tmon.appreview.bo.GetReviewOfAppListBO;
+import kr.co.tmon.appreview.bo.AppReviewBO;
+import kr.co.tmon.appreview.bo.RatingOfAppVersionBO;
+import kr.co.tmon.appreview.model.AppReviewModel;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,53 +19,65 @@ import org.springframework.web.servlet.ModelAndView;
  * 
  */
 
-@RequestMapping("/appreview")
 @Controller
+@RequestMapping("/appreview")
 public class DetailedAppRatingController {
+	private static final int DEFAULT_LOAD_NUMBER = 0;
 	private static final String APP_NAME_OF_COUPANG = "쿠팡";
 	private static final String APP_NAME_OF_WEMAP = "위메프";
 	private static final String APP_NAME_OF_TMON = "티몬";
 	private static final String APP_NAME_OF_TMONPLUS = "티몬플러스";
 
 	@Autowired
-	private GetRatingOfAppByVersionBO getRatingOfAppByVersionBO;
+	private AppReviewBO appReviewBO;
 
 	@Autowired
-	private GetReviewOfAppListBO getReviewOfAppListBO;
+	private RatingOfAppVersionBO ratingOfAppVersionBO;
 
 	@RequestMapping("/coupang")
 	public ModelAndView coupangAppRating(HttpServletRequest request) {
-		ModelAndView coupangRating = getModelAndViewByAppName(APP_NAME_OF_COUPANG);
+		int pageNumber = extractPageNumber(request);
+
+		ModelAndView coupangRating = getModelAndViewByAppName(APP_NAME_OF_COUPANG, pageNumber);
 
 		return coupangRating;
 	}
 
 	@RequestMapping("/wemap")
 	public ModelAndView wemapAppRating(HttpServletRequest request) {
-		ModelAndView wemapRating = getModelAndViewByAppName(APP_NAME_OF_WEMAP);
+		int pageNumber = extractPageNumber(request);
+
+		ModelAndView wemapRating = getModelAndViewByAppName(APP_NAME_OF_WEMAP, pageNumber);
 
 		return wemapRating;
 	}
 
 	@RequestMapping("/tmon")
 	public ModelAndView tmonAppRating(HttpServletRequest request) {
-		ModelAndView tmonRating = getModelAndViewByAppName(APP_NAME_OF_TMON);
+		int pageNumber = extractPageNumber(request);
+
+		ModelAndView tmonRating = getModelAndViewByAppName(APP_NAME_OF_TMON, pageNumber);
 
 		return tmonRating;
 	}
 
-	@RequestMapping("/tmonplus")
-	public ModelAndView tmonplusAppRating(HttpServletRequest request) {
-		ModelAndView tmonplusRating = getModelAndViewByAppName(APP_NAME_OF_TMONPLUS);
+	private int extractPageNumber(HttpServletRequest request) {
+		int pageNumber;
 
-		return tmonplusRating;
+		if (request.getParameter("pageNumber") == null)
+			pageNumber = DEFAULT_LOAD_NUMBER;
+		else
+			pageNumber = Integer.valueOf(request.getParameter("pageNumber"));
+		return pageNumber;
 	}
 
-	private ModelAndView getModelAndViewByAppName(String appName) {
+	private ModelAndView getModelAndViewByAppName(String appName, int pageNumber) {
 		ModelAndView modelAndView = new ModelAndView();
 
-		modelAndView.addObject("reviewList", getReviewOfAppListBO.getReviewOfApp(appName));
-		modelAndView.addObject("ratingFlowByVersion", getRatingOfAppByVersionBO.getRatingOfAppByVersion(appName));
+		modelAndView.addObject("reviewList", appReviewBO.selectReviewList(appName, pageNumber));
+		modelAndView.addObject("ratingFlowByVersion", ratingOfAppVersionBO.selectLastestFiveVersionRating(appName));
+
+		modelAndView.setViewName("AppDetail");
 
 		return modelAndView;
 	}

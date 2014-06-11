@@ -2,8 +2,6 @@ package kr.co.tmon.appreview.dao;
 
 import java.util.List;
 
-import org.apache.ibatis.annotations.Param;
-
 import kr.co.tmon.appreview.model.MonthlyAppRatingModel;
 
 /**
@@ -13,6 +11,8 @@ import kr.co.tmon.appreview.model.MonthlyAppRatingModel;
  */
 
 public interface MonthlyAppRatingMapper {
-	public void insertMonthlyRatingData(MonthlyAppRatingModel monthlyAppRating);
-	public MonthlyAppRatingModel selectMonthlyRatingData(@Param("reviewedMonth") String reviewedMonth);
+	void insertMonthlyAppRating(MonthlyAppRatingModel monthlyAppRatingModel);
+
+	List<MonthlyAppRatingModel> selectMonthlyAppRating();
+
 }

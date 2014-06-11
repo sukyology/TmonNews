@@ -8,7 +8,7 @@ package kr.co.tmon.appreview.model;
 
 public class RatingOfAppModel {
 	private float tmonRating;
-	private float tmonplustRating;
+	private float tmonplusRating;
 	private float coupangRating;
 	private float wemapRating;
 
@@ -20,12 +20,12 @@ public class RatingOfAppModel {
 		this.tmonRating = tmonRating;
 	}
 
-	public float getTmonplustRating() {
-		return tmonplustRating;
+	public float getTmonplusRating() {
+		return tmonplusRating;
 	}
 
-	public void setTmonplustRating(float tmonplustRating) {
-		this.tmonplustRating = tmonplustRating;
+	public void setTmonplusRating(float tmonplusRating) {
+		this.tmonplusRating = tmonplusRating;
 	}
 
 	public float getCoupangRating() {

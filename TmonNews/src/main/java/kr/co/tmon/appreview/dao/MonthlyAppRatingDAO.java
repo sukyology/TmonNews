@@ -19,13 +19,13 @@ public class MonthlyAppRatingDAO {
 	@Autowired
 	private SqlSession sqlSession;
 
-	public void insertMonthlyRating(MonthlyAppRatingModel monthlyAppRatingModel) {
+	public void insertMonthlyAppRating(MonthlyAppRatingModel monthlyAppRating) {
 		MonthlyAppRatingMapper monthlyAppRatingMapper = sqlSession.getMapper(MonthlyAppRatingMapper.class);
-		monthlyAppRatingMapper.insertMonthlyRatingData(monthlyAppRatingModel);
+		monthlyAppRatingMapper.insertMonthlyAppRating(monthlyAppRating);
 	}
 
-	public MonthlyAppRatingModel selectMonthlyRating(String monthString) {
+	public List<MonthlyAppRatingModel> selectMonthlyAppRating() {
 		MonthlyAppRatingMapper monthlyAppRatingMapper = sqlSession.getMapper(MonthlyAppRatingMapper.class);
-		return monthlyAppRatingMapper.selectMonthlyRatingData(monthString);
+		return monthlyAppRatingMapper.selectMonthlyAppRating();
 	}
 }

@@ -11,6 +11,15 @@ public class NumberOfAppReviewModel {
 	private int numberOfTmonAppReview;
 	private int numberOfWemapAppReview;
 	private int numberOfTmonplusAppReview;
+	private String monthString;
+
+	public String getMonthString() {
+		return monthString;
+	}
+
+	public void setMonthString(String monthString) {
+		this.monthString = monthString;
+	}
 
 	public int getNumberOfTmonplusAppReview() {
 		return numberOfTmonplusAppReview;

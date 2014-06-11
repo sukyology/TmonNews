@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
 	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-	
+
 <mapper namespace="kr.co.tmon.appreview.dao.RatingOfAppByVersionMapper">
 	<resultMap type="RatingOfAppByVersionModel" id="RatingOfAppByVersionResult">
 		<result property="ratingOne" column="rating_one" />
@@ -14,7 +14,7 @@
 		<result property="appVersion" column="app_version" />
 		<result property="averageRating" column="average_rating" />
 	</resultMap>
-	
+
 	<insert id="insertRatingOfAppByVersion" parameterType="RatingOfAppByVersionModel">
 		INSERT INTO
 			rating_by_version(rating_one, rating_two, rating_three, rating_four, rating_five, app_name, app_version, average_rating)
@@ -23,10 +23,9 @@
 		ON DUPLICATE KEY
 		UPDATE
 			rating_one=#{ratingOne}, rating_two=#{ratingTwo}, rating_three=#{ratingThree}, rating_four=#{ratingFour}, rating_five=#{ratingFive}, average_rating=#{averageRating}
-		
 	</insert>
 	
-	<select id="selectRatingOfAppByVersion" resultMap="RatingOfAppByVersionResult">
+	<select id="selectLastestFiveVersionRating" resultMap="RatingOfAppByVersionResult">
 		SELECT
 			rating_one, rating_two, rating_three, rating_four, rating_five, app_name, app_version, average_rating
 		FROM
@@ -35,5 +34,8 @@
 			app_name = #{appName}
 		ORDER BY
 			app_version DESC
+		LIMIT
+			5
 	</select>
+
 </mapper>

@@ -9,11 +9,11 @@ import org.apache.ibatis.annotations.Param;
 /**
  * 
  * @author 김종환
- *
+ * 
  */
 
 public interface RatingOfAppByVersionMapper {
 	void insertRatingOfAppByVersion(RatingOfAppByVersionModel ratingOfAppByVersion);
 
-	List<RatingOfAppByVersionModel> selectRatingOfAppByVersion(@Param("appName") String appName);
+	List<RatingOfAppByVersionModel> selectLastestFiveVersionRating(@Param("appName") String appName);
 }

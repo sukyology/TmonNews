@@ -4,6 +4,11 @@ import static org.junit.Assert.*;
 import static org.mockito.Matchers.*;
 import static org.mockito.Mockito.*;
 
+import java.sql.Date;
+import java.text.ParseException;
+
+import kr.co.tmon.socialnews.util.TypeChangeBetweenDateAndString;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -33,5 +38,25 @@ public class MonthStringToSpecificDateTest {
 
 		assertTrue(expected.compareTo(monthStringToSpecificDate.getLastDayOfMonth(testMontString)) == 0);
 
+	}
+
+	@Test
+	public void 월의_초일을_Date타입으로_반환하는지_알아보는_테스트() throws ParseException {
+		String montString = "2014-03";
+		String dateString = "2014-03-01";
+		TypeChangeBetweenDateAndString typeChangeBetweenDateAndString = new TypeChangeBetweenDateAndString();
+		Date expectedDate = typeChangeBetweenDateAndString.exchangeToDateType(dateString);
+		System.out.println(monthStringToSpecificDate.getFirstDayOfMonthForDateType(montString));
+		assertTrue(expectedDate.compareTo(monthStringToSpecificDate.getFirstDayOfMonthForDateType(montString)) == 0);
+	}
+
+	@Test
+	public void 월의_말일을_Date타입으로_반환하는지_알아보는_테스트() throws ParseException {
+		String montString = "2014-03";
+		String dateString = "2014-03-31";
+		TypeChangeBetweenDateAndString typeChangeBetweenDateAndString = new TypeChangeBetweenDateAndString();
+		Date expectedDate = typeChangeBetweenDateAndString.exchangeToDateType(dateString);
+		System.out.println(monthStringToSpecificDate.getLastDayOfMonthForDateType(montString));
+		assertTrue(expectedDate.compareTo(monthStringToSpecificDate.getLastDayOfMonthForDateType(montString)) == 0);
 	}
 }

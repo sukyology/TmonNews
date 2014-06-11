@@ -8,7 +8,11 @@
 	<context:component-scan base-package="kr.co.tmon.socialnews" use-default-filters="false">
 		<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller" />
 	</context:component-scan>
-
+	
+	<context:component-scan base-package="kr.co.tmon.appreview" use-default-filters="false">
+		<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller" />
+	</context:component-scan>
+	
 	<bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter" >
 	   <property name="messageConverters">
 	      <list>
