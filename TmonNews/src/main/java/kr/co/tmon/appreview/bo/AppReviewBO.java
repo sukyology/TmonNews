@@ -32,13 +32,6 @@ public class AppReviewBO {
 	@Autowired
 	private AppReviewDAO appReviewDAO;
 
-	public void insertLastestReview() throws IOException, ParseException, java.text.ParseException {
-		ExtractFromJson extractFromJson = new ExtractFromJson();
-		List<AppReviewModel> lastestReviewData = extractFromJson.getAppReviewListAmongLastestWeek();
-		for (AppReviewModel review : lastestReviewData)
-			appReviewDAO.insertAppReview(review);
-	}
-
 	public List<AppReviewModel> selectReviewList(String appName, int numberOfLoad) {
 		return appReviewDAO.selectAppReview(appName, numberOfLoad);
 	}

@@ -27,10 +27,9 @@ public class ExtractFromJsonTest {
 	public void 특정_날짜를_지정했을때_데이터를_받아오는지_확인하는_테스트() throws IOException, ParseException, java.text.ParseException {
 		assertNotNull(extractAppReviewListFromJson.getAppReviewListSpecificDate("2013-03-01", "2013-03-01"));
 	}
-	
+
 	@Test
-	public void rating모델을_정상적으로_받아오는지_테스트() throws IOException, ParseException
-	{
+	public void rating모델을_정상적으로_받아오는지_테스트() throws IOException, ParseException {
 		RatingOfAppModel result = extractAppReviewListFromJson.getRatingOfApp();
 		assertNotNull(result);
 	}

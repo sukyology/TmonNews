@@ -8,7 +8,6 @@ import kr.co.tmon.appreview.dao.AppReviewDAO;
 import kr.co.tmon.appreview.dao.MonthlyAppRatingDAO;
 import kr.co.tmon.appreview.model.MonthlyAppRatingModel;
 import kr.co.tmon.appreview.util.MonthStringToSpecificDate;
-import kr.co.tmon.appreview.util.SubstringForYearPlusMonth;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -36,17 +35,6 @@ public class MonthlyAppRatingBO {
 		monthlyAppRatingDAO.insertMonthlyAppRating(monthlyAppRating);
 	}
 
-	public void insertCurrentMonthAppRating() throws ParseException {
-		SubstringForYearPlusMonth substringForYearPlusMonth = new SubstringForYearPlusMonth();
-		String monthString = substringForYearPlusMonth.getCurrentMonthString();
-		MonthStringToSpecificDate monthStringToSpecificDate = new MonthStringToSpecificDate();
-		Date startDate = monthStringToSpecificDate.getFirstDayOfMonthForDateType(monthString);
-		Date endDate = monthStringToSpecificDate.getLastDayOfMonthForDateType(monthString);
-
-		MonthlyAppRatingModel monthlyAppRating = appReviewDAO.selectMonthlyAppRating(monthString, startDate, endDate);
-		monthlyAppRatingDAO.insertMonthlyAppRating(monthlyAppRating);
-	}
-
 	public List<MonthlyAppRatingModel> selectMonthlyAppRating() {
 		return monthlyAppRatingDAO.selectMonthlyAppRating();
 	}
@@ -58,5 +46,4 @@ public class MonthlyAppRatingBO {
 	public void setAppReviewDAO(AppReviewDAO appReviewDAO) {
 		this.appReviewDAO = appReviewDAO;
 	}
-
 }

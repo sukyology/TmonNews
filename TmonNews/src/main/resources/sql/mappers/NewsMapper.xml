@@ -137,13 +137,12 @@
 
 	<insert id="insertNews" parameterType="News">
 	INSERT INTO 
-		news(id, title, preview, DATE, image, link, provider, readcnt, similarnews)
-	SELECT
-		#{newsID}, #{newsTitle}, #{newsPreview}, #{newsDate}, #{newsImage}, #{newsLink}, #{newsProvider}, #{similarNews}, 0
-	FROM DUAL
-		WHERE 
-			NOT EXISTS 
-				(SELECT id FROM news WHERE id=#{newsID})
+		news(id, title, preview, DATE, image, link, provider, similarnews, readcnt)
+	VALUES
+		(#{newsID}, #{newsTitle}, #{newsPreview}, #{newsDate}, #{newsImage}, #{newsLink}, #{newsProvider}, #{similarNews}, 0)
+	ON DUPLICATE KEY
+		UPDATE similarnews = #{similarNews}
+			
 	</insert>
 
 	<insert id="mappingSocialCode" parameterType="News">
@@ -169,9 +168,11 @@
 
 	<select id="selectTodayNewsCountForInsert" resultType="int">
 		SELECT
-		COUNT(NEWS_ID)
-		FROM MAPPING_SOCIAL mapping natural join news news
+		SUM(SIMILARNEWS)+COUNT(news_id)
+		FROM MAPPING_SOCIAL mapping, news
+		news
 		WHERE
+		mapping.news_id = news.id AND
 		mapping.social_corpCode = #{socialCorpCode} and news.date = #{today}
 	</select>
 	<insert id="insertNewsCount" parameterType="countSocialNews">

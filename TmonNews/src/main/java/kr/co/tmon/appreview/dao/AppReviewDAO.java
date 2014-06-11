@@ -7,9 +7,6 @@ import java.util.List;
 import kr.co.tmon.appreview.model.AppReviewModel;
 import kr.co.tmon.appreview.model.MonthlyAppRatingModel;
 import kr.co.tmon.appreview.model.NumberOfAppReviewModel;
-import kr.co.tmon.appreview.model.RatingOfAppByVersionModel;
-import kr.co.tmon.appreview.util.MonthStringToSpecificDate;
-import kr.co.tmon.socialnews.util.TypeChangeBetweenDateAndString;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,22 +23,10 @@ public class AppReviewDAO {
 	@Autowired
 	private SqlSession sqlSession;
 
-	public void insertAppReview(AppReviewModel appReview) {
-		AppReviewMapper appReviewMapper = sqlSession.getMapper(AppReviewMapper.class);
-		appReviewMapper.insertAppReviewToUserTable(appReview);
-		appReviewMapper.insertAppReviewToReviewTable(appReview);
-	}
-
 	public List<AppReviewModel> selectAppReview(String appName, int numberOfLoad) {
 		AppReviewMapper appReviewMapper = sqlSession.getMapper(AppReviewMapper.class);
 
 		return appReviewMapper.selectAppReview(appName, numberOfLoad);
-	}
-
-	public List<RatingOfAppByVersionModel> selectAppRatingByVersion(String appName) {
-		AppReviewMapper appReviewMapper = sqlSession.getMapper(AppReviewMapper.class);
-
-		return appReviewMapper.selectReviewForRatingByVersion(appName);
 	}
 
 	public NumberOfAppReviewModel selectNumberOfAppReview(String monthString, Date startDate, Date endDate) throws ParseException {

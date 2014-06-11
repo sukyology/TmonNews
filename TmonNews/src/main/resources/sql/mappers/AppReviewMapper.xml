@@ -41,7 +41,7 @@
 		<result property="reviewedMonth" column="review_month" />
 		<result property="coupangRating" column="coupang_rating" />
 		<result property="wemapRating" column="wemap_rating" />
-		<result property="tmonRating" column="tmonRating" />
+		<result property="tmonRating" column="tmon_rating" />
 	</resultMap>
 	
 	<select id="selectAppReview" resultMap="AppReviewResult">
