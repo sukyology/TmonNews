@@ -1,7 +1,23 @@
 @import url(http://fonts.googleapis.com/css?family=Covered+By+Your+Grace);
-#linechartdiv {background: #282828 url('http://www.amcharts.com/lib/3/patterns/chalk/bg.jpg');color: #fff;
+#newsLinechart {
+	background: #282828 url('http://www.amcharts.com/lib/3/patterns/chalk/bg.jpg');color: #fff;
 	width		: 80%;
 	height		: 300px;
 	font-size	: 11px;
-}			
+}	
+#appLinechart {
+	width		: 100%;
+	height		: 300px;
+	font-size	: 11px;
+}		
+#appStackchartAverage {
+	width		: 100%;
+	height		: 300px;
+	font-size	: 11px;
+}	
+#appStackchartCount {
+	width		: 100%;
+	height		: 300px;
+	font-size	: 11px;
+}		
 	
