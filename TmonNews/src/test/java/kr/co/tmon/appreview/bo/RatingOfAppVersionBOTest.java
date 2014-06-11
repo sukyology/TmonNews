@@ -31,22 +31,13 @@ public class RatingOfAppVersionBOTest {
 	}
 
 	@Test
-	public void 네개의_앱에_대하여_중복이나_루프없이_insert를_수행하는지_테스트() {
-		AppReviewDAO mockedAppReviewDAO = mock(AppReviewDAO.class);
-		RatingOfAppByVersionDAO mockedRatingOfAppByVersionDAO = mock(RatingOfAppByVersionDAO.class);
+	public void 최근_12개의_월간_리뷰_평점을_받아오는지_테스트() {
+		RatingOfAppByVersionDAO ratingOfAppByVersionDAO = mock(RatingOfAppByVersionDAO.class);
+		List<RatingOfAppByVersionModel> ratingOfAppByVersionModels = new ArrayList<>();
+		when(ratingOfAppByVersionDAO.selectLastestFiveRatingOfApp("티몬")).thenReturn(ratingOfAppByVersionModels);
+		ratingOfAppVersionBO.setRatingOfAppByVersionDAO(ratingOfAppByVersionDAO);
 
-		List<RatingOfAppByVersionModel> mockedList = new ArrayList<>();
-
-		when(mockedAppReviewDAO.selectAppRatingByVersion("티몬")).thenReturn(mockedList);
-		when(mockedAppReviewDAO.selectAppRatingByVersion("쿠팡")).thenReturn(mockedList);
-		when(mockedAppReviewDAO.selectAppRatingByVersion("위메프")).thenReturn(mockedList);
-		when(mockedAppReviewDAO.selectAppRatingByVersion("티몬플러스")).thenReturn(mockedList);
-		
-		ratingOfAppVersionBO.setAppReviewDAO(mockedAppReviewDAO);
-		ratingOfAppVersionBO.setRatingOfAppByVersionDAO(mockedRatingOfAppByVersionDAO);
-
-		ratingOfAppVersionBO.insertAppRatingData();
-		verify(mockedRatingOfAppByVersionDAO, times(4));
+		assertNotNull(ratingOfAppVersionBO.selectLastestFiveVersionRating("티몬"));
 	}
 
 }

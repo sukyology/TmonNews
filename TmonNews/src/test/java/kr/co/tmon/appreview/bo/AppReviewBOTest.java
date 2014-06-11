@@ -1,23 +1,19 @@
 package kr.co.tmon.appreview.bo;
 
-import static org.junit.Assert.*;
-import static org.mockito.Matchers.*;
-import static org.mockito.Mockito.*;
+import static org.junit.Assert.assertNotNull;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+import java.sql.Date;
+import java.text.ParseException;
 
 import kr.co.tmon.appreview.dao.AppReviewDAO;
-import kr.co.tmon.appreview.model.AppReviewModel;
-import kr.co.tmon.appreview.util.ExtractFromJson;
+import kr.co.tmon.appreview.model.NumberOfAppReviewModel;
+import kr.co.tmon.appreview.util.MonthStringToSpecificDate;
+import kr.co.tmon.appreview.util.SubstringForYearPlusMonth;
 
-import org.json.simple.parser.ParseException;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.Mock;
-import org.mockito.runners.MockitoJUnitRunner;
 
 public class AppReviewBOTest {
 	private AppReviewBO appReviewBO;
@@ -28,26 +24,25 @@ public class AppReviewBOTest {
 	}
 
 	@Test
-	public void 데이터의_주어진_리스트의_개수만큼_인서트가_정확히_일어나는지_확인하는_테스트() throws IOException, ParseException, java.text.ParseException {
-		ExtractFromJson extractFromJson = mock(ExtractFromJson.class);
-		List<AppReviewModel> mockedList = generateSampleData();
-		AppReviewDAO mockedAppReviewDAO = mock(AppReviewDAO.class);
-		appReviewBO.setAppReviewDAO(mockedAppReviewDAO);
-		when(extractFromJson.getAppReviewListAmongLastestWeek()).thenReturn(mockedList);
-		List<AppReviewModel> lastestReviewData = extractFromJson.getAppReviewListAmongLastestWeek();
+	public void 앱리뷰숫자를_가져오는_명령이_제대로_동작하는지_테스트() throws ParseException {
+		AppReviewDAO appReviewDAO = mock(AppReviewDAO.class);
+		MonthStringToSpecificDate monthStringToSpecificDate = new MonthStringToSpecificDate();
+		Date startDate = monthStringToSpecificDate.getFirstDayOfMonthForDateType(getCurrentMonthString());
+		Date endDate = monthStringToSpecificDate.getLastDayOfMonthForDateType(getCurrentMonthString());
 
-		appReviewBO.insertLastestReview();
-		verify(mockedAppReviewDAO, times(3));
+		NumberOfAppReviewModel numberOfAppReviewModel = new NumberOfAppReviewModel();
+
+		when(appReviewDAO.selectNumberOfAppReview(getCurrentMonthString(), startDate, endDate)).thenReturn(numberOfAppReviewModel);
+
+		appReviewBO.setAppReviewDAO(appReviewDAO);
+
+		assertNotNull(appReviewBO.getNumberOfAppReview());
 	}
 
-	private List<AppReviewModel> generateSampleData() {
-		List<AppReviewModel> mockedList = new ArrayList<>();
-		AppReviewModel appReviewModel = new AppReviewModel();
+	private String getCurrentMonthString() {
+		Date currentDate = new Date(System.currentTimeMillis());
+		SubstringForYearPlusMonth substringForYearPlusMonth = new SubstringForYearPlusMonth();
 
-		mockedList.add(appReviewModel);
-		mockedList.add(appReviewModel);
-		mockedList.add(appReviewModel);
-
-		return mockedList;
+		return substringForYearPlusMonth.substringOfDate(currentDate);
 	}
 }

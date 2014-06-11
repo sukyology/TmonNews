@@ -30,13 +30,6 @@ public class AppReviewDAOTest {
 	@Autowired
 	private AppReviewDAO appReviewDAO;
 
-	@Transactional
-	@Test
-	public void 정상적으로_review테이블에_데이터가_삽입되는지_테스트() {
-		AppReviewModel sampleData = generateSampleData();
-		appReviewDAO.insertAppReview(sampleData);
-	}
-
 	@Test
 	public void 정상적으로_review리스트를_선택하는지_테스트() {
 		List<AppReviewModel> result = appReviewDAO.selectAppReview("티몬", 0);
@@ -44,15 +37,9 @@ public class AppReviewDAOTest {
 	}
 
 	@Test
-	public void 버전별_평점_데이터리스트를_정상적으로_반환하는지_테스트() {
-		List<RatingOfAppByVersionModel> result = appReviewDAO.selectAppRatingByVersion("티몬");
-		assertNotNull(result);
-	}
-
-	@Test
 	public void 월별_뉴스의_개수를_올바르게_반환하는지_테스트() throws ParseException {
 		MonthStringToSpecificDate monthStringToSpecificDate = new MonthStringToSpecificDate();
-		
+
 		Date startDate = monthStringToSpecificDate.getFirstDayOfMonthForDateType("2014-06");
 		Date endDate = monthStringToSpecificDate.getLastDayOfMonthForDateType("2014-06");
 		NumberOfAppReviewModel numberOfAppReview = appReviewDAO.selectNumberOfAppReview("2014-06", startDate, endDate);
@@ -61,8 +48,8 @@ public class AppReviewDAOTest {
 
 	@Test
 	public void 월별_평점을_반환하는지_테스트() throws ParseException {
-MonthStringToSpecificDate monthStringToSpecificDate = new MonthStringToSpecificDate();
-		
+		MonthStringToSpecificDate monthStringToSpecificDate = new MonthStringToSpecificDate();
+
 		Date startDate = monthStringToSpecificDate.getFirstDayOfMonthForDateType("2014-06");
 		Date endDate = monthStringToSpecificDate.getLastDayOfMonthForDateType("2014-06");
 		MonthlyAppRatingModel monthlyAppRatingModel = appReviewDAO.selectMonthlyAppRating("2014-06", startDate, endDate);

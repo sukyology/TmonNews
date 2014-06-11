@@ -18,16 +18,8 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class RatingOfAppVersionBO {
-	private static final String APP_NAME_OF_TMONPLUS = "티몬플러스";
-	private static final String APP_NAME_OF_TMON = "티몬";
-	private static final String APP_NAME_OF_WEMAP = "위메프";
-	private static final String APP_NAME_OF_COUPANG = "쿠팡";
-
 	@Autowired
 	private RatingOfAppByVersionDAO ratingOfAppByVersionDAO;
-
-	@Autowired
-	private AppReviewDAO appReviewDAO;
 
 	public List<RatingOfAppByVersionModel> selectLastestFiveVersionRating(String appName) {
 		return ratingOfAppByVersionDAO.selectLastestFiveRatingOfApp(appName);
@@ -35,9 +27,5 @@ public class RatingOfAppVersionBO {
 
 	public void setRatingOfAppByVersionDAO(RatingOfAppByVersionDAO ratingOfAppByVersionDAO) {
 		this.ratingOfAppByVersionDAO = ratingOfAppByVersionDAO;
-	}
-
-	public void setAppReviewDAO(AppReviewDAO appReviewDAO) {
-		this.appReviewDAO = appReviewDAO;
 	}
 }

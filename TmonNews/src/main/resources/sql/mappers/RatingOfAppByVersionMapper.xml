@@ -35,7 +35,7 @@
 		ORDER BY
 			app_version DESC
 		LIMIT
-			5
+			12
 	</select>
 
 </mapper>
