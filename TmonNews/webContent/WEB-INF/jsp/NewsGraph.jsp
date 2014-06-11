@@ -5,7 +5,7 @@
 <div id="demo" class="collapse in">
 <div class="row">
 		<center>
-			<div id="linechartdiv"></div>
+			<div id="newsLinechart"></div>
 		</center>
 	</div>
 </div>
@@ -27,7 +27,7 @@
 	</c:forEach> 
 
 	
-	var chart = AmCharts.makeChart("linechartdiv", {
+	var chart = AmCharts.makeChart("newsLinechart", {
 	    "type": "serial",
 	    "theme": "chalk",
 	    "pathToImages": "http://www.amcharts.com/lib/3/images/",
