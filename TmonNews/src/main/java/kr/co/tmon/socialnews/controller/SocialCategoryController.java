@@ -6,7 +6,6 @@ package kr.co.tmon.socialnews.controller;
 import java.text.ParseException;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import kr.co.tmon.socialnews.bo.CountSocialNewsBO;
 import kr.co.tmon.socialnews.bo.SocialCategoryBO;
@@ -14,6 +13,7 @@ import kr.co.tmon.socialnews.bo.SocialCategoryBO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -23,70 +23,47 @@ public class SocialCategoryController {
 	private SocialCategoryBO socialCategoryBO;
 	@Autowired
 	private CountSocialNewsBO countSocialNewsBO;
+	@Autowired
+	private SettingRequestController settingRequest;
 
 	@RequestMapping("/socials")
-	public ModelAndView controlAllSocialNews(HttpServletRequest request, int page, String date) throws ParseException {
-		final String socialCorpName = "socials";
-
-		makeCorpToSessionAttribute(request, socialCorpName);
-
-		return settingModelAndView(socialCorpName, page, date, request);
+	public ModelAndView controlAllSocialNews(HttpServletRequest request, @RequestParam(required = false, defaultValue = "1") int page, @RequestParam(required = false, defaultValue = "--") String date) throws ParseException {
+		return settingModelAndView("socials", page, date, request);
 	}
 
 	@RequestMapping("/coupang")
-	public ModelAndView controlCoupangNews(HttpServletRequest request, int page, String date) throws ParseException {
-		final String socialCorpName = "coupang";
-
-		makeCorpToSessionAttribute(request, socialCorpName);
-
-		return settingModelAndView(socialCorpName, page, date, request);
+	public ModelAndView controlCoupangNews(HttpServletRequest request, @RequestParam(required = false, defaultValue = "1") int page, @RequestParam(required = false, defaultValue = "--") String date) throws ParseException {
+		return settingModelAndView("coupang", page, date, request);
 	}
 
 	@RequestMapping("/tmon")
-	public ModelAndView controlTmonNews(HttpServletRequest request, int page, String date) throws ParseException {
-		final String socialCorpName = "tmon";
-
-		makeCorpToSessionAttribute(request, socialCorpName);
-
-		return settingModelAndView(socialCorpName, page, date, request);
+	public ModelAndView controlTmonNews(HttpServletRequest request, @RequestParam(required = false, defaultValue = "1") int page, @RequestParam(required = false, defaultValue = "--") String date) throws ParseException {
+		return settingModelAndView("tmon", page, date, request);
 	}
 
 	@RequestMapping("/wemap")
-	public ModelAndView controlWemapNews(HttpServletRequest request, int page, String date) throws ParseException {
-		final String socialCorpName = "wemap";
-
-		makeCorpToSessionAttribute(request, socialCorpName);
-
-		return settingModelAndView(socialCorpName, page, date, request);
+	public ModelAndView controlWemapNews(HttpServletRequest request, @RequestParam(required = false, defaultValue = "1") int page, @RequestParam(required = false, defaultValue = "--") String date) throws ParseException {
+		return settingModelAndView("wemap", page, date, request);
 	}
 
 	@RequestMapping("/etc")
-	public ModelAndView controlEtcNews(HttpServletRequest request, int page, String date) throws ParseException {
-		final String socialCorpName = "etc";
-
-		makeCorpToSessionAttribute(request, socialCorpName);
-
-		return settingModelAndView(socialCorpName, page, date, request);
-	}
-
-	private void makeCorpToSessionAttribute(HttpServletRequest request, final String socialCorpName) {
-		HttpSession session = request.getSession();
-		session.setAttribute("corp", socialCorpName);
-	}
-
-	private void makeTotalPageToAttribute(HttpServletRequest request) {
-		request.setAttribute("totalPage", socialCategoryBO.getNumberOfNews());
+	public ModelAndView controlEtcNews(HttpServletRequest request, @RequestParam(required = false, defaultValue = "1") int page, @RequestParam(required = false, defaultValue = "--") String date) throws ParseException {
+		return settingModelAndView("etc", page, date, request);
 	}
 
 	private ModelAndView settingModelAndView(String socialCorpName, int page, String date, HttpServletRequest request) throws ParseException {
 		ModelAndView socialCorpModelAndView = new ModelAndView();
 
+		if (date.equals("--"))
+			date = socialCategoryBO.getToday();
+
 		socialCorpModelAndView.addObject("newsList", socialCategoryBO.getNewsList(date, socialCorpName, page));
 		socialCorpModelAndView.addObject("countSocialNews", countSocialNewsBO.getNewsCount());
 
 		socialCorpModelAndView.setViewName("NewsContents");
-		makeTotalPageToAttribute(request);
+
+		request = settingRequest.setRequestSessionAndAttribute(request, socialCorpName);
+
 		return socialCorpModelAndView;
 	}
-
 }

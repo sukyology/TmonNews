@@ -34,22 +34,5 @@ public class CountSocialNewsDAOTest {
 		countSocialNews.setNewsCount(8521);
 		countSocialNews.setSocialCorpCode("cp");
 	}
-	
-	@Test
-	public void selectTest() {
-		List<CountSocialNews> countList = countSocialNewsDAO.selectNewsCount();
-		int countTmonNews = countSocialNewsDAO.selectTodayNewsCountForInsert("tm", "2014-06-01");
-		System.out.println("count_news table의 갯수 구하기 : "+countList.size());
-		System.out.println("TMon news의 갯수 구하기 : "+countTmonNews);
-	}
 
-	@Rollback(false)
-	@Test
-	public void insertTest() {
-		List<CountSocialNews> berforeNews = countSocialNewsDAO.selectNewsCount();
-		countSocialNewsDAO.insertNews(countSocialNews);
-		List<CountSocialNews> afterCount = countSocialNewsDAO.selectNewsCount();
-		
-		assertEquals(berforeNews.size()+1, afterCount.size());
-	}
 }

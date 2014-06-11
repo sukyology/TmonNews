@@ -27,15 +27,7 @@ public interface NewsMapper {
 	
 	List<News> getNewsListByAllCorpForDailyNumberOfNews(String newsDate);
 	
-	void insertNews(News news);
-
-	void mappingSocialCode(News news);
-
 	void readCountUpdate(int newsID);
 	
-	int selectTodayNewsCountForInsert(@Param("socialCorpCode") String social_corpCode, @Param("today") String today);
-	
 	List<CountSocialNews> selectNewsCount(@Param("date") String today);
-	
-	void insertNewsCount(CountSocialNews countSocialNews);
 }

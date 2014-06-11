@@ -1,5 +1,5 @@
 package kr.co.tmon.socialnews.controller;
-/*
+/**
  * 
  * @author 고영경
  * 
