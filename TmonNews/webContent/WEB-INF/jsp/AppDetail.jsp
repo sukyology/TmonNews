@@ -18,9 +18,14 @@
 	<div class="col-lg-2"></div>
 	<div class="col-lg-8">
 		<div class="row">
+		<div class="col-lg-6">
 			<div id="appPiechartReview"></div>
+		</div>
+		<div class="col-lg-6">
 			<div id="appLinechartVersion"></div>
 		</div>
+		</div>
+		
 		<div class="row">
 			<div id="content-box">
 				<div id="content-wrapper">
