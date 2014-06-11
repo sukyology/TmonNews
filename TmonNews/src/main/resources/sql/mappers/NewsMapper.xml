@@ -188,6 +188,7 @@
 	<select id="selectNewsCount" resultType="CountSocialNews">
 		SELECT date AS date, corp_code AS socialCorpCode, count AS newsCount
 		FROM news_count
+		WHERE date = #{date}
 	</select>
 
 </mapper>
