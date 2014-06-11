@@ -14,15 +14,18 @@
 <body>
 	<div class="col-lg-1"></div>
 	<div class="col-lg-10">
-		<div class="row">
-			<center><p><b>소셜3사의 최근1년간 App평점</b></p></center>
+		<div class="row center-block">
+				<p style='text-align:center;'>
+					<b>소셜3사의 최근1년간 App평점</b>
+				</p>
 			<div id="appLinechart"></div>
 		</div>
+		<div class='well'></div>
 		<div class="row">
-			<div class="col-lg-5">
+			<div class="col-lg-4 col-lg-offset-1">
 				<div id="appStackchartAverage"></div>
 			</div>
-			<div class="col-lg-5">
+			<div class="col-lg-4 col-lg-offset-2">
 				<div id="appStackchartCount"></div>
 			</div>
 		</div>
@@ -74,8 +77,8 @@ var chart = new GraphFactory(chartData , "light", "appStackchartAverage").create
 </script>
 
 
-<!-- 최근한달 3사의 리뷰 개수 -->
-<script type="text/javascript">
+	<!-- 최근한달 3사의 리뷰 개수 -->
+	<script type="text/javascript">
 var chartData =[{
 	corp :"Tmon",
 	appAverage: ${numberOfNews.numberOfTmonAppReview},
@@ -93,7 +96,5 @@ var chartData =[{
 
 var chart = new GraphFactory(chartData , "light", "appStackchartCount").createStackTypeGraph();
 </script>
-
-
 
 </body>

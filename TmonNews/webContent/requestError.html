@@ -1,6 +1,3 @@
-<%@ taglib uri="http://www.opensymphony.com/sitemesh/decorator" prefix="decorator"%>
-<%@ taglib uri="http://www.opensymphony.com/sitemesh/page" prefix="page"%>
-<%@ page contentType="text/html; charset=utf-8"%>
 <!doctype html>
 <html>
 <head>
@@ -15,7 +12,6 @@
 <script src="/js/jquery-ui-1.10.4.js"></script>
 <script src="/js/bootstrap.js"></script>
 
-<decorator:head />
 
 <link href="/css/jquery-ui-1.10.4.css" rel="stylesheet">
 <!-- Bootstrap core CSS -->
@@ -39,7 +35,7 @@ h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6 {
 }
 
 h4 {
-	font-size: 15px;
+	font-size: 14px;
 }
 
 .ui-datepicker-trigger {
@@ -61,7 +57,7 @@ h4 {
 
 <body>
 	<nav class="navbar navbar-static-top navbar-default" role="navigation" style='border-bottom-style: solid; border-bottom-color: #666; padding-top: 10px; padding-bottom: 10px;'>
-		<div class="container" style="padding-left: 0px; padding-right: 0px; text-align: center;">
+		<div class="container" style="padding-left: 0px; text-align: center;">
 			<h1 style='display: inline-block; margin-top: 0px;'>
 				<img src="/image/TMON-BI.png" height="20" align="middle">
 			</h1>
@@ -77,7 +73,6 @@ h4 {
 
 			<ul class="nav navbar-nav navbar-right">
 				<div id='dateAndCalendar' style='float: left; margin-top: 9px; margin-right: 15px;'>
-					<text style='color:#666; vertical-align:0px;'>${newsList['0'].newsDate}</text>
 					<input id="datepicker" type="hidden" />
 				</div>
 				<li class="dropdown" id='news' style='margin-right: 15px;'><a class="dropdown-toggle" data-toggle="dropdown"> News <b class="caret"></b></a>
@@ -105,7 +100,16 @@ h4 {
 		<!-- /.navbar-collapse -->
 		<!-- /.container-fluid -->
 	</nav>
-	<decorator:body />
+
+	<div class="jumbotron">
+		<h1>요청하신 페이지를 찾을 수가 없습니다.</h1>
+
+		<p>
+			<button style="margin-top: 50px;" class="btn btn-primary btn-lg" role="button">홈으로</button>
+		</p>
+	</div>
+
+
 	<script type="text/javascript">
 		$("#news .socials").on("click", function() {
 			location.assign("/news/socials.tmon?" + location.href.substr(location.href.search("date="), 15) + "&page=1");
@@ -123,9 +127,7 @@ h4 {
 			location.assign("/news/etc.tmon?" + location.href.substr(location.href.search("date="), 15) + "&page=1");
 		});
 	</script>
-	
 	<script>
-	//
 		function searchInCurrentLocation(string) {
 			if (location.href.search(string) > 0) {
 				$('.navbar li.active').removeClass('active');
@@ -138,9 +140,20 @@ h4 {
 		$(document).ready(searchInCurrentLocation('appreview'));
 	</script>
 
+	<script>
+		$.datepicker.setDefaults({
+			showOn : "button",
+			buttonImageOnly : true,
+			buttonImage : "/image/calendarglyphicon.png",
+		});
+		$("#datepicker").datepicker({
+			dateFormat : "yy-mm-dd"
+		});
+		$("input").on("change", function() {
+			location.assign("/news/socials.tmon" + "?date=" + $("#datepicker").val() + "&page=1");
+		});
+	</script>
+
 </body>
 </html>
-
-
-
 

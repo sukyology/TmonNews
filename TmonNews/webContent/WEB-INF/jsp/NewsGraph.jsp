@@ -2,7 +2,8 @@
     pageEncoding="utf-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<div id="demo" class="collapse in">
+<p style="text-align: center;"><strong>소셜3사 언론 노출 빈도수</strong></p>
+<div id="newsCountChart" class="collapse in" style='outline-color: #666; margin: 10px;'>
 <div class="row">
 		<center>
 			<div id="newsLinechart"></div>
@@ -10,9 +11,9 @@
 	</div>
 </div>
 <center>
-<button type="button" class="btn btn-warning" data-toggle="collapse" data-target="#demo">
-  펼치기/닫기
-</button>
+	<button class=" btn btn-danger glyphicon glyphicon-chevron-up"></button>
+	<button class="btn btn-success glyphicon glyphicon-chevron-down"></button>
+	</button>
 </center>
 	<script type="text/javascript">
 	var chartData = new Array();
@@ -107,3 +108,20 @@
 	}
 
 	</script>
+<script>
+$('.glyphicon-chevron-down').hide();
+$('.glyphicon-chevron-down').click(function(){
+	$('#newsCountChart').collapse('show');
+	$('.glyphicon-chevron-up').show();
+	$('.glyphicon-chevron-down').hide();
+});
+$('.glyphicon-chevron-up').click(function(){
+	$('#newsCountChart').collapse('hide');
+	$('.glyphicon-chevron-down').show();
+	$('.glyphicon-chevron-up').hide();
+});
+	
+
+</script>
+<div class="row" style="height: 10px;"></div>
+<div class="well well-sm" style="text-align:center;">오늘의 뉴스</div>

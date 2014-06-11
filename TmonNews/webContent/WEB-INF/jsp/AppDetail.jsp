@@ -18,31 +18,41 @@
 	<div class="col-lg-2"></div>
 	<div class="col-lg-8">
 		<div class="row">
-		<div class="col-lg-6">
-			<div id="appPiechartReview"></div>
+			<div class="col-lg-6">
+				<div id="appPiechartReview"></div>
+			</div>
+			<div class="col-lg-6">
+				<div id="appLinechartVersion"></div>
+			</div>
 		</div>
-		<div class="col-lg-6">
-			<div id="appLinechartVersion"></div>
+
+		<div style='margin-top: 20px;' class='well well-sm'>
+			<center>최근 앱 리뷰</center>
 		</div>
-		</div>
-		
+
 		<div class="row">
-			<div id="content-box">
-				<div id="content-wrapper">
-					<c:forEach var="appReview" items="${reviewList}">
-						<div class="media-body">
-							<h4 class="media-heading">
-								${appReview.reviewTitle}<sub>&nbsp;&nbsp;|&nbsp;&nbsp; ${appReview.writtenDate}</sub>
-							</h4>
-							<p style="margin-top: 10px; margin-left: 15px">${appReview.reviewContext}<sub>&nbsp;&nbsp;|&nbsp;&nbsp; ${appReview.reviewerID}</sub>
-							<p>
+
+			<div id="content-wrapper">
+				<c:forEach var="appReview" items="${reviewList}">
+					<div class="col-lg-6">
+						<div class="panel panel-default">
+							<div class='panel-heading'>
+								<h4 class="panel-title"><c:if test='${empty appReview.reviewTitle}'><font color="darkgray">[제목없음]</font></c:if>${appReview.reviewTitle}</h4>
+								<sub style='float: right;'> ${appReview.writtenDate}</sub>
+							</div>
+							<div class='panel-body' style='padding: 10px;'>
+								<p style="margin-left: 15px">${appReview.reviewContext}<sub><font color='#666'>&nbsp;&nbsp;|&nbsp;&nbsp; ${appReview.reviewerID}</font></sub>
+								<p>
+							</div>
 						</div>
-						<br>
-					</c:forEach>
-				</div>
+					</div>
+				</c:forEach>
 			</div>
 		</div>
 	</div>
+		<button class='btn btn-primary btn-block center-block' id='loadMoreAppReview'>
+		<b>더보기</b>
+	</button>
 	<div class="col-lg-2"></div>
 
 
@@ -90,25 +100,22 @@ var chart = new GraphFactoryForVersion(chartData , color).createLineTypeGraphFor
 
 
 
-	<script>
-      $(document).ready(function() {
-            $contentLoadTriggered = false;
-            $pagenumber = 1;
-            $("#content-box").scroll(function() {
-                  if ($("#content-box").scrollTop() >= ($("#content-wrapper").height() - $("#content-box").height()) && $contentLoadTriggered == false) {
-                        $contentLoadTriggered = true;
-                        $.get(location.href, {
-                             "pagenumber" : pagenumber
-                        }, function(data) {
-                             $("#content-wrapper").append(data);
-                             $contentLoadTriggered = false;
-                             pagenumber++;
-                        });
-                  }
-            });
-      });
-</script>
 
+	<script>
+		$(document).ready(function() {
+			$pagenumber = 0;
+
+			$('#loadMoreAppReview').on("click", function() {
+				$pagenumber++;
+				$.get('/moreappreview/'+location.href.split('/')['4'], {
+					"pageNumber" : $pagenumber
+				}, function(response) {
+					$("#content-wrapper").append(response);
+					
+				});
+			});
+		});
+	</script>
 
 </body>
 </html>
