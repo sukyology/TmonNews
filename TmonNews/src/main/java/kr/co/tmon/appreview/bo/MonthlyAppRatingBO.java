@@ -8,6 +8,7 @@ import kr.co.tmon.appreview.dao.AppReviewDAO;
 import kr.co.tmon.appreview.dao.MonthlyAppRatingDAO;
 import kr.co.tmon.appreview.model.MonthlyAppRatingModel;
 import kr.co.tmon.appreview.util.MonthStringToSpecificDate;
+import kr.co.tmon.appreview.util.ReorderMonthlyRatingList;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -36,7 +37,9 @@ public class MonthlyAppRatingBO {
 	}
 
 	public List<MonthlyAppRatingModel> selectMonthlyAppRating() {
-		return monthlyAppRatingDAO.selectMonthlyAppRating();
+		ReorderMonthlyRatingList reorderMonthlyRatingList = new ReorderMonthlyRatingList();
+		List<MonthlyAppRatingModel> selectedList = monthlyAppRatingDAO.selectMonthlyAppRating();
+		return reorderMonthlyRatingList.reorderList(selectedList);
 	}
 
 	public void setMonthlyAppRatingDAO(MonthlyAppRatingDAO monthlyAppRatingDAO) {
