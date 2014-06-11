@@ -15,6 +15,7 @@
 	<div class="col-lg-1"></div>
 	<div class="col-lg-10">
 		<div class="row">
+			<center><p><b>소셜3사의 최근1년간 App평점</b></p></center>
 			<div id="appLinechart"></div>
 		</div>
 		<div class="row">
@@ -69,7 +70,7 @@ var chartData =[{
 	color:"#FF0000"
 }]
 
-var chart = new GraphFactory(chartData , "light", "appStackchartAverage").createStackTypeGraph();
+var chart = new GraphFactory(chartData , "light", "appStackchartAverage").createStackTypeGraphForAverage();
 </script>
 
 
