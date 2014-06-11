@@ -76,13 +76,13 @@ public class ExtractFromJson {
 
 	private void getAverageRating(RatingOfAppModel ratingOfApp, JSONObject jsonObject) {
 		if (APP_NAME_OF_COUPANG.compareTo((String) jsonObject.get("appName")) == 0)
-			ratingOfApp.setCoupangRating((float) jsonObject.get("averageScore"));
+			ratingOfApp.setCoupangRating(Float.valueOf((String) jsonObject.get("averageScore")));
 		else if (APP_NAME_OF_WEMAP.compareTo((String) jsonObject.get("appName")) == 0)
-			ratingOfApp.setWemapRating((float) jsonObject.get("averageScore"));
+			ratingOfApp.setWemapRating(Float.valueOf((String) jsonObject.get("averageScore")));
 		else if (APP_NAME_OF_TMON.compareTo((String) jsonObject.get("appName")) == 0)
-			ratingOfApp.setTmonRating((float) jsonObject.get("averageScore"));
+			ratingOfApp.setTmonRating(Float.valueOf((String) jsonObject.get("averageScore")));
 		else if (APP_NAME_OF_TMONPLUS.compareTo((String) jsonObject.get("appName")) == 0)
-			ratingOfApp.setTmonplusRating((float) jsonObject.get("averageScore"));
+			ratingOfApp.setTmonplusRating(Float.valueOf((String) jsonObject.get("averageScore")));
 	}
 
 }
