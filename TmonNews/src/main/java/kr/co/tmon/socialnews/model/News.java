@@ -16,6 +16,7 @@ public class News {
 	private String newsLink;
 	private String newsProvider;
 	private int newsCount;
+	private int similarNews;
 
 	public int getNewsID() {
 		return newsID;
@@ -87,6 +88,14 @@ public class News {
 
 	public void setNewsCount(int newsCount) {
 		this.newsCount = newsCount;
+	}
+
+	public int getSimilarNews() {
+		return similarNews;
+	}
+
+	public void setSimilarNews(int similarNews) {
+		this.similarNews = similarNews;
 	}
 
 }
