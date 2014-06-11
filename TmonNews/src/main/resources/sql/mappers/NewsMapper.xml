@@ -2,7 +2,6 @@
 <!DOCTYPE mapper
 	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-
 <mapper namespace="kr.co.tmon.socialnews.dao.NewsMapper">
 	<resultMap type="News" id="NewsResult">
 		<id property="newsID" column="id" />
@@ -48,7 +47,7 @@
 			news.readcnt DESC,
 			news.id ASC
 		LIMIT
-			#{page}, 5
+			#{page}, 10
 	</select>
 
 	<select id="getNewsListByAllCorp" resultMap="NewsResult">
@@ -89,7 +88,7 @@
 					CODE = "wmp" THEN 3
 		END ASC
 		LIMIT
-		#{page}, 5
+		#{page}, 10
 	</select>
 	
 	<select id="getNewsListForDailyNumberOfNews" resultMap="NewsResult">

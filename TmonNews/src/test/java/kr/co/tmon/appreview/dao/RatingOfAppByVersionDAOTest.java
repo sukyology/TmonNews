@@ -34,7 +34,7 @@ public class RatingOfAppByVersionDAOTest {
 	@Test
 	public void 최신_5개버전의_평점_데이터를_반환하는지_테스트() {
 		List<RatingOfAppByVersionModel> result = ratingOfAppByVersionDAO.selectLastestFiveRatingOfApp("쿠팡");
-		assertEquals(12, result.size());
+		assertEquals(5, result.size());
 
 		for (RatingOfAppByVersionModel ratingOfApp : result)
 			System.out.println(ratingOfApp.getAppVersion());

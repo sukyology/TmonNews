@@ -4,6 +4,7 @@ import java.util.List;
 
 import kr.co.tmon.appreview.dao.RatingOfAppByVersionDAO;
 import kr.co.tmon.appreview.model.RatingOfAppByVersionModel;
+import kr.co.tmon.appreview.util.ReorderMonthlyRatingList;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,7 +21,9 @@ public class RatingOfAppVersionBO {
 	private RatingOfAppByVersionDAO ratingOfAppByVersionDAO;
 
 	public List<RatingOfAppByVersionModel> selectLastestFiveVersionRating(String appName) {
-		return ratingOfAppByVersionDAO.selectLastestFiveRatingOfApp(appName);
+		ReorderMonthlyRatingList reorderMonthlyRatingList = new ReorderMonthlyRatingList();
+		List<RatingOfAppByVersionModel> result = ratingOfAppByVersionDAO.selectLastestFiveRatingOfApp(appName);
+		return reorderMonthlyRatingList.reorderListOfRatingOfAppVersionModel(result);
 	}
 
 	public void setRatingOfAppByVersionDAO(RatingOfAppByVersionDAO ratingOfAppByVersionDAO) {

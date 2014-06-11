@@ -7,16 +7,17 @@
 		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
 		http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-3.0.xsd">
-	
-	<task:annotation-driven executor="taskExecutor" scheduler="taskScheduler" />
+
+	<task:annotation-driven executor="taskExecutor"
+		scheduler="taskScheduler" />
 	<task:executor id="taskExecutor" pool-size="1" />
 	<task:scheduler id="taskScheduler" />
-	
-	<!-- DataSource -->
+
+<!-- DataSource -->
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
 		destroy-method="close">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver"></property>
-		<property name="url" value="jdbc:mysql://10.5.208.35:3306/front_db"></property>
+		<property name="url" value="jdbc:mysql://10.5.220.117:3306/front_db"></property>
 		<property name="username" value="@username@"></property>
 		<property name="password" value="@password@"></property>
 		<property name="removeAbandoned" value="true"></property>
@@ -24,7 +25,7 @@
 		<property name="logAbandoned" value="true"></property>
 		<property name="testOnBorrow" value="false"></property>
 		<property name="initialSize" value="10"></property>
-		<property name="maxActive" value="40"></property>
+		<property name="maxActive" value="400"></property>
 		<property name="minIdle" value="6"></property>
 		<property name="maxIdle" value="40"></property>
 		<property name="maxWait" value="1000"></property>
@@ -32,12 +33,12 @@
 		<property name="timeBetweenEvictionRunsMillis" value="30000"></property>
 
 	</bean>
-
+	
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
 		<property name="mapperLocations" value="classpath:sql/mappers/*.xml"></property>
 		<property name="typeAliases"
-			value="kr.co.tmon.socialnews.model.News, kr.co.tmon.socialnews.model.CountSocialNews, kr.co.tmon.appreview.model.AppReviewModel, kr.co.tmon.appreview.model.MonthlyAppRatingModel, kr.co.tmon.appreview.model.NumberOfAppReviewModel, kr.co.tmon.appreview.model.RatingOfAppByVersionModel"></property>
+			value="kr.co.tmon.socialnews.model.News, kr.co.tmon.socialnews.model.CountSocialNews, kr.co.tmon.appreview.model.AppReviewModel, kr.co.tmon.appreview.model.MonthlyAppRatingModel, kr.co.tmon.appreview.model.NumberOfAppReviewModel, kr.co.tmon.appreview.model.RatingOfAppByVersionModel, kr.co.tmon.appreview.model.RatingOfAppModel"></property>
 		<property name="typeAliasesPackage"
 			value="kr.co.tmon.socialnews.model, kr.co.tmon.appreview.model"></property>
 	</bean>
@@ -63,6 +64,11 @@
 	
 	<bean id="monthlyAppRatingMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
 		<property name="mapperInterface" value="kr.co.tmon.appreview.dao.MonthlyAppRatingMapper" />
+		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
+	</bean>
+	
+	<bean id="ratingOfAppMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property value="kr.co.tmon.appreview.dao.RatingOfAppMapper" name="mapperInterface"/>
 		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
 	</bean>
 

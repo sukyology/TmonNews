@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
 	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-
+	
 <mapper namespace="kr.co.tmon.appreview.dao.RatingOfAppByVersionMapper">
 	<resultMap type="RatingOfAppByVersionModel" id="RatingOfAppByVersionResult">
 		<result property="ratingOne" column="rating_one" />
@@ -35,7 +35,7 @@
 		ORDER BY
 			app_version DESC
 		LIMIT
-			12
+			5
 	</select>
 
 </mapper>

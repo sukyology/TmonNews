@@ -22,7 +22,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class LocalGetNewsDAO {
 	private static final int MINUS_FOR_ARRANGING_PAGE_NUMBER = 1;
-	private static final int NEWS_PER_PAGE = 5;
+	private static final int NEWS_PER_PAGE = 10;
 	private static final String DEFAULT_CATEGORY = "socials";
 
 	@Autowired
