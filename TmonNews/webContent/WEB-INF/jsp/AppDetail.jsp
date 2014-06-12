@@ -49,7 +49,11 @@ right:3px;
 								<h4 class="panel-title">
 									<c:if test='${empty appReview.reviewTitle}'>
 										<font color="darkgray">[제목없음]</font>
-									</c:if>${appReview.reviewTitle}</h4>
+									</c:if>${appReview.reviewTitle}
+									<c:forEach var="star" begin="1" end="${appReview.rating }">
+										<img src="../image/star.png" width=18 height=18>
+									</c:forEach>	
+								</h4>
 								<sub style='float: right;'> ${appReview.writtenDate}</sub>
 							</div>
 							<div class='panel-body' style='padding: 10px;'>
