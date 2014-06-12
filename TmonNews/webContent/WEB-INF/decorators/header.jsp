@@ -28,9 +28,6 @@
 <link href="/css/bootstrap.css" rel="stylesheet">
 
 <style>
-.dropdown:hover .dropdown-menu {
-	display: block;
-}
 
 a:visited {
 	background-color: yellow;
@@ -62,6 +59,11 @@ h4 {
 	line-height: 20px;
 	font-weight: 900;
 }
+.navbar-default .navbar-nav > .open > a:hover,
+.navbar-default .navbar-nav > .open > a:focus {
+  color: #555;
+  background-color: #f8f8f8;
+}
 </style>
 </head>
 
@@ -90,7 +92,7 @@ h4 {
 					<input id="datepicker" type="hidden" />
 				</div>
 				
-				<li class="dropdown" id='news' style='margin-right: 15px;'><a class="dropdown-toggle" data-toggle="dropdown"> News <b class="caret"></b></a>
+				<li class="dropdown" id='news' style='margin-right: 15px;'><a class="bar-menu dropdown-toggle" data-toggle="dropdown"> News <b class="caret"></b></a>
 					<ul class="dropdown-menu">
 						<li class='socials'><a>소셜3사</a></li>
 						<li class="divider"></li>
@@ -101,7 +103,7 @@ h4 {
 						<li class='etc disabled'><a>ETC.</a></li>
 					</ul></li>
 					
-				<li class="dropdown" id="appreview"><a class="dropdown-toggle" data-toggle="dropdown"> App <b class="caret"></b></a>
+				<li class="dropdown" id="appreview"><a class="bar-menu dropdown-toggle" data-toggle="dropdown"> App <b class="caret"></b></a>
 					<ul class="dropdown-menu">
 						<li><a href="/appreview/socials.tmon">소셜3사</a></li>
 						<li class="divider"></li>
@@ -148,7 +150,19 @@ h4 {
 		$(document).ready(searchInCurrentLocation('news'));
 		$(document).ready(searchInCurrentLocation('appreview'));
 	</script>
+<script>
+function changeNameOfCategory(string){
+	if (location.href.search(string) > 0){
+		$('.navbar li.active .bar-menu').html(string.toUpperCase()+'<b class="caret"></b>');
+	}
+	
+}
+$(document).ready(changeNameOfCategory('tmon'));
+$(document).ready(changeNameOfCategory('socials'));
+$(document).ready(changeNameOfCategory('coupang'));
+$(document).ready(changeNameOfCategory('wemap'));
 
+</script>
 </body>
 </html>
 
