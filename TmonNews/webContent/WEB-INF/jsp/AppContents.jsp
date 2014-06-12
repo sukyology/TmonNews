@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>- 메인 페이지</title>
+<title>- 앱리뷰 페이지</title>
 <link href="/css/chart.css" rel="stylesheet">
 <script type="text/javascript" src="http://www.amcharts.com/lib/3/amcharts.js"></script>
 <script type="text/javascript" src="http://www.amcharts.com/lib/3/serial.js"></script>

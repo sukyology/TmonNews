@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>- 메인 페이지</title>
+<title>- 뉴스 페이지</title>
 <link href="/css/chart.css" rel="stylesheet">
 <script type="text/javascript" src="http://www.amcharts.com/lib/3/amcharts.js"></script>
 <script type="text/javascript" src="http://www.amcharts.com/lib/3/serial.js"></script>
@@ -13,82 +13,85 @@
 </head>
 <body>
 
-		<c:choose>
-			<c:when test="${empty newsList}">
-			
-				<script>
-					location.assign("/requestError.html");
-				</script>
-				
-			</c:when>
-			<c:otherwise>
-			
-			<%@ include file="./NewsGraph.jsp"%>
-			
-				<!--기사 내용시작-->
-				<div class="col-lg-2 col-md-1"></div>
+
+
+	<%@ include file="./NewsGraph.jsp"%>
+
+	<c:choose>
+		<c:when test="${empty newsList}">
+
+			<center>
+				<h4 class="text-muted">요청하신 날짜의 뉴스가 없습니다. 다른 날짜의 뉴스를 선택해주세요. </h4>
+			</center>
+
+		</c:when>
+		<c:otherwise>
+
+			<!--기사 내용시작-->
+			<div class="col-lg-2 col-md-1"></div>
 			<div class="col-lg-8 col-md-9">
-					<c:forEach var="news" items="${newsList}">
-						<div class="row">
-							<div class="col-lg-10 col-md-10 col-sm-9 col-xs-11">
-								<div class="media">
+				<c:forEach var="news" items="${newsList}">
+					<div class="row">
+						<div class="col-lg-10 col-md-10 col-sm-9 col-xs-11">
+							<div class="media">
 
-									<canvas id="${news.newsID}" class="media-object pull-left canvas hidden-xs" width="100px" height="100px" style="margin-right: 20px;"></canvas>
-									<script type="text/javascript">
-										function draw() {
+								<canvas id="${news.newsID}" class="media-object pull-left canvas hidden-xs" width="100px" height="100px" style="margin-right: 20px;"></canvas>
+								<script type="text/javascript">
+									function draw() {
 
-											var canvas = document.getElementById('<c:out value="${news.newsID}"/>').getContext('2d');
-											var image = new Image();
-											image.onload = function() {
+										var canvas = document.getElementById('<c:out value="${news.newsID}"/>').getContext('2d');
+										var image = new Image();
+										image.onload = function() {
 
-												var width = image.naturalWidth;
-												var height = image.naturalHeight;
-												if (width > height) {
-													canvas.drawImage(image, (width - height) / 2, 0, (width + height) / 2, height, 0, 0, 100, 100);
-												} else {
-													canvas.drawImage(image, 0, (height - width) / 2, width, (width + height) / 2, 0, 0, 100, 100);
-												}
-											};
-											image.src = '<c:out value="${news.newsImage}"/>';
+											var width = image.naturalWidth;
+											var height = image.naturalHeight;
+											if (width > height) {
+												canvas.drawImage(image, (width - height) / 2, 0, (width + height) / 2, height, 0, 0, 100, 100);
+											} else {
+												canvas.drawImage(image, 0, (height - width) / 2, width, (width + height) / 2, 0, 0, 100, 100);
+											}
+										};
+										image.src = '<c:out value="${news.newsImage}"/>';
 
-											image.onerror = function() {
-												image.src = "/image/" + location.pathname.split("/")["2"].split(".")["0"] + "_logo_mini.png";
-												canvas.drawImage(image, 0, 0, 100, 100);
-											};
-										}
+										image.onerror = function() {
+											image.src = "/image/" + location.pathname.split("/")["2"].split(".")["0"] + "_logo_mini.png";
+											canvas.drawImage(image, 0, 0, 100, 100);
+										};
+									}
 
-										$(document).ready(draw());
-									</script>
-									<div class="media-body">
-										<h4 class="media-heading">
-											<a href="../NewsOpen.tmon?newsLink=${news.newsLink}&newsID=${news.newsID}" target="_blank"> ${news.newsTitle}<sub>&nbsp;&nbsp;|&nbsp;&nbsp; ${news.newsProvider}</sub>
-											</a>
-										</h4>
-										<p style="font-size:13px; margin-top:10px; line-height:1.8em;">${news.newsPreview}<p>
-									</div>
+									$(document).ready(draw());
+								</script>
+								<div class="media-body">
+									<h4 class="media-heading">
+										<a href="../NewsOpen.tmon?newsLink=${news.newsLink}&newsID=${news.newsID}" target="_blank"> ${news.newsTitle}<sub>&nbsp;&nbsp;|&nbsp;&nbsp; ${news.newsProvider}</sub>
+										</a>
+									</h4>
+									<p style="font-size: 13px; margin-top: 10px; line-height: 1.8em;">${news.newsPreview}
+									<p>
 								</div>
 							</div>
-
-							
-								<center>
-								<span class="hidden-xs"><font size="2">조회수</font><br> <font size="2">${news.newsCount}</font></span>
-								</center>
-							
-
 						</div>
-						<br>
-					</c:forEach>
 
-					<center>
-						<ul class="pagination">
-							<%@ include file="./Pagination.jsp"%>
-						</ul>
-					</center>
 
-				</div>
-			</c:otherwise>
-		</c:choose>
-	
+						<center>
+							<span class="hidden-xs"><font size="2">조회수</font><br> <font size="2">${news.newsCount}</font></span>
+						</center>
+
+
+					</div>
+					<br>
+				</c:forEach>
+
+				<center>
+					<ul class="pagination">
+						<%@ include file="./Pagination.jsp"%>
+					</ul>
+				</center>
+
+			</div>
+		</c:otherwise>
+	</c:choose>
+
 
 	<script>
 		$.datepicker.setDefaults({
