@@ -11,7 +11,16 @@
 <script type="text/javascript" src="http://www.amcharts.com/lib/3/serial.js"></script>
 <script type="text/javascript" src="http://www.amcharts.com/lib/3/themes/light.js"></script>
 <script type="text/javascript" src="/js/GraphFactory.js"></script>
-
+<style>
+#right-space{
+position:relative;
+}
+.glyphicon .glyphicon-hand-up{
+postion:absolute;
+bottom:3px;
+right:3px;
+}
+</style>
 </head>
 <body>
 
@@ -37,7 +46,10 @@
 					<div class="col-lg-6">
 						<div class="panel panel-default">
 							<div class='panel-heading'>
-								<h4 class="panel-title"><c:if test='${empty appReview.reviewTitle}'><font color="darkgray">[제목없음]</font></c:if>${appReview.reviewTitle}</h4>
+								<h4 class="panel-title">
+									<c:if test='${empty appReview.reviewTitle}'>
+										<font color="darkgray">[제목없음]</font>
+									</c:if>${appReview.reviewTitle}</h4>
 								<sub style='float: right;'> ${appReview.writtenDate}</sub>
 							</div>
 							<div class='panel-body' style='padding: 10px;'>
@@ -50,10 +62,13 @@
 			</div>
 		</div>
 	</div>
-		<button class='btn btn-primary btn-block center-block' id='loadMoreAppReview'>
+	
+		<div class="col-lg-2">
+		</div>
+	<button style='margin-bottom: 20px; margin-top: 20px;' class='btn btn-primary btn-block center-block' id='loadMoreAppReview'>
 		<b>더보기</b>
 	</button>
-	<div class="col-lg-2"></div>
+
 
 
 	<script type="text/javascript">

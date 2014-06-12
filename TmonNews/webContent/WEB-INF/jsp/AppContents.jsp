@@ -11,6 +11,7 @@
 <script type="text/javascript" src="http://www.amcharts.com/lib/3/themes/light.js"></script>
 <script type="text/javascript" src="/js/GraphFactory.js"></script>
 </head>
+<a id="top"></a>
 <body>
 	<div class="col-lg-1"></div>
 	<div class="col-lg-10">
@@ -31,6 +32,7 @@
 		</div>
 	</div>
 	<div class="col-lg-1"></div>
+
 
 
 	<!-- 월별 App리뷰 평점그래프 -->

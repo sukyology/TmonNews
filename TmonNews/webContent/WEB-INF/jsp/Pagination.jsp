@@ -13,7 +13,7 @@
 
 <c:if test="${totalPage > 0}">
 	<!-- 한 화면에 들어갈 뉴스 개수 -->
-	<c:set var="pageSize" value="5" />
+	<c:set var="pageSize" value="10" />
 	<!-- pagination 보여지는 개수 -->
 	<c:set var="pageGroupSize" value="5" />
 
