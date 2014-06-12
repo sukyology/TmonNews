@@ -5,15 +5,15 @@
 
 <c:set var="date" value='<%=request.getParameter("date")%>' />
 <c:set var="currentPage" value='<%=request.getParameter("page")%>' />
-<%-- <c:when test="${empty currentPage}">
-      <c:set var="currentPage" value='1' />
-</c:when> --%>
 
+<c:if test="${empty currentPage}">
+      <c:set var="currentPage" value='1' />
+</c:if>
 
 
 <c:if test="${totalPage > 0}">
       <!-- 한 화면에 들어갈 뉴스 개수 -->
-      <c:set var="pageSize" value="5" />
+      <c:set var="pageSize" value="10" />
       <!-- pagination 보여지는 개수 -->
       <c:set var="pageGroupSize" value="5" />
 
