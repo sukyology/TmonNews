@@ -11,16 +11,7 @@
 <script type="text/javascript" src="http://www.amcharts.com/lib/3/serial.js"></script>
 <script type="text/javascript" src="http://www.amcharts.com/lib/3/themes/light.js"></script>
 <script type="text/javascript" src="/js/GraphFactory.js"></script>
-<style>
-#right-space{
-position:relative;
-}
-.glyphicon .glyphicon-hand-up{
-postion:absolute;
-bottom:3px;
-right:3px;
-}
-</style>
+
 </head>
 <body>
 
@@ -72,7 +63,7 @@ right:3px;
 
 
 	<script type="text/javascript">
-var chartData = [
+var corpAverageGradechartData = [
                  { grade: "5점", value:${ratingFlowByVersion.get(0).ratingFive}},
                  { grade:"4점", value:${ratingFlowByVersion.get(0).ratingFour}},
                  { grade:"3점", value:${ratingFlowByVersion.get(0).ratingThree}},
@@ -81,7 +72,7 @@ var chartData = [
                 
                 ];
 
-var chart = new GraphFactory(chartData , "light", "appPiechartReview").createPieTypeGraph();
+new GraphFactory(corpAverageGradechartData , "light", "appPiechartReview").createPieTypeGraph();
 </script>
 
 
@@ -110,7 +101,7 @@ var color;
 </c:when>
 </c:choose>
 
-var chart = new GraphFactoryForVersion(chartData , color).createLineTypeGraphForVersion();
+new GraphFactoryForVersion(chartData , color).createLineTypeGraphForVersion();
 </script>
 
 
