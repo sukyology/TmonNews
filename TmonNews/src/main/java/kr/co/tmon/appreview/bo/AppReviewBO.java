@@ -6,6 +6,7 @@ import java.util.List;
 import kr.co.tmon.appreview.dao.AppReviewDAO;
 import kr.co.tmon.appreview.model.AppReviewModel;
 import kr.co.tmon.appreview.model.NumberOfAppReviewModel;
+import kr.co.tmon.appreview.util.AccurateOneMonthPeriod;
 import kr.co.tmon.appreview.util.MonthStringToSpecificDate;
 import kr.co.tmon.appreview.util.SubstringForYearPlusMonth;
 
@@ -28,9 +29,9 @@ public class AppReviewBO {
 	}
 
 	public NumberOfAppReviewModel getNumberOfAppReview() throws java.text.ParseException {
-		MonthStringToSpecificDate monthStringToSpecificDate = new MonthStringToSpecificDate();
-		Date startDate = monthStringToSpecificDate.getFirstDayOfMonthForDateType(getCurrentMonthString());
-		Date endDate = monthStringToSpecificDate.getLastDayOfMonthForDateType(getCurrentMonthString());
+		AccurateOneMonthPeriod accurateOneMonthPeriod = new AccurateOneMonthPeriod();
+		Date startDate = accurateOneMonthPeriod.returnOneMonthAgoDate();
+		Date endDate = accurateOneMonthPeriod.returnCurrentDate();
 		return appReviewDAO.selectNumberOfAppReview(getCurrentMonthString(), startDate, endDate);
 	}
 
