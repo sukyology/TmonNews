@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
 <p style="text-align: center;"><strong>소셜3사 언론 노출 빈도수</strong></p>
 <div id="newsCountChart" class="collapse in" style='outline-color: #666; margin: 10px;'>
 <div class="row">

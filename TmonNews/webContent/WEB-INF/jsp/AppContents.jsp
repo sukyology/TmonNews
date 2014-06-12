@@ -11,14 +11,13 @@
 <script type="text/javascript" src="http://www.amcharts.com/lib/3/themes/light.js"></script>
 <script type="text/javascript" src="/js/GraphFactory.js"></script>
 </head>
-<a id="top"></a>
 <body>
 	<div class="col-lg-1"></div>
 	<div class="col-lg-10">
 		<div class="row center-block">
-				<p style='text-align:center;'>
-					<b>소셜3사의 최근1년간 App평점</b>
-				</p>
+			<p style='text-align: center;'>
+				<b>소셜3사의 최근1년간 App평점</b>
+			</p>
 			<div id="appLinechart"></div>
 		</div>
 		<div class='well'></div>
@@ -36,11 +35,11 @@
 
 
 	<!-- 월별 App리뷰 평점그래프 -->
-	<script type="text/javascript">
-var chartData = new Array();
+<script type="text/javascript">
+var monthAppReviewChartData = new Array();
 <c:forEach var="appCount" items="${ratingFlow}">
 	
-	chartData.push({
+	monthAppReviewChartData.push({
 		date :'${appCount.reviewedMonth}',
 	   	tmon: ${appCount.tmonRating},
 	   	coupang : ${appCount.coupangRating},
@@ -48,19 +47,15 @@ var chartData = new Array();
 	});           
 </c:forEach>  
 
-	var chart = new GraphFactory(chartData , "light", "appLinechart").createLineTypeGraph();
-	chart.addListener("rendered", zoomChart);
+	var monthAppChart = new GraphFactory(monthAppReviewChartData , "light", "appLinechart").createLineTypeGraph();
+		monthAppChart.addListener("rendered", zoomChart);
 
 
 	function zoomChart() {
-		chart.zoomToIndexes(chartData.length - 40, chartData.length - 1);
+		monthAppChart.zoomToIndexes(monthAppReviewChartData.length - 40, monthAppReviewChartData.length - 1);
 	}
-</script>
 
-
-	<!-- 3사 마켓평균점수 -->
-	<script type="text/javascript">
-var chartData =[{
+var averageGradeChartData =[{
 	corp :"Tmon",
 	appAverage: ${averageRatingOfApp.tmonRating},
 	color:"#FFBB00"
@@ -75,13 +70,9 @@ var chartData =[{
 	color:"#FF0000"
 }]
 
-var chart = new GraphFactory(chartData , "light", "appStackchartAverage").createStackTypeGraphForAverage();
-</script>
+new GraphFactory(averageGradeChartData , "light", "appStackchartAverage").createStackTypeGraphForAverage();
 
-
-	<!-- 최근한달 3사의 리뷰 개수 -->
-	<script type="text/javascript">
-var chartData =[{
+var reviewCountChartData =[{
 	corp :"Tmon",
 	appAverage: ${numberOfNews.numberOfTmonAppReview},
 	color:"#FFBB00"
@@ -96,7 +87,7 @@ var chartData =[{
 	color:"#FF0000"
 }]
 
-var chart = new GraphFactory(chartData , "light", "appStackchartCount").createStackTypeGraph();
+new GraphFactory(reviewCountChartData , "light", "appStackchartCount").createStackTypeGraph();
 </script>
 
 </body>

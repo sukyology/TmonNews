@@ -1,36 +1,15 @@
 /*NewsContents.jsp*/
 @import url(http://fonts.googleapis.com/css?family=Covered+By+Your+Grace);
 #newsLinechart {
-	background: #282828 url('http://www.amcharts.com/lib/3/patterns/chalk/bg.jpg');color: #fff;
 	width		: 80%;
 	height		: 300px;
 	font-size	: 11px;
 }
 /*AppContents.jsp*/	
-#appLinechart {
+#appLinechart , #appStackchartAverage , #appStackchartCount, #appPiechartReview , #appLinechartVersion {
 	width		: 100%;
 	height		: 300px;
 	font-size	: 11px;
 }		
-#appStackchartAverage {
-	width		: 100%;
-	height		: 300px;
-	font-size	: 11px;
-}	
-#appStackchartCount {
-	width		: 100%;
-	height		: 300px;
-	font-size	: 11px;
-}		
-/*AppDetail.jsp*/	
-#appPiechartReview {
-	width		: 100%;
-	height		: 300px;
-	font-size	: 11px;
-}	
-#appLinechartVersion{
-	width		: 100%;
-	height		: 300px;
-	font-size	: 11px;
-}	
+	
 	

@@ -11,16 +11,7 @@
 <script type="text/javascript" src="http://www.amcharts.com/lib/3/serial.js"></script>
 <script type="text/javascript" src="http://www.amcharts.com/lib/3/themes/light.js"></script>
 <script type="text/javascript" src="/js/GraphFactory.js"></script>
-<style>
-#right-space{
-position:relative;
-}
-.glyphicon .glyphicon-hand-up{
-postion:absolute;
-bottom:3px;
-right:3px;
-}
-</style>
+
 </head>
 <body>
 
@@ -49,7 +40,11 @@ right:3px;
 								<h4 class="panel-title">
 									<c:if test='${empty appReview.reviewTitle}'>
 										<font color="darkgray">[제목없음]</font>
-									</c:if>${appReview.reviewTitle}</h4>
+									</c:if>${appReview.reviewTitle}
+									<c:forEach var="star" begin="1" end="${appReview.rating }">
+										<img src="../image/star.png" width=18 height=18>
+									</c:forEach>	
+								</h4>
 								<sub style='float: right;'> ${appReview.writtenDate}</sub>
 							</div>
 							<div class='panel-body' style='padding: 10px;'>
@@ -72,7 +67,7 @@ right:3px;
 
 
 	<script type="text/javascript">
-var chartData = [
+var corpAverageGradechartData = [
                  { grade: "5점", value:${ratingFlowByVersion.get(0).ratingFive}},
                  { grade:"4점", value:${ratingFlowByVersion.get(0).ratingFour}},
                  { grade:"3점", value:${ratingFlowByVersion.get(0).ratingThree}},
@@ -81,7 +76,7 @@ var chartData = [
                 
                 ];
 
-var chart = new GraphFactory(chartData , "light", "appPiechartReview").createPieTypeGraph();
+new GraphFactory(corpAverageGradechartData , "light", "appPiechartReview").createPieTypeGraph();
 </script>
 
 
@@ -110,7 +105,7 @@ var color;
 </c:when>
 </c:choose>
 
-var chart = new GraphFactoryForVersion(chartData , color).createLineTypeGraphForVersion();
+new GraphFactoryForVersion(chartData , color).createLineTypeGraphForVersion();
 </script>
 
 
