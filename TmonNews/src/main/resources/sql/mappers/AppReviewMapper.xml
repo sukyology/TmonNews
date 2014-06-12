@@ -65,6 +65,10 @@
 						user.id = review.user_id
 		WHERE
 			review.app_name = #{appName}
+				AND
+					<![CDATA[
+						review.rating <= 3
+						]]> 
 		ORDER BY
 			review.date DESC
 		LIMIT
