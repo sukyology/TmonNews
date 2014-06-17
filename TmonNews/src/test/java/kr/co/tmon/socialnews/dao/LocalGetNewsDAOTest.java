@@ -34,7 +34,7 @@ public class LocalGetNewsDAOTest {
 
 	@Test
 	public void 뉴스데이터가_정상적으로_담기는지_확인하는_테스트() {
-		String dateString = "2014-06-02";
+		String dateString = "2014-06-15";
 
 		List<News> newsList = getNewsDAO.getNewsList(dateString, "cp", 1);
 		News news = newsList.get(0);

@@ -1,6 +1,6 @@
 package kr.co.tmon.appreview.bo;
 
-import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -9,7 +9,7 @@ import java.text.ParseException;
 
 import kr.co.tmon.appreview.dao.AppReviewDAO;
 import kr.co.tmon.appreview.model.NumberOfAppReviewModel;
-import kr.co.tmon.appreview.util.MonthStringToSpecificDate;
+import kr.co.tmon.appreview.util.AccurateOneMonthPeriod;
 import kr.co.tmon.appreview.util.SubstringForYearPlusMonth;
 
 import org.junit.Before;
@@ -26,17 +26,20 @@ public class AppReviewBOTest {
 	@Test
 	public void 앱리뷰숫자를_가져오는_명령이_제대로_동작하는지_테스트() throws ParseException {
 		AppReviewDAO appReviewDAO = mock(AppReviewDAO.class);
-		MonthStringToSpecificDate monthStringToSpecificDate = new MonthStringToSpecificDate();
-		Date startDate = monthStringToSpecificDate.getFirstDayOfMonthForDateType(getCurrentMonthString());
-		Date endDate = monthStringToSpecificDate.getLastDayOfMonthForDateType(getCurrentMonthString());
+		AccurateOneMonthPeriod accurateOneMonthPeriod = new AccurateOneMonthPeriod();
+		Date startDate = accurateOneMonthPeriod.returnOneMonthAgoDate();
+		Date endDate = accurateOneMonthPeriod.returnCurrentDate();
 
 		NumberOfAppReviewModel numberOfAppReviewModel = new NumberOfAppReviewModel();
+		numberOfAppReviewModel.setMonthString("11");
+		numberOfAppReviewModel.setNumberOfCoupangAppReview(1);
+		numberOfAppReviewModel.setNumberOfTmonAppReview(4);
+		numberOfAppReviewModel.setNumberOfTmonplusAppReview(5);
+		numberOfAppReviewModel.setNumberOfWemapAppReview(3);
 
 		when(appReviewDAO.selectNumberOfAppReview(getCurrentMonthString(), startDate, endDate)).thenReturn(numberOfAppReviewModel);
-
 		appReviewBO.setAppReviewDAO(appReviewDAO);
-
-		assertNotNull(appReviewBO.getNumberOfAppReview());
+		assertEquals(appReviewBO.getNumberOfAppReview(), null);
 	}
 
 	private String getCurrentMonthString() {

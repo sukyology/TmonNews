@@ -27,10 +27,10 @@ public class CountSocialNewsDAOTest {
 	@Autowired
 	private CountSocialNewsDAO countSocialNewsDAO;
 	private CountSocialNews countSocialNews = new CountSocialNews();
-	@Before
+	@Test
 	public void setTest() {
 		countSocialNews = new CountSocialNews();
-		countSocialNews.setDate("2014-05-01");
+		countSocialNews.setDate("2014-06-11");
 		countSocialNews.setNewsCount(8521);
 		countSocialNews.setSocialCorpCode("cp");
 	}

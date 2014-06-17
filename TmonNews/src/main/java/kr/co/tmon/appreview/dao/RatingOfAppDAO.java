@@ -6,6 +6,12 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+/**
+ * 
+ * @author 김종환
+ *
+ */
+
 @Repository
 public class RatingOfAppDAO {
 	@Autowired

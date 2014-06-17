@@ -6,6 +6,12 @@ import java.util.List;
 import kr.co.tmon.appreview.model.MonthlyAppRatingModel;
 import kr.co.tmon.appreview.model.RatingOfAppByVersionModel;
 
+/**
+ * 
+ * @author 김종환
+ *
+ */
+
 public class ReorderMonthlyRatingList {
 
 	public List<MonthlyAppRatingModel> reorderList(List<MonthlyAppRatingModel> monthlyAppRatingList) {

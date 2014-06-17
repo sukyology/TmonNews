@@ -4,6 +4,12 @@ import java.sql.Date;
 import java.util.Calendar;
 import java.util.Locale;
 
+/**
+ * 
+ * @author 김종환
+ *
+ */
+
 public class AccurateOneMonthPeriod {
 	public Date returnCurrentDate() {
 		return new Date(System.currentTimeMillis());
