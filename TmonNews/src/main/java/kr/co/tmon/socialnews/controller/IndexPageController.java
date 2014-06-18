@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class IndexPageController {
 
 	@RequestMapping("index")
-	public String ControlCalendar() {
+	public String controlCalendar() {
 		return "Index";
 	}
 }
