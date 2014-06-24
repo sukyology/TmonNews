@@ -18,12 +18,9 @@ public class NewsOpenController {
 	private NewsCountBO newsCountBO;
 	
 	@RequestMapping("/NewsOpen")
-	public String controllerNewsCount(HttpServletRequest request, int newsID, String newsLink){
-		request.setAttribute("newsID", newsID);
-		request.setAttribute("newsLink", newsLink);
-		
+	public String controllerNewsCount(HttpServletRequest request, int newsID){
 		newsCountBO.updateNewsCount(newsID);
 		
-		return "NewsOpen";
+		return "redirect:"+request.getQueryString().substring(9);
 	}
 }
