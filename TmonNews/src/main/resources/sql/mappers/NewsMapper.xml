@@ -45,7 +45,8 @@
 			date=#{newsDate}
 		ORDER BY 
 			news.readcnt DESC,
-			news.id ASC
+			news.similarnews DESC,
+			news.id DESC
 		LIMIT
 			#{page}, 10
 	</select>
@@ -78,7 +79,8 @@
 		news.id
 		ORDER BY
 			news.readcnt DESC,
-			news.id ASC,
+			news.similarnews DESC,
+			news.id DESC,
 			CASE 
 				WHEN 
 					CODE = "tm" THEN 1

@@ -5,6 +5,7 @@ import java.text.ParseException;
 
 import javax.servlet.http.HttpServletRequest;
 
+import kr.co.tmon.appreview.bo.AppRankingBO;
 import kr.co.tmon.appreview.bo.AppReviewBO;
 import kr.co.tmon.appreview.bo.MonthlyAppRatingBO;
 import kr.co.tmon.appreview.bo.RatingOfAppBO;
@@ -30,6 +31,9 @@ public class AppReviewIndexController {
 	
 	@Autowired
 	private RatingOfAppBO ratingOfAppBO;
+	
+	@Autowired
+	private AppRankingBO appRankingBO;
 
 	@RequestMapping("/appreview/socials")
 	public ModelAndView indexPageView(HttpServletRequest request) throws ParseException, IOException, org.json.simple.parser.ParseException {
@@ -37,7 +41,7 @@ public class AppReviewIndexController {
 		indexPageModel.addObject("ratingFlow", monthlyAppRatingBO.selectMonthlyAppRating());
 		indexPageModel.addObject("numberOfNews", appReviewBO.getNumberOfAppReview());
 		indexPageModel.addObject("averageRatingOfApp", ratingOfAppBO.getRatingOfApp());
-
+		indexPageModel.addObject("appRankingFlow", appRankingBO.getAppRankingFlow());
 		indexPageModel.setViewName("AppContents");
 		return indexPageModel;
 	}

@@ -3,13 +3,14 @@ package kr.co.tmon.appreview.util;
 import java.util.ArrayList;
 import java.util.List;
 
+import kr.co.tmon.appreview.model.AppRankingModel;
 import kr.co.tmon.appreview.model.MonthlyAppRatingModel;
 import kr.co.tmon.appreview.model.RatingOfAppByVersionModel;
 
 /**
  * 
  * @author 김종환
- *
+ * 
  */
 
 public class ReorderMonthlyRatingList {
@@ -32,5 +33,13 @@ public class ReorderMonthlyRatingList {
 		return reorderedList;
 	}
 
-	
+	public List<AppRankingModel> reorderListOfAppRanking(List<AppRankingModel> appRankingList) {
+		List<AppRankingModel> reorderedList = new ArrayList<>();
+
+		for (int index = appRankingList.size() - 1; index >= 0; index--)
+			reorderedList.add(appRankingList.get(index));
+
+		return reorderedList;
+	}
+
 }

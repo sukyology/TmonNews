@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kr.co.tmon.appreview.dao.AppRankingMapper">
+	<resultMap type="AppRankingModel" id="AppRankingResult">
+		<result property="dateString" column="date" />
+		<result property="tmonRank" column="tmon_rank" />
+		<result property="coupangRank" column="coupang_rank" />
+		<result property="wemapRank" column="wemap_rank" />
+	</resultMap>
+	
+	<select id="selectAppRanking" resultMap="AppRankingResult">
+		SELECT
+			date, tmon_rank, coupang_rank, wemap_rank
+		FROM
+			ranking
+		ORDER BY
+			date DESC
+		LIMIT
+			24
+	</select>
+</mapper>
