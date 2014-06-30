@@ -118,6 +118,78 @@ GraphFactory.prototype.createLineTypeGraph = function(chart) {
 
 
 
+
+GraphFactory.prototype.createLineTypeGraphForDaily = function(chart) {
+	var chart = AmCharts
+			.makeChart(
+					this.selectorName,
+					{
+						"type" : "serial",
+						"theme" : this.themeName,
+						"pathToImages" : "http://www.amcharts.com/lib/3/images/",
+						"dataProvider" : this.chartData,
+						"colors" : [ "#FFBB00", "#6799FF", "#FF0000" ],
+						"valueAxes" : [ {
+							"axisAlpha" : 0.2,
+							"dashLength" : 1,
+							"position" : "left",
+							"reversed" : true
+						} ],
+						"graphs" : [
+								{
+									"id" : "tmonGragh",
+									"balloonText" : "<b><span style='font-size:14px;'>Tmon: [[value]]</span></b>",
+									"bullet" : "round",
+									"bulletBorderAlpha" : 1,
+									"bulletColor" : "#FFBB00",
+									"hideBulletsCount" : 50,
+									"title" : "tmon",
+									"valueField" : "tmon",
+									"useLineColorForBulletBorder" : true,
+									"lineThickness" : 3
+								},
+								{
+									"id" : "coupangGragh",
+									"balloonText" : "<b><span style='font-size:14px;'>Coupang: [[value]]</span></b>",
+									"bullet" : "round",
+									"bulletBorderAlpha" : 1,
+									"bulletColor" : "#6799FF",
+									"hideBulletsCount" : 50,
+									"title" : "coupang",
+									"valueField" : "coupang",
+									"useLineColorForBulletBorder" : true,
+									"lineThickness" : 1
+								},
+								{
+									"id" : "wemapGragh",
+									"balloonText" : "<b><span style='font-size:14px;'>Wemap: [[value]]</span></b>",
+									"bullet" : "round",
+									"bulletBorderAlpha" : 1,
+									"bulletColor" : "#FF0000",
+									"hideBulletsCount" : 50,
+									"title" : "wemap",
+									"valueField" : "wemap",
+									"useLineColorForBulletBorder" : true,
+									"lineThickness" : 1
+								} ],
+						
+						"chartCursor" : {
+							"cursorPosition" : "mouse"
+						},
+						"categoryField" : "date",
+						"categoryAxis" : {
+							"parseDates" : false,
+							"axisColor" : "#DADADA",
+							"dashLength" : 1,
+							"minorGridEnabled" : true
+						}
+					});
+	
+	return chart;
+}
+
+
+
 GraphFactory.prototype.createStackTypeGraph = function(chart) {
 	var chart = AmCharts.makeChart(this.selectorName, {
 		"titles":[{
@@ -139,7 +211,8 @@ GraphFactory.prototype.createStackTypeGraph = function(chart) {
 	        "lineAlpha": 0.2,
 	        "type": "column",
 	        "valueField": "appAverage",
-	        "colorField": "color"
+	        "colorField": "color",
+	        "labelText" : "[[value]]"
 	      
 	    }],
 	    "chartCursor": {
@@ -180,7 +253,8 @@ GraphFactory.prototype.createStackTypeGraphForAverage = function(chart) {
 	        "lineAlpha": 0.2,
 	        "type": "column",
 	        "valueField": "appAverage",
-	        "colorField": "color"
+	        "colorField": "color",
+	        "labelText" : "[[value]]"
 	      
 	    }],
 	    "chartCursor": {

@@ -16,9 +16,9 @@
 	<div class="col-lg-10">
 		<div class="row center-block">
 			<p style='text-align: center;'>
-				<b>소셜3사의 최근1년간 App평점</b>
+				<b>소셜3사의 최근 24시간 App순위 </b>
 			</p>
-			<div id="appLinechart"></div>
+			<div id="appDailyLinechart"></div>
 		</div>
 		<div class='well'></div>
 		<div class="row">
@@ -29,13 +29,22 @@
 				<div id="appStackchartCount"></div>
 			</div>
 		</div>
+		<br><br><br>
+		<div class="row center-block">
+			<p style='text-align: center;'>
+				<b>소셜3사의 최근1년간 App평점</b>
+			</p>
+			<div id="appLinechart"></div>
+			<br><br><br>
+		</div>
 	</div>
+	
 	<div class="col-lg-1"></div>
 
 
 
 	<!-- 월별 App리뷰 평점그래프 -->
-<script type="text/javascript">
+	<script type="text/javascript">
 var monthAppReviewChartData = new Array();
 <c:forEach var="appCount" items="${ratingFlow}">
 	
@@ -54,7 +63,21 @@ var monthAppReviewChartData = new Array();
 	function zoomChart() {
 		monthAppChart.zoomToIndexes(monthAppReviewChartData.length - 40, monthAppReviewChartData.length - 1);
 	}
+	<!-- 일별 App리뷰 평점그래프 -->
+var DailyAppChartData = new Array();
+	<c:forEach var="appRanking" items="${appRankingFlow}">
+		
+	DailyAppChartData.push({
+			date :'${appRanking.dateString}',
+		   	tmon: ${appRanking.tmonRank},
+		   	coupang : ${appRanking.coupangRank},
+		   	wemap : ${appRanking.wemapRank} 
+		});           
+	</c:forEach>  
 
+		var monthAppChart = new GraphFactory(DailyAppChartData , "light", "appDailyLinechart").createLineTypeGraphForDaily();
+	
+		<!-- App전체평점그래프 -->
 var averageGradeChartData =[{
 	corp :"Tmon",
 	appAverage: ${averageRatingOfApp.tmonRating},
@@ -72,6 +95,7 @@ var averageGradeChartData =[{
 
 new GraphFactory(averageGradeChartData , "light", "appStackchartAverage").createStackTypeGraphForAverage();
 
+<!-- App리뷰개수 그래프 -->
 var reviewCountChartData =[{
 	corp :"Tmon",
 	appAverage: ${numberOfNews.numberOfTmonAppReview},
