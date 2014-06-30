@@ -6,10 +6,14 @@
 	font-size	: 11px;
 }
 /*AppContents.jsp*/	
-#appLinechart, #appDailyLinechart, #appStackchartAverage , #appStackchartCount, #appPiechartReview , #appLinechartVersion {
+#appLinechart, #appDailyLinechart, #appStackchartAverage , #appStackchartCount {
 	width		: 100%;
 	height		: 200px;
 	font-size	: 11px;
 }		
-	
+#appPiechartReview , #appLinechartVersion {
+	width		: 100%;
+	height		: 300px;
+	font-size	: 11px;
+}
 	
