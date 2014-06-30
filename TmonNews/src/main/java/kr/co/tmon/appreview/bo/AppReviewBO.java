@@ -7,7 +7,6 @@ import kr.co.tmon.appreview.dao.AppReviewDAO;
 import kr.co.tmon.appreview.model.AppReviewModel;
 import kr.co.tmon.appreview.model.NumberOfAppReviewModel;
 import kr.co.tmon.appreview.util.AccurateOneMonthPeriod;
-import kr.co.tmon.appreview.util.MonthStringToSpecificDate;
 import kr.co.tmon.appreview.util.SubstringForYearPlusMonth;
 
 import org.springframework.beans.factory.annotation.Autowired;

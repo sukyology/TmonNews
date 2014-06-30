@@ -1,6 +1,7 @@
 package kr.co.tmon.appreview.util;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,13 +27,11 @@ public class ReorderMonthlyRatingListTest {
 		MonthlyAppRatingModel monthlyAppRatingModel = generateSampleData();
 		monthlyAppRatingList.add(monthlyAppRatingModel);
 		monthlyAppRatingList.add(monthlyAppRatingModel);
-		
+
 		MonthlyAppRatingModel alteredMonthlyAppRatingModel = generateSampleData();
 		alteredMonthlyAppRatingModel.setReviewedMonth("2014-07");
-		
-		monthlyAppRatingList.add(alteredMonthlyAppRatingModel);
 
-		
+		monthlyAppRatingList.add(alteredMonthlyAppRatingModel);
 
 		List<MonthlyAppRatingModel> reorederedList = reorderMonthlyRatingList.reorderList(monthlyAppRatingList);
 
@@ -40,6 +39,11 @@ public class ReorderMonthlyRatingListTest {
 
 		for (int index = 0; index < 3; index++)
 			System.out.println(reorederedList.get(index).getReviewedMonth());
+	}
+
+	@Test
+	public void 앱랭킹리스트에서_시간을_제대로_파싱해서_가져오는지_테스트() {
+		assertTrue("15:00".compareTo(reorderMonthlyRatingList.subStringOfTime("2014-06-26, 15:00")) == 0);
 	}
 
 	private MonthlyAppRatingModel generateSampleData() {
