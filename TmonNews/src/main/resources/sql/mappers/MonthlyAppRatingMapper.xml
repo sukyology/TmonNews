@@ -27,6 +27,6 @@
 		ORDER BY
 			review_month DESC
 		LIMIT
-			12
+			1, 12
 	</select>
 </mapper>
